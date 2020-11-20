@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import * as React from 'react';
-import { Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { Alert, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 export default function Inscricoes() {
@@ -47,23 +47,25 @@ export default function Inscricoes() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text>{inscricoes.map((item: any) => {
-                return (
-                    <TouchableOpacity key={item.idKey} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
-                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
-                            <View style={{ flexDirection: 'column', marginLeft: 5 }}>
-                                <Text style={{ marginLeft: '10%' }}>{item.nome}</Text>
-                                <Text style={{ marginLeft: '10%' }}>{item.email}</Text>
+        <ScrollView style={styles.container}>
+            <View>
+                {inscricoes.map((item: any) => {
+                    return (
+                        <TouchableOpacity key={item.idKey} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
+                                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
+                                <View style={{ flexDirection: 'column', marginLeft: 5 }}>
+                                    <Text style={{ marginLeft: '10%' }}>{item.nome}</Text>
+                                    <Text style={{ marginLeft: '10%' }}>{item.email}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
-                    </TouchableOpacity>
-                );
-            })}</Text>
+                            <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+                        </TouchableOpacity>
+                    );
+                })}
+            </View>
+        </ScrollView>
 
-        </View>
     );
 }
 
@@ -71,8 +73,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
         padding: 20,
     },
     title: {

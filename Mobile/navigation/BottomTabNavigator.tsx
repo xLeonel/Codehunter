@@ -1,11 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import InicioScreen from '../screens/InicioScreen';
 import VagaScreen from '../screens/VagasScreen';
 import DashboardScreen from '../screens/DashboardScreen';
-import { BottomTabParamList, DashboardParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, DashboardParamList, RootStackParamList, TabOneParamList, TabTwoParamList } from '../types';
 import { TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -68,16 +68,16 @@ function TabInicioNavigator() {
 const TabVagaStack = createStackNavigator<TabTwoParamList>();
 
 
-function TabVagaNavigator() {
+function TabVagaNavigator({ navigation }: StackScreenProps<RootStackParamList, 'NotFound'>) {
   React.useEffect(() => {
 
     const decodeToken = async () => {
       var token = await AsyncStorage.getItem('token');
-  
+
       var jwtDecode = require('jwt-decode');
-  
+
       var tokenDecoded = jwtDecode(token);
-  
+
       setRole(tokenDecoded.Role);
     }
 
@@ -88,7 +88,7 @@ function TabVagaNavigator() {
 
   const [role, setRole] = React.useState('');
 
-  
+
   return (
     <TabVagaStack.Navigator>
       <TabVagaStack.Screen
@@ -96,7 +96,7 @@ function TabVagaNavigator() {
         component={VagaScreen}
         options={{
           headerTitle: 'Vagas', headerRight: () => (
-            <TouchableOpacity>{role === '3' ? <Ionicons name="md-add-circle-outline" size={30} style={{ marginRight: 10 }} color="black" /> : null}</TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('CadastroVaga')}>{role === '3' ? <Ionicons name="md-add-circle-outline" size={30} style={{ marginRight: 10 }} color="black" /> : null}</TouchableOpacity>
           )
         }}
       />

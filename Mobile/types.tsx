@@ -6,6 +6,7 @@ export type RootStackParamList = {
   LoginEmpresa: undefined;
   TipoUsuario: undefined;
   Inscricoes: any;
+  CadastroVaga: any
 };
 
 export type BottomTabParamList = {

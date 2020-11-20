@@ -6,6 +6,7 @@ import { ColorSchemeName } from 'react-native';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import SplashScreeen from '../screens/SplashScreen';
 import Inscricoes from '../screens/InscricoesScreen';
+import CadastroVaga from '../screens/CadastroVagaScreen';
 import LoginScreen from '../screens/LoginScreen';
 import LoginEmpresaScreen from '../screens/LoginEmpresaScreen';
 import TipoUsuarioScreen from '../screens/TipoUsuarioScreen';
@@ -37,6 +38,7 @@ function RootNavigator() {
       <Stack.Screen name="LoginEmpresa" component={LoginEmpresaScreen} options={{ title: 'Login' }} />
       <Stack.Screen name="TipoUsuario" component={TipoUsuarioScreen} options={{ title: 'Tipo Usuario' }} />
       <Stack.Screen name="Inscricoes" component={Inscricoes} options={{ title: 'Inscricao', headerTitle: 'Inscricao', headerShown: true }} />
+      <Stack.Screen name="CadastroVaga" component={CadastroVaga} options={{ title: 'Cadastro Vaga', headerTitle: 'Cadastrar Vaga', headerShown: true }} />
       <Stack.Screen name="Voltar" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
