@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.label-edit {
+  padding-bottom: 10px;
+
+}
+
+.select-box {
+  position: relative;
+  display: block;
+  height: 45px;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.7500em;;
+  color: #000000;
+  box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
+  border:1px solid rgb(0, 0, 0);
+  border-radius: 2px;
+  
+  @media (min-width: 768px) {
+    width: 70%;
+  }
+  
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+  
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
+}
+
+.label-edit{
+  font-size: 0.7500em;
+  font-weight: 600;
+}

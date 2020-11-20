@@ -1,0 +1,107 @@
+.mainContent h2 {
+    margin: 17px 0 14px 0;
+text-align: center;
+}
+
+.mainConteudo {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 15%;
+    margin-top: 7%;
+}
+
+.esquerdoContent form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.esquerdoContent h3 {
+    text-align: center;
+    margin-bottom: 15%;
+}
+
+.direitoContent {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.direitoContent p{
+    margin: 5% 0 5% 0;
+}
+
+.linha {
+    border-right:1px solid #000;
+    height:500px;
+    text-align: center;
+}
+
+.botaoSenhaConfig {
+    margin-top: 5%;
+    margin-left: -10%;
+    background-color: #DC3545;
+    color: white;
+    padding: 10px 35px;
+    border-radius: 10px;
+    border-color: white;
+    border-width: 3px;
+    border-style: solid;   
+    
+}
+
+.botaoSenhaConfig:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    border-color: #000000DE;
+}
+
+.BotaoSubmit {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.DivsForm {
+    width: 100%;
+    margin-bottom: 15px;   
+}
+
+@media screen and (max-width: 1350px) {
+    .linha {
+        display: none;
+    }
+
+    .mainConteudo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 0%;
+        margin-top: 0%;
+    }
+    .esquerdoContent form {
+        width: 50%;
+        align-items: center;    
+    }
+
+    .esquerdoContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 5%;
+        margin-top: 5%;
+    }
+
+    .esquerdoContent h3 {
+        text-align: center;
+        margin-bottom: 5%;
+    }
+}
+
+.submitConfig {
+    background-color: #DC3545;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    cursor: pointer;
+}

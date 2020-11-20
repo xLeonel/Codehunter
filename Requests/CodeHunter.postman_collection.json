@@ -1,0 +1,1210 @@
+{
+	"info": {
+		"_postman_id": "7a547611-23e2-4887-a474-9365b786d715",
+		"name": "CodeHunter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "LoginUsuario",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Email\" : \"adm@adm.com\",\n\t\"Senha\" : \"senhateste\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Login/Usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Login",
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginEmpresa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"Email\" : \"teste@email.com\",\r\n\t\"Senha\" : \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Login/Empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Login",
+								"Empresa"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Login para verificar se é um usuario ou um Administrador",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Usuario.BuscarMyUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9ybGVvbmVsMTAwQGhvdG1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2MDAwOTYzNjUsImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.jD7zq7tT2jfy6IYKAb2v6I7QY07OxB3CUiYCJfskjmY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IdAcessoNavigation\": {\n        \"Email\": \"vitorleonel100@hotmail.com\",\n        \"Senha\": \"senhateste\"\n    },\n    \"NomeCompleto\": \"Vitor Leonel\",\n    \"Celular\": \"(11) 99119-5734\",\n    \"Cpf\": \"013.110.207-01\",\n    \"Curriculo\": \"\",\n    \"Foto\": \"\",\n    \"Descricao\": \"sou o aaaa xd\",\n    \"IdAreaAtuacaoNavigation\": {\n        \"NomeAreaAtuacao\": \"Back-end\"\n    },\n    \"IdEnderecoNavigation\": {\n        \"Cep\": \"03807-300\",\n        \"Logradouro\": \"Rua bahia\",\n        \"Complemento\": \"\",\n        \"Bairro\": \"Casquinha veia\",\n        \"Localidade\": \"São Paulo\",\n        \"Uf\": \"SP\"\n    },\n    \"Experiencias\": [\n        {\n            \"NomeEmpresa\": \"AAAA\",\n            \"Cargo\": \"DDDD\",\n            \"DateInicio\": \"2019-07-26T00:00:00\",\n            \"DateFim\": \"2019-07-26T00:00:00\"\n        },\n        {\n            \"NomeEmpresa\": \"BBB\",\n            \"Cargo\": \"BBBB\",\n            \"DateInicio\": \"2019-07-26T00:00:00\",\n            \"DateFim\": \"2019-07-26T00:00:00\"\n        }\n    ],\n    \"IdPreferenciasTrabalhoNavigation\": {\n        \"Linkedin\": \"v\",\n        \"Github\": \"v\",\n        \"StackOverflow\": \"v\",\n        \"SitePessoal\": \"v\",\n        \"NivelIngles\": \"Avançado\",\n        \"SituacaoProfissional\": \"Empregado\",\n        \"IdRemoto\": 1,\n        \"IdRegimeContratacaoNavigation\": {\n            \"NomeRegimeContratacao\": \"Estágio\",\n            \"ExpectativaSalario\": \"2500\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CadastroADM (PROVISORIO)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IdAcessoNavigation\": {\r\n        \"Email\": \"adm@adm.com\",\r\n        \"Senha\": \"senhateste\"\r\n    },\r\n    \"NomeCompleto\": \"Vitor Leonel\",\r\n    \"Celular\": \"(11) 99119-5734\",\r\n    \"Cpf\": \"013.110.207-11\",\r\n    \"Curriculo\": \"\",\r\n    \"Foto\": \"\",\r\n    \"Descricao\": \"sou o aaaa xd\",\r\n    \"IdAreaAtuacaoNavigation\": {\r\n        \"NomeAreaAtuacao\": \"Back-end\"\r\n    },\r\n    \"IdEnderecoNavigation\": {\r\n        \"Cep\": \"03807-300\",\r\n        \"Logradouro\": \"Rua bahia\",\r\n        \"Complemento\": \"\",\r\n        \"Bairro\": \"Casquinha veia\",\r\n        \"Localidade\": \"São Paulo\",\r\n        \"Uf\": \"SP\"\r\n    },\r\n      \"IdPreferenciasTrabalhoNavigation\": {\r\n        \"Linkedin\": \"v\",\r\n        \"Github\": \"v\",\r\n        \"StackOverflow\": \"v\",\r\n        \"SitePessoal\": \"v\",\r\n        \"NivelIngles\": \"Avançado\",\r\n        \"SituacaoProfissional\": \"Empregado\",\r\n        \"IdRemoto\": 1,\r\n        \"IdRegimeContratacaoNavigation\": {\r\n            \"NomeRegimeContratacao\": \"Estágio\",\r\n            \"ExpectativaSalario\": \"2500\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario/Adm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario",
+								"Adm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RecuperarSenha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"gugugacasco007@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario/RecuperarSenha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario",
+								"RecuperarSenha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario.AtualizarId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9ybGVvbmVsMTAwQGhvdG1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2MDAwOTYzNjUsImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.jD7zq7tT2jfy6IYKAb2v6I7QY07OxB3CUiYCJfskjmY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"celular\": \"(11) 99119-5734\",\n    \"nomePersonalidade\": \"\",\n    \"curriculo\": \"\",\n    \"foto\": \"\",\n    \"descricao\": \"sou o incrivel xd\",\n    \"IdAcessoNavigation\": {\n        \"Senha\": \"senha e\"\n    },\n    \"IdAreaAtuacaoNavigation\": {\n        \"NomeAreaAtuacao\": \"front-end\"\n    },\n    \"IdEnderecoNavigation\": {\n        \"Cep\": \"03807-300\",\n        \"Logradouro\": \"Av bahia\",\n        \"Complemento\": \"\",\n        \"Bairro\": \"Casquinha veia\",\n        \"Localidade\": \"São Paulo\",\n        \"Uf\": \"SP\"\n    },\n    \"IdPreferenciasTrabalhoNavigation\": {\n        \"Linkedin\": \"linkedin\",\n        \"Github\": \"a\",\n        \"StackOverflow\": \"b\",\n        \"SitePessoal\": \"c\",\n        \"NivelIngles\": \"Avançado\",\n        \"SituacaoProfissional\": \"Empregado\",\n        \"IdRemoto\": 2,\n        \"IdRegimeContratacaoNavigation\": {\n            \"NomeRegimeContratacao\": \"CLT\",\n            \"ExpectativaSalario\": \"3500\"\n        }\n    },\n    \"Experiencias\": [\n        {\n            \"NomeEmpresa\": \"fELICIDADE\",\n            \"Cargo\": \"aa\",\n            \"DateInicio\": \"2019-07-26T00:00:00\",\n            \"DateFim\": \"2019-07-26T00:00:00\"\n        },\n        {\n            \"NomeEmpresa\": \"LLondres\",\n            \"Cargo\": \"lider\",\n            \"DateInicio\": \"2019-07-26T00:00:00\",\n            \"DateFim\": \"2019-07-26T00:00:00\"\n        },\n        {\n            \"NomeEmpresa\": \"Abigail\",\n            \"Cargo\": \"lider\",\n            \"DateInicio\": \"2019-07-26T00:00:00\",\n            \"DateFim\": \"2019-07-26T00:00:00\"\n        }\n    ]\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario"
+							]
+						},
+						"description": "Atualizar por Id "
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario.Deletar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9ybGVvbmVsMTAwQGhvdG1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2MDAwOTYzNjUsImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.jD7zq7tT2jfy6IYKAb2v6I7QY07OxB3CUiYCJfskjmY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario"
+							]
+						},
+						"description": "para deletar um estudio"
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario.InscricaoUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9ybGVvbmVsMTAwQGhvdG1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2MDAyODYzNzAsImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.YMkB2Op8RSk7Cl1N0pMUJLSr-cCtOb2dwG4QPV4JuKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario/Inscricao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario",
+								"Inscricao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario.VagasMatch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9ybGVvbmVsMTAwQGhvdG1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2MDAyODYzNzAsImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.YMkB2Op8RSk7Cl1N0pMUJLSr-cCtOb2dwG4QPV4JuKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario/VagasMatch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario",
+								"VagasMatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario.ListarAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imdpb3ZhbmFfZ3JhbmRlcHJlc2VudGVkZWRldXNAaG90bWFpbC5jb20iLCJqdGkiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMyIsImV4cCI6MTYwMDA5NTkzMSwiaXNzIjoiQ29kZWh1bnRlci5XZWJBcGkiLCJhdWQiOiJDb2RlaHVudGVyLldlYkFwaSJ9.u9NB-71nMu3CMasqNcaoCu0v1ltY9A5Je24cLkEwyoA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Usuario/AllUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuario",
+								"AllUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Estudios dos jogos ",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{
+					"name": "Empresa.BuscarMyEmpresa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Empresa/12",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Empresa",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empresa.Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Empresa"
+							]
+						},
+						"description": "listar todos os estudios"
+					},
+					"response": []
+				},
+				{
+					"name": "Empresa.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IdAcessoNavigation\": {\n        \"Email\": \"teste@email.com\",\n        \"Senha\": \"1234\"\n    },\n    \"NomeFantasia\" : \"NFTeste\",\n    \"RazaoSocial\" : \"RSTeste\",\n    \"NumColaboradores\" : 10,\n    \"Cnpj\" : \"02.468.861/0001-14\",\n    \"NomeRepresentante\" : \"NRTeste\",\n    \"Celular\" : \"(11) 91234-5678\",\n    \"Descricao\" : \"DescricaoTeste\",\n     \"IdAreaAtuacaoNavigation\": {\n        \"NomeAreaAtuacao\": \"Back-end\"\n    },\n    \"IdEnderecoNavigation\": {\n        \"Cep\": \"03807-300\",\n        \"Logradouro\": \"Rua bahia\",\n        \"Complemento\": \"\",\n        \"Bairro\": \"Casquinha veia\",\n        \"Localidade\": \"São Paulo\",\n        \"Uf\": \"SP\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empresa.AtualizarId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IdAcessoNavigation\": {\n        \"Email\": \"teste@email.com\",\n        \"Senha\": \"senhaatualizada\"\n    },\n    \"NomeFantasia\" : \"EmpresaAtualizada\",\n    \"NumColaboradores\" : 10,\n    \"NomeRepresentante\" : \"NRTeste\",\n    \"Celular\" : \"11912345678\",\n    \"Descricao\" : \"DescricaoTeste\",\n     \"IdAreaAtuacaoNavigation\": {\n        \"NomeAreaAtuacao\": \"Back-end\"\n    },\n    \"IdEnderecoNavigation\": {\n        \"Cep\": \"03807-300\",\n        \"Logradouro\": \"Rua bahia\",\n        \"Complemento\": \"\",\n        \"Bairro\": \"Casquinha veia\",\n        \"Localidade\": \"São Paulo\",\n        \"Uf\": \"SP\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Empresa"
+							]
+						},
+						"description": "Atualizar por Id "
+					},
+					"response": []
+				},
+				{
+					"name": "Empresa.Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Empresa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Empresa"
+							]
+						},
+						"description": "para deletar um estudio"
+					},
+					"response": []
+				},
+				{
+					"name": "Empresa.Filial",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiIzIiwiZXhwIjoxNjAwMDMzNzEzLCJpc3MiOiJDb2RlaHVudGVyLldlYkFwaSIsImF1ZCI6IkNvZGVodW50ZXIuV2ViQXBpIn0.2mrJV_mvKdIyFrOaSjsBMTT-ZcmAIhta0YmzxzfkM34",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IdAcessoNavigation\": {\r\n        \"Email\": \"outro@email.com\",\r\n        \"Senha\": \"1234\"\r\n    },\r\n    \"NomeFantasia\": \"NFTeste\",\r\n    \"Cnpj\": \"02.468.861/0002-24\",\r\n    \"NumColaboradores\": 10,\r\n    \"NomeRepresentante\": \"NRTeste\",\r\n    \"Celular\": \"(11) 91234-5678\",\r\n    \"Descricao\": \"DescricaoTeste\",\r\n    \"IdAreaAtuacaoNavigation\": {\r\n        \"NomeAreaAtuacao\": \"Back-end\"\r\n    },\r\n    \"IdEnderecoNavigation\": {\r\n        \"Cep\": \"03807-300\",\r\n        \"Logradouro\": \"Rua bahia\",\r\n        \"Complemento\": \"\",\r\n        \"Bairro\": \"Casquinha veia\",\r\n        \"Localidade\": \"São Paulo\",\r\n        \"Uf\": \"SP\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Empresa/Filial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Empresa",
+								"Filial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empresa.ListFilial",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiIzIiwiZXhwIjoxNjAwMDMzNzEzLCJpc3MiOiJDb2RlaHVudGVyLldlYkFwaSIsImF1ZCI6IkNvZGVodW50ZXIuV2ViQXBpIn0.2mrJV_mvKdIyFrOaSjsBMTT-ZcmAIhta0YmzxzfkM34",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Empresa/Filial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Empresa",
+								"Filial"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Estudios dos jogos ",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Vaga",
+			"item": [
+				{
+					"name": "Vaga.Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Vaga",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Vaga"
+							]
+						},
+						"description": "listar todos os estudios"
+					},
+					"response": []
+				},
+				{
+					"name": "Vaga.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiIzIiwiZXhwIjoxNjAwMjg2MTI3LCJpc3MiOiJDb2RlaHVudGVyLldlYkFwaSIsImF1ZCI6IkNvZGVodW50ZXIuV2ViQXBpIn0.tEPwW-lVr2XJDbNhV-webDpm4eZCwX6Fl-mT4NTzl5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Titulo\": \"Teste Vaga\",\n    \"DescricaoAtividades\": \"Teste DA\",\n    \"DescricaoRequisitos\": \"Teste DR\",\n    \"Localidade\": \"São Paulo\",\n    \"VagaRemota\": true,\n    \"DataPostada\": \"2020-09-10\",\n    \"DataValidadeVaga\": \"2020-10-01\",\n    \"IdAreaAtuacaoNavigation\": {\n        \"NomeAreaAtuacao\": \"Back-end\"\n    },\n    \"IdRemoto\": 1,\n    \"IdRegimeContratacaoNavigation\": {\n        \"NomeRegimeContratacao\": \"Estágio\",\n        \"ExpectativaSalario\": \"2500\"\n    },\n    \"Beneficios\": [\n        {\n            \"NomeBeneficios\": \"Refeicao\"\n        },\n        {\n            \"NomeBeneficios\": \"Vale-Alimentação\"\n        }\n    ],\n    \"Tecnologia\": [\n        {\n            \"NomeTecnologia\": \"SQL\"\n        },\n        {\n            \"NomeTecnologia\": \"c#\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Vaga",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Vaga"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vaga.AtualizarId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Titulo\" : \"Teste Vaga Atualizada\",\n    \"DescricaoAtividades\" : \"Teste DA\",\n    \"DescricaoRequisitos\" : \"Teste DR\",\n    \"Localidade\" : \"São Paulo\",\n    \"VagaRemota\" : true,\n    \"DataPostada\" : \"2020-09-10\",\n    \"DataValidadeVaga\" : \"2020-09-29\",\n    \"IdAreaAtuacaoNavigation\" : {\n        \"NomeAreaAtuacao\": \"Front-end\"\n    },\n    \"IdRemoto\": 2,\n    \"IdRegimeContratacaoNavigation\": {\n        \"NomeRegimeContratacao\": \"Pj\",\n        \"ExpectativaSalario\": \"1\"\n    },\n    \"Beneficios\": [\n        {\n            \"NomeBeneficios\": \"alimentaçao\"        \n        },\n        {\n            \"NomeBeneficios\": \"refdeicao\"\n        },\n        {\n            \"NomeBeneficios\": \"disney\"         \n        }\n    ],\n    \"Tecnologia\": [\n        {\n            \"NomeTecnologia\": \"sql\"        \n        },\n        {\n            \"NomeTecnologia\": \"c#\"\n        },\n        {\n            \"NomeTecnologia\": \"jks\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Vaga/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Vaga",
+								"2"
+							]
+						},
+						"description": "Atualizar por Id "
+					},
+					"response": []
+				},
+				{
+					"name": "Vaga.Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Vaga/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Vaga",
+								"2"
+							]
+						},
+						"description": "para deletar um estudio"
+					},
+					"response": []
+				},
+				{
+					"name": "Vaga.BuscarId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Vaga/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Vaga",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Estudios dos jogos ",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Inscricao",
+			"item": [
+				{
+					"name": "Inscricao.ListarAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Inscricao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Inscricao"
+							]
+						},
+						"description": "listar todos os estudios"
+					},
+					"response": []
+				},
+				{
+					"name": "Inscricao.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9ybGVvbmVsMTAwQGhvdG1haWwuY29tIiwianRpIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE2MDAyODYxNDgsImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.wjoTCvtgXlQ0UvDsmq_jcoNaEIjI8LvbCbz61syfDQg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"IdVaga\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Inscricao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Inscricao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inscricao.AtualizarId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IdStatusInscricao\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Inscricao/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Inscricao",
+								"2"
+							]
+						},
+						"description": "Atualizar por Id "
+					},
+					"response": []
+				},
+				{
+					"name": "Inscricao.Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Inscricao/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Inscricao",
+								"2"
+							]
+						},
+						"description": "para deletar um estudio"
+					},
+					"response": []
+				},
+				{
+					"name": "Inscricao.BuscarId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Inscricao/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Inscricao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Estudios dos jogos ",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Estagio",
+			"item": [
+				{
+					"name": "Estagio.Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Estagio/AllInternship",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Estagio",
+								"AllInternship"
+							]
+						},
+						"description": "listar todos os estudios"
+					},
+					"response": []
+				},
+				{
+					"name": "Estagio.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbUBhZG0uY29tIiwianRpIjoiMiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjIiLCJleHAiOjE2MDAyODY1OTksImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.z795aB-dmYUkSp31o3dv12h-BV80qs7to6GuPCDB1O0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IdContratoNavigation\": {\n        \"Inicio\": \"2020-06-10\",\n        \"Previsto\": \"2020-11-15\",\n        \"Efetivado\": \"2020-12-21\"\n    },\n    \"ContratoPDF\": \"\",\n    \"IdInscricao\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Estagio/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Estagio",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Estagio.AtualizarId",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"IdContratoNavigation\": {\n        \"Inicio\": \"2020-04-25\",\n        \"Previsto\": \"2020-10-22\",\n        \"Efetivado\": \"2021-12-15\",\n        \"IdStatusContrato\" : 2\n    },\n    \"ContratoPDF\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Estagio/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Estagio",
+								"3"
+							]
+						},
+						"description": "Atualizar por Id "
+					},
+					"response": []
+				},
+				{
+					"name": "Estagio.Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Estagio/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Estagio",
+								"3"
+							]
+						},
+						"description": "para deletar um estudio"
+					},
+					"response": []
+				},
+				{
+					"name": "Estagio.BuscarId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/api/Estagio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Estagio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ExportCsv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbUBhZG0uY29tIiwianRpIjoiMiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjIiLCJleHAiOjE2MDAyODY1OTksImlzcyI6IkNvZGVodW50ZXIuV2ViQXBpIiwiYXVkIjoiQ29kZWh1bnRlci5XZWJBcGkifQ.z795aB-dmYUkSp31o3dv12h-BV80qs7to6GuPCDB1O0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Estagio/ExportarCsv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Estagio",
+								"ExportarCsv"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Estudios dos jogos ",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

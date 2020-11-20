@@ -1,0 +1,29 @@
+@media screen and (max-width: 1350px) {
+    .response {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .textoAserReponse {
+        font-size: 15px;
+    }
+}
+
+.radioResponsivoTeste {
+    display: flex;
+    flex-direction: column;
+}
+
+.response {
+    display: flex;
+}
+
+@media screen and (max-width: 500px) {
+    .responseFooter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}

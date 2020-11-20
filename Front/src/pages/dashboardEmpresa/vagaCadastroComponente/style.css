@@ -1,0 +1,21 @@
+.texteareaCadastro:focus {
+    outline: none !important;
+    border-color: #4BB3EE;
+    box-shadow:0 0 4px 0 #4BB3EE;
+  }
+
+  .texteareaCadastro{
+    border:1px solid rgba(0, 0, 0, 0.849);
+   transition:.3s;
+  }
+
+  .submitCadastroVaga {
+      background-color: #DC3545;
+      color: white;
+      padding: 10px 100px;
+      border: none;
+      cursor: pointer;
+
+
+  }
+

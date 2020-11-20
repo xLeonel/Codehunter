@@ -1,0 +1,45 @@
+.content {
+    background-color: #DC3545;
+    display: flex;
+    justify-content: center;
+    /* margin: 5% 20%; */
+    height: 183px;
+    align-items: center;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    font-size: 15px;
+
+}
+
+.propaganda {
+    margin-top: 22px;
+    text-align: end;
+} 
+
+.logoImg{
+    margin: 0 50px;
+    margin-bottom: 48.5px;
+}
+.logo {
+    width: 186px;
+    height: 65px;
+}
+
+
+@media screen and (max-width: 850px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        height: 300px;
+    }
+}
+
+
+
+

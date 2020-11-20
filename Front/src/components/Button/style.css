@@ -1,0 +1,67 @@
+.button{
+    background-color: #DC3545;
+    color: white;
+    padding: 10px 35px;
+    border-radius: 10px;
+    border-color: white;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.buttonDesbugado{
+    background-color: #DC3545;
+    color: white;
+    padding: 10px 35px;
+    border-radius: 10px;
+    border-color: white;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.buttonDesbugado:hover {
+    transition: 0.5s;
+    background-color: white;
+    color: #DC3545;
+    cursor: pointer;
+}
+
+.button:hover {
+    transition: 0.5s;
+    cursor: pointer;
+    border-color: #000000DE;
+}
+
+.submit{
+    background-color: #DC3545;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    cursor: pointer;
+}
+
+.buttonT{
+    background-color: transparent;
+    color: #DC3545;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border-color: #DC3545;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.buttonVagasDashboard{
+    background-color: transparent;
+    color: #000000DE;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border-color: #000000DE;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.buttonVagasDashboard:hover{
+    transition: 0.5s;
+    background-color: #DC3545;
+    color: white;
+    cursor: pointer;
+}

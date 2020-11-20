@@ -1,0 +1,76 @@
+.navbarOriginal nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #DC3545;
+    height: 106px;
+}
+
+.left img {
+    width: 186px;
+    height: 65px;
+    margin: 17px 40px 14px  40px;
+}
+
+
+.right {
+    display: flex;
+    align-items: center;
+    margin: 0 30px; 
+}
+
+.rightDeslogado {
+    display: flex;
+    align-items: center;
+    margin: 0 30px; 
+}
+
+.modalUser {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 0 0 30px;
+}
+
+.texto {
+    margin: 0 12px;
+    color: #FFFFFF;
+}
+
+.image{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    /* background-image: url("../../assets/images/fotoUser.jpg"); */
+    /* background-position: center center; */
+    /* as mentioned by Vad: */
+    /* background-size: cover; */
+}
+
+
+.rightBurguer {
+    display: none;
+}
+
+@media screen and (max-width: 850px) {
+    .right, .BotaoResponsivo {
+        display: none;
+    }
+
+    .rightBurguer {
+        display: block;
+        margin: 0 30px; 
+    }
+    
+    .rightBurguer img{
+        width: auto;
+        height: 50px;
+        cursor: pointer;
+    }
+}
+
+.link {
+    text-decoration: none;
+    color: #000000DE;
+}

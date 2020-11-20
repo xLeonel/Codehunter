@@ -1,0 +1,63 @@
+
+.rightDashboard {
+    display: flex;
+    justify-content: flex-end;
+    /* margin: 0 30px;  */
+    background-color: transparent;
+    height: 85px;
+}
+
+.botaoNavDashboard {
+    display: flex;
+    align-items: center;
+}
+
+.iconeDashboard {
+    margin-left: 30px;
+}
+
+
+.modalUserDashboard {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 30px 0 30px;
+}
+
+.textoDashboard {
+    margin: 0 12px;
+    color: #000000DE;
+}
+
+.imageDashboard{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #000000DE;
+    /* background-image: url("../../assets/images/fotoUser.jpg"); */
+    /* background-position: center center; */
+    /* as mentioned by Vad: */
+    /* background-size: cover; */
+}
+
+
+.rightBurguerDashboard {
+    display: none;
+}
+
+
+@media screen and (max-width: 850px) {
+    
+    .modalUserDashboard,  .botaoNavDashboard{
+        display: none;
+    }
+
+    .rightBurguerDashboard {
+        display: block;
+    }
+
+    .response {
+        display: none;
+    }
+
+}

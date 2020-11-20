@@ -1,0 +1,112 @@
+.mainContentLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.ladoDireitoLogin {
+    width: 15%;
+    margin-left: 10%;
+}
+
+.ladoDireitoLogin h2{
+    text-align: center;
+    margin-left: 15%;
+    padding-bottom: 15%;
+
+}
+
+.SenhaPointer:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+ 
+.subtitleLogin {
+    width: 125%;
+    margin-top: -8%;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.subtitleLogin p{
+    font-size: 15px; 
+} 
+.subtitleLoginCheck {
+    display: flex;
+    align-items:center;
+}
+
+.subtitleLoginCheck p{
+   margin: 0 0 0 10px;
+   font-size: 15px;
+}
+
+
+.submitLogin {
+    background-color: #DC3545;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    cursor: pointer;
+    width: 125%;
+    
+    height: 45px;
+    margin-top: 10%;
+}
+
+
+.divImgLogin img{
+    width: 429px;
+    height: 150px;
+    margin-left: -50%;
+}
+
+.DivsFormLogin {
+    width: 125%;
+    margin-bottom: 15px;  
+}
+
+
+@media screen and (max-width: 1350px) {
+   
+    .mainContentLogin {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .ladoDireitoLogin {
+        width: 50%;
+        margin-left: -5%;
+    }
+    
+    .ladoDireitoLogin h2{
+      font-size: 18px;
+    }
+
+    .divImgLogin img{
+        width: auto;
+        height: 75px;
+        margin-left: 5%;
+    }
+
+    .subtitleLogin {
+        margin-top: 0%;
+    }
+
+    .subtitleLogin p {
+        font-size: 14px; 
+    } 
+
+    .subtitleLoginCheck p{
+       font-size: 14px;
+    }
+    
+
+   
+
+
+}

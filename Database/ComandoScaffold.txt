@@ -1,0 +1,1 @@
+Scaffold-DbContext "Data Source=DESKTOP-GCOFA7F\SQLEXPRESS; Initial Catalog=NomeBanco; user Id=sa; pwd=SENHA;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Domains -ContextDir Contexts -Context CodehunterContext

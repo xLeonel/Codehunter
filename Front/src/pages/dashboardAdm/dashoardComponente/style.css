@@ -1,0 +1,10 @@
+
+@media screen and (max-width: 1500px) {
+   
+    .inverter{
+        display: flex;
+       flex-direction: column;
+       width: auto;
+       height: auto;
+    }
+}

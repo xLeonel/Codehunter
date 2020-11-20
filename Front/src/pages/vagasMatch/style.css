@@ -1,0 +1,106 @@
+/* .logoDaNav img{
+    width: 186px;
+    height: 65px;
+    margin: 17px 40px 14px  40px;
+}
+
+.allPage {
+    height: 100vh;
+}
+
+.MainContent {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.MainContent img {
+    width: 242px;
+    height: 375px;
+    margin-left: -7%; 
+}
+
+.MainContent h3 {
+    margin: 0% 0 2% 0;
+    text-align: center;
+}
+
+.MainContent p {
+    margin: 3% 0 2% 0;
+}
+
+.BotoesChoose {
+    display: flex;
+} */
+
+
+.vaga2 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 32%;
+}
+
+.basicInfo2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.local2 {
+    display: flex;
+    align-items: center;
+}
+
+.salary2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.description2 {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.tecnology2 {
+    display: flex;
+}
+
+.vaga2 .button {
+    padding: 3% 15%;
+    border-radius: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .logoDaNav {
+    display: flex;
+    justify-content: center;
+  }
+  .MainContent img {
+    width: 470px;
+    height: 300px;
+    margin-left: -14%;
+    }
+
+    .MainContent {
+        margin-top: 5%;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+    .MainContent img {
+        width: 330px;
+        height: 160px;
+        margin-left: -14%;
+        }
+}
+
+@media screen and (max-width: 680px) {
+    .MainContent img {
+        display: none;
+        }
+}
+

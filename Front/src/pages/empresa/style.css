@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    list-style: none;
+    border: 0
+}
+
+.div-company-main{
+   /* height: 100%; */
+   margin-top: 2%;
+}
+
+.div-company-main-form{
+    display: flex;
+    align-items: flex-start; 
+    justify-content: space-evenly;     
+}
+
+.h2-company-title{
+    text-align: center;
+    font-size: 1.3em;
+    padding-bottom: 7%;
+}
+
+.h3-company-subtitle{
+    text-align: center;
+    font-size: 0.80em;
+    font-weight: 500;
+    color: rgb(94, 94, 94);
+    padding-bottom: 15%;
+}
+
+.div-company-input {
+    width: 300px;
+    padding-bottom: 35px;  
+}
+
+.div-company-line {
+    border-right:1px solid #000;
+    height: 500px;
+    text-align: center;
+}
+
+.div-company-step{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; 
+    margin-left: 1%;
+    margin-right: 1%; 
+}
+
+.btn-company-step {
+    background-color: #DC3545;
+    color: white;
+    cursor: pointer;
+    width: 270px; 
+    height: 45px;
+}
+
+#div-company-main-number-complement{
+    display: flex;
+    justify-content: space-between;
+}
+
+#div-company-input-complement{
+    width: 200px;
+    padding-bottom: 35px;  
+}
+
+#div-company-input-number{
+    width: 75px;
+    padding-bottom: 35px;  
+}
+
+@media screen and (max-width: 1350px) {
+       
+    .div-company-main-form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-bottom: 35px ;
+    }
+
+    .div-company-line{
+        display: none;
+    }
+
+    .div-company-input {
+        width: 200px;
+        padding-bottom: 20px; 
+
+    }
+
+    .btn-company-step{
+        width:  230px;
+    }
+
+    #div-company-input-complement{
+        width: 120px;
+        padding-bottom: 35px;  
+    }
+    
+    #div-company-input-number{
+        width: 70px;
+        padding-bottom: 35px;  
+    }
+}
+
+.select-box {
+    position: relative;
+    display: block;
+    height: 45px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 0.7500em;;
+    color: #000000;
+    box-shadow: 1px 2px 10px -2px rgba(0,0,0,0.3);
+    border:1px solid rgb(0, 0, 0);
+    border-radius: 2px;
+    
+    @media (min-width: 768px) {
+      width: 70%;
+    }
+    
+    @media (min-width: 992px) {
+      width: 50%;
+    }
+    
+    @media (min-width: 1200px) {
+      width: 30%;
+    }
+  }
+  

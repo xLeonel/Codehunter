@@ -1,0 +1,24 @@
+.input-text {
+  width:100%;
+  border:1px solid rgba(0, 0, 0, 0.849);
+  border-radius:2px;
+  margin:8px 0;
+  outline:none;
+  padding:8px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+.input-text:focus{
+  border-color: #4BB3EE;
+  box-shadow:0 0 4px 0 #4BB3EE;
+}
+
+.label-edit{
+  font-size: 0.7500em;
+  font-weight: 600;
+}
+
+input {
+  height: 45px;
+}

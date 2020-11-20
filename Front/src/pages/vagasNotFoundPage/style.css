@@ -1,0 +1,71 @@
+.logoDaNav img{
+    width: 186px;
+    height: 65px;
+    margin: 17px 40px 14px  40px;
+      
+}
+
+.allPage {
+    height: 100vh;
+}
+
+.MainContent {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.MainContent img {
+    width: 542px;
+    height: 375px;
+    margin-left: -7%; 
+}
+
+.MainContent h1 {
+    margin: 0% 0 2% 0;
+    text-align: center;
+}
+
+.MainContent p {
+    margin: 3% 0 2% 0;
+}
+
+.BotoesChoose {
+    display: flex;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+  .logoDaNav {
+    display: flex;
+    justify-content: center;
+  }
+  .MainContent img {
+    width: 470px;
+    height: 300px;
+    margin-left: -14%;
+    }
+
+    .MainContent {
+        margin-top: 5%;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+    .MainContent img {
+        width: 330px;
+        height: 160px;
+        margin-left: -14%;
+        }
+}
+
+@media screen and (max-width: 680px) {
+    .MainContent img {
+        display: none;
+        }
+}

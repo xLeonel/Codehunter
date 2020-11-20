@@ -1,0 +1,72 @@
+.pesquisa {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.inputsPesquisa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3% 15% 3% 0;
+}
+
+.inputsPesquisa .input-text {
+    width: 200%;
+}
+
+.cidades {
+    height: 45px;
+    width: 15%;
+    border: black 1px solid;
+}
+
+.qtdVagas {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.areaAtuacao {
+    color: #DC3545;
+}
+
+.vaga {
+    display: flex;
+    flex-direction: column;
+    margin: 0 32%;
+}
+
+.basicInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.local {
+    display: flex;
+    align-items: center;
+}
+
+.salary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.tecnology {
+    display: flex;
+}
+
+.vaga .button {
+    padding: 3% 15%;
+    border-radius: 0;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+}

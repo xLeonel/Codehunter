@@ -1,0 +1,58 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:62788",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "Api": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      //"launchUrl": "localhost/{launchUrl}",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "MobileVitor": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      //"launchUrl": "localhost/{launchUrl}",
+      "applicationUrl": "http://192.168.0.3:8000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "MobileJJ": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      //"launchUrl": "localhost/{launchUrl}",
+      "applicationUrl": "http://192.168.0.3:8000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "MobileAllan": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      //"launchUrl": "localhost/{launchUrl}",
+      "applicationUrl": "http://192.168.0.3:8000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "MobilePedro": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      //"launchUrl": "localhost/{launchUrl}",
+      "applicationUrl": "http://192.168.0.3:8000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
