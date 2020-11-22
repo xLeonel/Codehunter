@@ -1,15 +1,261 @@
-import { Text, View } from '../components/Themed';
+import { View, Text } from '../components/Themed';
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Alert, StyleSheet, TextInput } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
+import { Ionicons } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Button } from 'react-native-paper';
+import moment from 'moment';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 
 export default function CadastroVaga() {
 
-    return (
-        <View style={styles.container}>
-            <Text>Cadstor Vaga</Text>
-        </View>
+    const [uf, setUfs] = React.useState([]);
 
+    interface Obejto {
+        label: string,
+        value: string
+    }
+
+
+    const arrayuf: Array<Obejto> = [];
+    const [array, setArray] = React.useState(Array<Obejto>());
+
+
+    const [tecnologiasTags, setTecnologiaTags] = React.useState(Object);
+    const [beneficiosTags, setBeneficiosTags] = React.useState(Object);
+
+    const [titulo, setTitulo] = React.useState('');
+    const [descricaoAtividades, setDA] = React.useState('');
+    const [descricaoRequisisto, setDR] = React.useState('');
+    const [localidade, setLocalidade] = React.useState('');
+    const [remoto, setRemoto] = React.useState(false);
+    const [idRemoto, setIdRemoto] = React.useState(0);
+    const [dtValidade, setDtValidade] = React.useState('');
+    const [areaAtuacao, setAreaAtuacao] = React.useState('');
+    const [regimeContratacao, setRegimeContratacao] = React.useState('');
+    const [salario, setSalario] = React.useState('');
+
+    React.useEffect(() => {
+        const getUF = async () => {
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome`, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(dados => {
+                    setUfs(dados)
+                })
+                .then(() => {
+                    uf.map((item: any) => {
+                        arrayuf.push({ label: item.nome, value: item.nome })
+                    })
+
+                    setArray(arrayuf);
+                })
+                .catch(erro => console.error(erro))
+        }
+
+        getUF();
+    }, [array]); //looping infite (?) but working
+
+    const cadastrarVaga = async () => {
+
+        const beneficiosFormat = []
+
+        for (let index = 0; index < beneficiosTags.length; index++) {
+            console.log(beneficiosTags[index].title);
+
+            let send = {
+                NomeBeneficios: beneficiosTags[index].title
+            }
+            beneficiosFormat.push(send)
+        }
+
+        const tecnologiasFormat = []
+
+        for (let index = 0; index < tecnologiasTags.length; index++) {
+            console.log(tecnologiasTags[index].title);
+            let send = {
+                NomeTecnologia: tecnologiasTags[index].title
+            }
+            tecnologiasFormat.push(send)
+        }
+
+        const body = {
+            Titulo: titulo,
+            DescricaoAtividades: descricaoAtividades,
+            DescricaoRequisitos: descricaoRequisisto,
+            Localidade: localidade,
+            VagaRemota: remoto,
+            DataPostada: moment(new Date()),
+            DataValidadeVaga: dtValidade,
+            IdAreaAtuacaoNavigation: {
+                NomeAreaAtuacao: areaAtuacao
+            },
+            IdRemoto: idRemoto,
+            IdRegimeContratacaoNavigation: {
+                NomeRegimeContratacao: regimeContratacao,
+                ExpectativaSalario: salario
+            },
+            Beneficios: beneficiosFormat,
+            Tecnologia: tecnologiasFormat
+        }
+
+        try {
+            const url = "http://localhost:5000/api/Vaga"
+            const request = await fetch(url, {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                },
+                body: JSON.stringify(body)
+            })
+            const response = await request.json()
+
+            Alert.alert(response);
+
+        } catch (error) {
+            throw new Error(error)
+        }
+
+
+      
+    }
+
+    return (
+        <ScrollView>
+            <View style={styles.container}>
+
+                <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                    placeholder='Digite o titulo da vaga'
+                    onChangeText={(t) => setTitulo(t)}
+                />
+
+                <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                    numberOfLines={5}
+                    multiline={true}
+                    placeholder='Digite a atividade que desempenhará..'
+                    onChangeText={(t) => setDA(t)}
+
+                />
+
+
+                <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                    numberOfLines={5}
+                    multiline={true}
+                    placeholder='Digite os requisitos que deve possuir..'
+                    onChangeText={(t) => setDR(t)}
+
+                />
+
+                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Selecione a cidade da vaga',
+                            value: null
+                        }}
+                        onValueChange={(value) => setLocalidade(value)}
+                        items={array}
+                        Icon={() => {
+                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                        }}
+                    />
+                </View>
+
+                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Selecione o tipo de trabalho',
+                            value: null
+                        }}
+                        onValueChange={(value) => {
+                            if (value === 1) {
+                                setRemoto(true);
+                            }
+                            setIdRemoto(value)
+                        }}
+                        items={[
+                            { label: 'Remoto ou presencial', value: 3 },
+                            { label: 'Apenas presencial', value: 2 },
+                            { label: 'Apenas remoto', value: 1 },
+                        ]}
+                        Icon={() => {
+                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                        }}
+                    />
+                </View>
+
+
+                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Selecione a área de atuação',
+                            value: null
+                        }}
+                        onValueChange={(value) => setAreaAtuacao(value)}
+                        items={[
+                            { label: 'Back-end', value: 'Back-end' },
+                            { label: 'Front-end', value: 'Front-end' },
+                            { label: 'Redes', value: 'Redes' },
+                            { label: 'Full-stack', value: 'Full-stack' },
+                        ]}
+                        Icon={() => {
+                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                        }}
+                    />
+                </View>
+
+                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Selecione o regime de contratação',
+                            value: null
+                        }}
+                        onValueChange={(value) => setRegimeContratacao(value)}
+                        items={[
+                            { label: 'CLT', value: 'CLT' },
+                            { label: 'PJ', value: 'PJ' },
+                            { label: 'Estágio', value: 'Estágio' },
+                        ]}
+                        Icon={() => {
+                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                        }}
+                    />
+                </View>
+
+                <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                    placeholder='Digite o salário'
+                    onChangeText={(t) => setSalario(t)}
+                    
+                />
+
+                {/* <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                    placeholder='Digite o salário'
+                    onChangeText={(e) => setTeste(e)}
+                    onKeyPress={({ nativeEvent }) => {
+                        nativeEvent.key === ' ' ? () => {
+                            arraytag.push({ value: teste })
+                            setArrayTag(arraytag);
+                        } : null
+                    }}
+                /> */}
+
+                <Button style={{ marginTop: '10%', marginBottom: '10%' }} mode="contained" color="#DC3545" onPress={() => cadastrarVaga()}>
+                    Cadastrar
+                </Button>
+            </View >
+        </ScrollView >
     );
 }
 
@@ -18,7 +264,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
         padding: 20,
     },
     title: {
@@ -37,6 +282,6 @@ const styles = StyleSheet.create({
         height: 1,
         width: '100%',
     },
-});
 
+});
 
