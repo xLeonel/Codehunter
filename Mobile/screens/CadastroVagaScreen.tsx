@@ -8,8 +8,6 @@ import { Button } from 'react-native-paper';
 import moment from 'moment';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
-
 export default function CadastroVaga() {
 
     const [uf, setUfs] = React.useState([]);
@@ -19,13 +17,8 @@ export default function CadastroVaga() {
         value: string
     }
 
-
     const arrayuf: Array<Obejto> = [];
     const [array, setArray] = React.useState(Array<Obejto>());
-
-
-    const [tecnologiasTags, setTecnologiaTags] = React.useState(Object);
-    const [beneficiosTags, setBeneficiosTags] = React.useState(Object);
 
     const [titulo, setTitulo] = React.useState('');
     const [descricaoAtividades, setDA] = React.useState('');
@@ -37,6 +30,19 @@ export default function CadastroVaga() {
     const [areaAtuacao, setAreaAtuacao] = React.useState('');
     const [regimeContratacao, setRegimeContratacao] = React.useState('');
     const [salario, setSalario] = React.useState('');
+
+    const [tags, setTags] = React.useState('');
+    const [tagsBeneficios, setTagsBeneficio] = React.useState('');
+
+    interface Tag {
+        nome: string
+    }
+
+    const arrayTag: Array<Tag> = [];
+    const arrayTagBenefico: Array<Tag> = [];
+    const [arrayTagFormat, setArrayTag] = React.useState(Array<Tag>());
+    const [arrayTagFormatBeneficio, setArrayTagBeneficio] = React.useState(Array<Tag>());
+
 
     React.useEffect(() => {
         const getUF = async () => {
@@ -67,21 +73,21 @@ export default function CadastroVaga() {
 
         const beneficiosFormat = []
 
-        for (let index = 0; index < beneficiosTags.length; index++) {
-            console.log(beneficiosTags[index].title);
+        for (let index = 0; index < arrayTagFormatBeneficio.length; index++) {
+            console.log(arrayTagFormatBeneficio[index].nome);
 
             let send = {
-                NomeBeneficios: beneficiosTags[index].title
+                NomeBeneficios: arrayTagFormatBeneficio[index].nome
             }
             beneficiosFormat.push(send)
         }
 
         const tecnologiasFormat = []
 
-        for (let index = 0; index < tecnologiasTags.length; index++) {
-            console.log(tecnologiasTags[index].title);
+        for (let index = 0; index < arrayTagFormat.length; index++) {
+            console.log(arrayTagFormat[index].nome);
             let send = {
-                NomeTecnologia: tecnologiasTags[index].title
+                NomeTecnologia: arrayTagFormat[index].nome
             }
             tecnologiasFormat.push(send)
         }
@@ -93,7 +99,7 @@ export default function CadastroVaga() {
             Localidade: localidade,
             VagaRemota: remoto,
             DataPostada: moment(new Date()),
-            DataValidadeVaga: dtValidade,
+            DataValidadeVaga: '2020-10-01',
             IdAreaAtuacaoNavigation: {
                 NomeAreaAtuacao: areaAtuacao
             },
@@ -123,11 +129,39 @@ export default function CadastroVaga() {
         } catch (error) {
             throw new Error(error)
         }
-
-
-      
     }
 
+    const atualizarTagsTecnologia = () => {
+        let tagsSemFormat = tags;
+
+        let tagsSplitada = tagsSemFormat.split(' ');
+
+
+        for (let index = 0; index < tagsSplitada.length; index++) {
+            let body = { nome: tagsSplitada[index] }
+
+            arrayTag.push(body)
+        }
+
+        setArrayTag(arrayTag);
+    }
+
+    const atualizarTagsBeneficios = () => {
+        let tagsSemFormatBen = tagsBeneficios;
+
+        let tagsSplitadaBen = tagsSemFormatBen.split(' ');
+
+
+        for (let index = 0; index < tagsSplitadaBen.length; index++) {
+            let body = { nome: tagsSplitadaBen[index] }
+
+            arrayTagBenefico.push(body)
+        }
+
+        setArrayTagBeneficio(arrayTagBenefico);
+    }
+
+   
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -236,20 +270,57 @@ export default function CadastroVaga() {
                     style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
                     placeholder='Digite o salário'
                     onChangeText={(t) => setSalario(t)}
-                    
+
                 />
 
-                {/* <TextInput
+                <TextInput
                     style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    placeholder='Digite o salário'
-                    onChangeText={(e) => setTeste(e)}
+                    placeholder='Digite as tecnologias'
+                    onChangeText={(e) => setTags(e)}
                     onKeyPress={({ nativeEvent }) => {
-                        nativeEvent.key === ' ' ? () => {
-                            arraytag.push({ value: teste })
-                            setArrayTag(arraytag);
-                        } : null
+                        nativeEvent.key === ' ' || nativeEvent.key === 'Backspace' ? atualizarTagsTecnologia() : null
                     }}
-                /> */}
+                />
+                <View style={{ flexDirection: 'row' }}>
+                    {arrayTagFormat.slice(0, 2).map((tec: any) => {
+                        return (
+                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={tec.nome}>{tec.nome}</Button>
+                        );
+                    })}
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                    {arrayTagFormat.slice(2, 5).map((tec: any) => {
+                        return (
+                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={tec.nome}>{tec.nome}</Button>
+                        );
+                    })}
+                </View>
+
+                <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                    placeholder='Digite os beneficios'
+                    onChangeText={(e) => setTagsBeneficio(e)}
+                    onKeyPress={({ nativeEvent }) => {
+                        nativeEvent.key === ' ' || nativeEvent.key === 'Backspace' ? atualizarTagsBeneficios() : null
+                    }}
+                />
+                <View style={{ flexDirection: 'row' }}>
+                    {arrayTagFormatBeneficio.slice(0, 2).map((ben: any) => {
+                        return (
+                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={ben.nome}>{ben.nome}</Button>
+                        );
+                    })}
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                    {arrayTagFormatBeneficio.slice(2, 5).map((ben: any) => {
+                        return (
+                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={ben.nome}>{ben.nome}</Button>
+                        );
+                    })}
+                </View>
+
 
                 <Button style={{ marginTop: '10%', marginBottom: '10%' }} mode="contained" color="#DC3545" onPress={() => cadastrarVaga()}>
                     Cadastrar
