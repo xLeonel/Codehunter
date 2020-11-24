@@ -8,15 +8,18 @@ import { Text, View } from '../components/Themed';
 export default function TabOneScreen() {
 
   const [inscricao, setMyInscricao] = React.useState([]);
+  const [role, setRole] = React.useState('');
+
 
   React.useEffect(() => {
+    decodeToken();
     getInscricao();
   }, []);
 
   const getInscricao = async () => {
     try {
-      const request = await fetch("http://192.168.0.3:8000/api/Login/Usuario", {
-        method: "POST",
+      const request = await fetch("http://192.168.0.3:8000/api/Usuario/Inscricao", {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           authorization: 'Bearer ' + await AsyncStorage.getItem('token')
@@ -33,6 +36,17 @@ export default function TabOneScreen() {
     }
   }
 
+
+  const decodeToken = async () => {
+    var token = await AsyncStorage.getItem('token');
+
+    var jwtDecode = require('jwt-decode');
+
+    var tokenDecoded = jwtDecode(token);
+
+    setRole(tokenDecoded.Role);
+  }
+
   const UsuarioScreen = () => {
 
     return (
@@ -41,12 +55,12 @@ export default function TabOneScreen() {
 
         {inscricao.map((item: any) => {
           return (
-            <TouchableOpacity key={item.idKey} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity key={item.id} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
-                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
+                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.id}</Text>
                 <View style={{ flexDirection: 'column', marginLeft: 5 }}>
-                  <Text style={{ marginLeft: '10%' }}>{item.nome}</Text>
-                  <Text style={{ marginLeft: '10%' }}>{item.email}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length === 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...' )}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.empresa}</Text>
                 </View>
               </View>
               <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
@@ -58,10 +72,16 @@ export default function TabOneScreen() {
     );
   }
 
+  const EmpresaScreen = () => {
+    return (
+      <Text>Company</Text>
+    );
+  }
+
 
   return (
     <ScrollView style={styles.container}>
-      {UsuarioScreen()}
+      {role === '1' || role === '2' ? UsuarioScreen() : EmpresaScreen()}
     </ScrollView>
   );
 }

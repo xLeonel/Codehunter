@@ -8,6 +8,7 @@ namespace Api.ViewModels
 {
     public class InscricaoViewModel
     {
+        public int Id { get; set; }
         public string Titulo { get; set; }
         public string DescricaoAtividades { get; set; }
         public string DescricaoRequisitos { get; set; }

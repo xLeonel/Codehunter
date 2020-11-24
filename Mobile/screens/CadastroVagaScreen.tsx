@@ -7,8 +7,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 import moment from 'moment';
 import AsyncStorage from '@react-native-community/async-storage';
+import { NavigationHelpersContext } from '@react-navigation/native';
+import { RootStackParamList } from '../types';
+import { StackScreenProps } from '@react-navigation/stack';
 
-export default function CadastroVaga() {
+export default function CadastroVaga({
+    navigation,
+  }: StackScreenProps<RootStackParamList, 'NotFound'>) {
+  
 
     const [uf, setUfs] = React.useState([]);
 
@@ -113,9 +119,9 @@ export default function CadastroVaga() {
         }
 
         try {
-            const url = "http://localhost:5000/api/Vaga"
+            const url = "http://192.168.0.3:8000/api/Vaga"
             const request = await fetch(url, {
-                method: "post",
+                method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: 'Bearer ' + await AsyncStorage.getItem('token')
@@ -124,8 +130,18 @@ export default function CadastroVaga() {
             })
             const response = await request.json()
 
-            Alert.alert(response);
-
+            Alert.alert(
+                //title
+                'Vaga',
+                //body
+                `${response}`,
+                [
+                  {
+                    text: 'Ok',
+                    onPress: () => navigation.goBack()
+                  }
+                ]
+              );
         } catch (error) {
             throw new Error(error)
         }

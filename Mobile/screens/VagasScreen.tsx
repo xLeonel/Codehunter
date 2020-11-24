@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import * as React from 'react';
-import { Alert, Modal, ScrollView, StyleSheet, TouchableHighlight } from 'react-native';
+import { Alert, Modal, RefreshControl, ScrollView, StyleSheet, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-paper';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
@@ -306,6 +306,22 @@ export default function VagaScreen({
 
   }
 
+  const wait = (timeout : any) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    listarVagas();
+
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
 
   const vagaUser = () => {
     return (
@@ -352,9 +368,11 @@ export default function VagaScreen({
     );
   }
 
+
+
   const vagaEmpresa = () => {
     return (
-      <ScrollView style={{ width: '100%' }}>
+      <ScrollView style={{ width: '100%' }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={styles.container}>
           {vagas.map((item: any) => {
             return (

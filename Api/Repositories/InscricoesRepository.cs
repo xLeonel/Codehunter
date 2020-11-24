@@ -18,6 +18,8 @@ namespace Api.Repositories
         {
             List<InscricaoViewModel> inscricaoViewModels = new List<InscricaoViewModel>();
 
+            var count = 1;
+
             foreach (var item in ctx.Inscricao
                 .Include(i => i.IdStatusInscricaoNavigation)
                 .Include(i => i.IdVagaNavigation.IdEmpresaNavigation)
@@ -47,6 +49,7 @@ namespace Api.Repositories
 
                 InscricaoViewModel inscricaoViewModel = new InscricaoViewModel
                 {
+                    Id = count,
                     Titulo = item.IdVagaNavigation.Titulo,
                     DescricaoAtividades = item.IdVagaNavigation.DescricaoAtividades,
                     DescricaoRequisitos = item.IdVagaNavigation.DescricaoRequisitos,
@@ -63,6 +66,8 @@ namespace Api.Repositories
                 };
 
                 inscricaoViewModels.Add(inscricaoViewModel);
+
+                count++;
             }
 
             return inscricaoViewModels;
