@@ -1,17 +1,44 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
 import { RootStackParamList } from '../types';
 
 export default function Splash({
   navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
+
+  React.useEffect(() => {
+    onRefresh();
+  }, []);
+
+  const wait = (timeout: any) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    wait(3500).then(() => {
+      setRefreshing(false);
+      navigation.replace('TipoUsuario');
+    });
+  }, []);
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Splash.</Text>
+
       <TouchableOpacity onPress={() => navigation.replace('TipoUsuario')} style={styles.link}>
-        <Text style={styles.linkText}>Login</Text>
+        <Image
+          style={{ width: 186, height: 65, marginBottom: '15%' }}
+          source={require('../assets/images/logo.png')}
+
+        />
       </TouchableOpacity>
     </View>
   );
