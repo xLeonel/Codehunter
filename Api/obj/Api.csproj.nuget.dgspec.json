@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vitor\\Desktop\\Codehunter\\Api\\Api.csproj": {}
+    "D:\\Rinha de Galo\\Codehunter\\Api\\Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vitor\\Desktop\\Codehunter\\Api\\Api.csproj": {
+    "D:\\Rinha de Galo\\Codehunter\\Api\\Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vitor\\Desktop\\Codehunter\\Api\\Api.csproj",
+        "projectUniqueName": "D:\\Rinha de Galo\\Codehunter\\Api\\Api.csproj",
         "projectName": "Api",
-        "projectPath": "C:\\Users\\vitor\\Desktop\\Codehunter\\Api\\Api.csproj",
-        "packagesPath": "C:\\Users\\vitor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vitor\\Desktop\\Codehunter\\Api\\obj\\",
+        "projectPath": "D:\\Rinha de Galo\\Codehunter\\Api\\Api.csproj",
+        "packagesPath": "C:\\Users\\juran\\.nuget\\packages\\",
+        "outputPath": "D:\\Rinha de Galo\\Codehunter\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juran\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "LumenWorksCsvReader": {
               "target": "Package",
@@ -93,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
