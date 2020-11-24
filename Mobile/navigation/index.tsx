@@ -9,6 +9,7 @@ import Inscricoes from '../screens/InscricoesScreen';
 import CadastroVaga from '../screens/CadastroVagaScreen';
 import LoginScreen from '../screens/LoginScreen';
 import LoginEmpresaScreen from '../screens/LoginEmpresaScreen';
+import ConfiguracoesScreen from '../screens/ConfiguracoesScreen';
 import TipoUsuarioScreen from '../screens/TipoUsuarioScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
@@ -36,6 +37,7 @@ function RootNavigator() {
       <Stack.Screen name="Splash" component={SplashScreeen} options={{ title: 'Splash' }} />
       <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
       <Stack.Screen name="LoginEmpresa" component={LoginEmpresaScreen} options={{ title: 'Login' }} />
+      <Stack.Screen name="Configuracoes" component={ConfiguracoesScreen} options={{ title: 'Configuracoes'}}/>
       <Stack.Screen name="TipoUsuario" component={TipoUsuarioScreen} options={{ title: 'Tipo Usuario' }} />
       <Stack.Screen name="Inscricoes" component={Inscricoes} options={{ title: 'Inscricao', headerTitle: 'Inscricao', headerShown: true }} />
       <Stack.Screen name="CadastroVaga" component={CadastroVaga} options={{ title: 'Cadastro Vaga', headerTitle: 'Cadastrar Vaga', headerShown: true }} />
