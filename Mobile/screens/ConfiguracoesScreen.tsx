@@ -1,50 +1,76 @@
 import * as React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
-import { StyleSheet, Text, View } from 'react-native';
-import { Fontisto } from '@expo/vector-icons'; 
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Fontisto, Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { SimpleLineIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { View } from '../components/Themed';
 
 export default function Configuracoes({
     navigation
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
     return (
-    <View style={styles.container}>
-        <Text style={styles.title}>Configurações</Text>
-        <View style={styles.separatorTitle}/>
+        <View style={styles.container}>
+            {/* <Text style={styles.title}>Configurações</Text>
+        <View style={styles.separatorTitle}/> */}
 
-        <View style={styles.container1}>
-            <MaterialCommunityIcons name="account-circle-outline" size={40} color="black" />
-            <Text style={styles.textos}>Alterar Foto de Perfil</Text>
-            <AntDesign name="rightcircleo" size={25} color="black" />
+            <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('AlterarFotoPerfil')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
+                    <Ionicons name="md-images" size={30} color="black" />
+                    <Text style={{ marginLeft: '10%' }}>Alterar Foto de Perfil</Text>
+                </View>
+                <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+            </TouchableOpacity>
+
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+
+            <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('AtualizarRedesSociais')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
+                    <Ionicons name="md-list" size={30} color="black" />
+                    <Text style={{ marginLeft: '10%' }}>Atualizar redes sociais</Text>
+                </View>
+                <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+            </TouchableOpacity>
+
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+            <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('AlterarSenha')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%', }}>
+                    <Ionicons name="md-lock" size={30} color="black" />
+                    <Text style={{ marginLeft: '10%' }}>Alterar senha</Text>
+                </View>
+                <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+            </TouchableOpacity>
+
+
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+            <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('ExcluirConta')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%', }}>
+                    <Ionicons name="md-remove-circle" size={30} color="black" />
+                    <Text style={{ marginLeft: '10%' }}>Excluir Conta</Text>
+                </View>
+                <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+            </TouchableOpacity>
+
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+
+            <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('Configuracoes')}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
+                    <Ionicons name="md-information-circle" size={30} color="black" />
+                    <Text style={{ marginLeft: '10%' }}>Sobre nós</Text>
+                </View>
+                <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+            </TouchableOpacity>
+
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+
         </View>
-
-        <View style={styles.separator}/>
-
-        <View style={styles.container2}>
-            <Fontisto name="email" size={40} color="black" />
-            <Text style={styles.textos}>Alterar Email</Text>
-            <AntDesign name="rightcircleo" size={25} color="black" />
-        </View>
-
-        <View style={styles.separator}/>
-
-        <View style={styles.container3}>
-            <MaterialCommunityIcons name="lock-outline" size={40} color="black" />
-            <Text style={styles.textos}>Alterar Senha</Text>
-            <AntDesign name="rightcircleo" size={25} color="black" />
-        </View>
-
-        <View style={styles.separator}/>
-
-        <View style={styles.container4}>
-            <SimpleLineIcons name="info" size={40} color="black" />
-            <Text style={styles.textos}>Sobre Nós</Text>
-            <AntDesign name="rightcircleo" size={25} color="black" />
-        </View>
-    </View>
     );
 }
 
@@ -52,28 +78,9 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         flex: 1,
-        padding: 10,
-        paddingTop: 70
+        // paddingTop: 15
     },
-    container1: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10
-    },
-    container2: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10
-    },
-    container3: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10
-    },
-    container4: {
+    containerContent: {
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -90,13 +97,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
+    // separator: {
+    //     alignItems: 'center',
+    //     backgroundColor: '#000',
+    //     height: 1,
+    //     marginBottom: 15,
+    //     marginTop: 15,
+    //     width: '100%'
+    // },
     separator: {
-        alignItems: 'center',
-        backgroundColor: '#000',
         height: 1,
-        marginBottom: 15,
-        marginTop: 15,
-        width: '100%'
+        width: '100%',
     },
     separatorTitle: {
         backgroundColor: '#DC3545',

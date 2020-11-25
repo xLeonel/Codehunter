@@ -10,6 +10,10 @@ import CadastroVaga from '../screens/CadastroVagaScreen';
 import LoginScreen from '../screens/LoginScreen';
 import LoginEmpresaScreen from '../screens/LoginEmpresaScreen';
 import ConfiguracoesScreen from '../screens/ConfiguracoesScreen';
+import ExcluirContaScreen from '../screens/ExcluirContaScreen';
+import AlterarSenhaScreen from '../screens/AlterarSenhaScreen';
+import RedesSociaisScreen from '../screens/RedesSociaisScreen';
+import AlterarFotoPerfilScreen from '../screens/AlterarFotoScreen';
 import TipoUsuarioScreen from '../screens/TipoUsuarioScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
@@ -37,7 +41,11 @@ function RootNavigator() {
       <Stack.Screen name="Splash" component={SplashScreeen} options={{ title: 'Splash' }} />
       <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
       <Stack.Screen name="LoginEmpresa" component={LoginEmpresaScreen} options={{ title: 'Login' }} />
-      <Stack.Screen name="Configuracoes" component={ConfiguracoesScreen} options={{ title: 'Configuracoes'}}/>
+      <Stack.Screen name="Configuracoes" component={ConfiguracoesScreen} options={{ headerTitle: 'Configurações', headerShown: true }} />
+      <Stack.Screen name="ExcluirConta" component={ExcluirContaScreen} options={{ headerTitle: 'Excluir Conta', headerShown: true }} />
+      <Stack.Screen name="AlterarSenha" component={AlterarSenhaScreen} options={{ headerTitle: 'Alterar Senha', headerShown: true }} />
+      <Stack.Screen name="AtualizarRedesSociais" component={RedesSociaisScreen} options={{ headerTitle: 'Atualizar Redes Sociais', headerShown: true }} />
+      <Stack.Screen name="AlterarFotoPerfil" component={AlterarFotoPerfilScreen} options={{ headerTitle: 'Alterar Foto Perfil', headerShown: true }} />
       <Stack.Screen name="TipoUsuario" component={TipoUsuarioScreen} options={{ title: 'Tipo Usuario' }} />
       <Stack.Screen name="Inscricoes" component={Inscricoes} options={{ title: 'Inscricao', headerTitle: 'Inscricao', headerShown: true }} />
       <Stack.Screen name="CadastroVaga" component={CadastroVaga} options={{ title: 'Cadastro Vaga', headerTitle: 'Cadastrar Vaga', headerShown: true }} />

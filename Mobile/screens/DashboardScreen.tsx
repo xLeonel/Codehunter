@@ -60,7 +60,7 @@ export default function Dashboard({
         <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
       </TouchableOpacity>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+      <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('Configuracoes')}>
         <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
           <Ionicons name="md-settings" size={30} color="black" />
           <Text style={{ marginLeft: '10%' }}>Configurações</Text>

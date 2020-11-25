@@ -7,7 +7,12 @@ export type RootStackParamList = {
   TipoUsuario: undefined;
   Configuracoes: undefined;
   Inscricoes: any;
-  CadastroVaga: any
+  CadastroVaga: any;
+  ExcluirConta: any;
+  AlterarSenha: undefined;
+  AlterarFotoPerfil: undefined;
+  SobreNos: undefined;
+  AtualizarRedesSociais: undefined;
 };
 
 export type BottomTabParamList = {

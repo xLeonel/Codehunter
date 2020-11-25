@@ -52,6 +52,8 @@ export default function TabOneScreen() {
     return (
       <View>
         <Text style={styles.title}>Minhas Inscrições</Text>
+        <View style={styles.separatorTitle} />
+
 
         {inscricao.map((item: any) => {
           return (
@@ -59,7 +61,7 @@ export default function TabOneScreen() {
               <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
                 <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.id}</Text>
                 <View style={{ flexDirection: 'column', marginLeft: 5 }}>
-                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length === 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...' )}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length === 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...')}</Text>
                   <Text style={{ marginLeft: '10%' }}>{item.empresa}</Text>
                 </View>
               </View>
@@ -102,4 +104,11 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  separatorTitle: {
+    backgroundColor: '#DC3545',
+    height: 2.5,
+    marginBottom: 20,
+    marginTop: 3,
+    width: '15%'
+  }
 });
