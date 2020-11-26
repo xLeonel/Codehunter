@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import NavBar from '../../components/navbar';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
-import { usuarioLogado } from '../../services/auth';
+import { parseJWT, usuarioLogado } from '../../services/auth';
 import history from '../../history';
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 
 
 import '../../assets/style/reset.css'
@@ -16,23 +16,23 @@ function Vaga(){
     const [techs, setTech] = React.useState([]);
     const [beneficios, setBeneficios] = React.useState([]);
     
-    const [role, setRole] = React.useState('');
+    // const [role, setRole] = React.useState('');
     const [inscrito, setInscrito] = React.useState(Boolean);
 
     
     useEffect(() => {
-        decodeToken();
+        // decodeToken();
         GetVaga();
         GetVagaTech();
     },[])
 
-    const decodeToken = async () => {
-        var token = localStorage.getItem('token');
-        if(token !== null){
-            var tokenDecoded:any = jwt_decode(token);
-            setRole(tokenDecoded.Role);
-        }
-    }
+    // const decodeToken = async () => {
+    //     var token = localStorage.getItem('token');
+    //     if(token !== null){
+    //         var tokenDecoded:any = jwt_decode(token);
+    //         setRole(tokenDecoded.Role);
+    //     }
+    // }
 
     const inscricao = {
         idVaga: vagaId
@@ -119,7 +119,7 @@ function Vaga(){
         }
     
     const selectedVaga = () => {
-        if(role === '1' || role === '2'){
+        if(parseJWT().role === '1' || parseJWT().role === '2'){
         return (
             <div>
                 <NavBar/>

@@ -5,7 +5,7 @@ import { StyleSheet, Text, TextInput, View, Image, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import { RootStackParamList } from '../types';
 
-export default function Login({
+export default function LoginAluno({
   navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
 
@@ -19,7 +19,7 @@ export default function Login({
     }
 
     try {
-      const request = await fetch("http://192.168.0.3:8000/api/Login/Usuario", {
+      const request = await fetch('http://192.168.0.3:8000/api/Login/Usuario', {
         body: JSON.stringify(body),
         method: "POST",
         headers: {
@@ -36,7 +36,7 @@ export default function Login({
     } catch (error) {
       console.log("ERROR")
       console.log(error)
-      Alert.alert("Usuário não encontrado!", "Tente novamente")
+      Alert.alert("Aluno não encontrado!", "Tente novamente")
     }
   }
 
@@ -72,7 +72,7 @@ export default function Login({
 
       <Text style={styles.label}>Esqueceu a senha?</Text>
 
-      <Text style={styles.label}>Não possui uma conta? <Text style={{ fontWeight: 'bold' }}>Cadastre-se</Text></Text>
+      <Text style={styles.label}>Não possui uma conta? <Text style={{ fontWeight: 'bold' }} onPress={() => navigation.navigate('CadastroAluno')}>Cadastre-se</Text></Text>
 
     </View >
   );

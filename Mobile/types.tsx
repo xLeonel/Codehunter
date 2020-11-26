@@ -13,6 +13,8 @@ export type RootStackParamList = {
   AlterarFotoPerfil: undefined;
   SobreNos: undefined;
   AtualizarRedesSociais: undefined;
+  CadastroAluno: undefined;
+  CadastroEmpresa: undefined;
 };
 
 export type BottomTabParamList = {

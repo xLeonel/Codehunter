@@ -7,6 +7,8 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import SplashScreeen from '../screens/SplashScreen';
 import Inscricoes from '../screens/InscricoesScreen';
 import CadastroVaga from '../screens/CadastroVagaScreen';
+import CadastroAluno from '../screens/CadastroAlunoScreen';
+import CadastroEmpresa from '../screens/CadastroEmpresaScreen';
 import LoginScreen from '../screens/LoginScreen';
 import LoginEmpresaScreen from '../screens/LoginEmpresaScreen';
 import ConfiguracoesScreen from '../screens/ConfiguracoesScreen';
@@ -49,6 +51,8 @@ function RootNavigator() {
       <Stack.Screen name="TipoUsuario" component={TipoUsuarioScreen} options={{ title: 'Tipo Usuario' }} />
       <Stack.Screen name="Inscricoes" component={Inscricoes} options={{ title: 'Inscricao', headerTitle: 'Inscricao', headerShown: true }} />
       <Stack.Screen name="CadastroVaga" component={CadastroVaga} options={{ title: 'Cadastro Vaga', headerTitle: 'Cadastrar Vaga', headerShown: true }} />
+      <Stack.Screen name="CadastroAluno" component={CadastroAluno} options={{ title: 'Cadastro Aluno', headerTitle: 'Cadastrar Aluno', headerShown: true }} />
+      <Stack.Screen name="CadastroEmpresa" component={CadastroEmpresa} options={{ title: 'Cadastro Empresa', headerTitle: 'Cadastrar Empresa', headerShown: true }} />
       <Stack.Screen name="Voltar" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>

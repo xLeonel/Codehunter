@@ -10,10 +10,14 @@ export default function TabOneScreen() {
   const [inscricao, setMyInscricao] = React.useState([]);
   const [role, setRole] = React.useState('');
 
+  const [numList, setNum] = React.useState(0);
+
 
   React.useEffect(() => {
     decodeToken();
     getInscricao();
+    getNumVagas();
+
   }, []);
 
   const getInscricao = async () => {
@@ -63,6 +67,25 @@ export default function TabOneScreen() {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  const getNumVagas = async () => {
+    try {
+      const request = await fetch("http://192.168.0.3:8000/api/Empresa/Vagas", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+        }
+      })
+
+      const response = await request.json();
+
+      setNum(response.length);
+
+
+    } catch (error) {
+      console.log("ta tudo bem")
+    }
+  }
 
   const UsuarioScreen = () => {
 
@@ -93,13 +116,36 @@ export default function TabOneScreen() {
 
   const EmpresaScreen = () => {
     return (
-      <Text>Company</Text>
+      <View>
+        <Text style={styles.title}>Vagas</Text>
+        <View style={styles.separatorTitle} />
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 20 }}>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.titleVagaEmpresa}>{numList}</Text>
+            <Text>Cadastradas</Text>
+          </View>
+
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.titleVagaEmpresa}>0</Text>
+            <Text>Match</Text>
+          </View>
+
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.titleVagaEmpresa}>0</Text>
+            <Text>Canceladas</Text>
+          </View>
+        </View>
+
+
+
+      </View>
     );
   }
 
 
   return (
-    <ScrollView style={styles.container}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+    <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       {role === '1' || role === '2' ? UsuarioScreen() : EmpresaScreen()}
     </ScrollView>
   );
@@ -127,5 +173,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 3,
     width: '15%'
+  },
+  titleVagaEmpresa: {
+    color: '#DC3545',
+    fontWeight: 'bold',
+    fontSize: 40
   }
 });
