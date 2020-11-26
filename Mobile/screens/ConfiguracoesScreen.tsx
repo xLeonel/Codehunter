@@ -30,7 +30,7 @@ export default function Configuracoes({
             <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('AtualizarRedesSociais')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
                     <Ionicons name="md-list" size={30} color="black" />
-                    <Text style={{ marginLeft: '10%' }}>Atualizar redes sociais</Text>
+                    <Text style={{ marginLeft: '10%' }}>Atualizar informações</Text>
                 </View>
                 <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
             </TouchableOpacity>

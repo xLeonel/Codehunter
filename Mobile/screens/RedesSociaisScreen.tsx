@@ -45,7 +45,30 @@ export default function RedesSociaisScreen({
             setRemoto(response.idPreferenciasTrabalhoNavigation.idRemoto);
 
         } catch (error) {
-            console.log("ERROR")
+            console.log("erro aluno")
+            console.log(error)
+        }
+
+        try {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                }
+            })
+
+            const response = await request.json();
+
+            // setTelefone(dados.celular);
+
+            setLinkedin(response.nomeFantasia);
+            setGitHub(response.nomeRepresentante);
+            setStackOverflow(`${response.numColaboradores}`);
+            setSitePessoal(response.descricao);
+
+        } catch (error) {
+            console.log("erro empresa")
             console.log(error)
         }
     }
@@ -78,10 +101,40 @@ export default function RedesSociaisScreen({
 
             // setTelefone(dados.celular);
 
-           Alert.alert('Atualização', `${response}`, [{text:'Ok', onPress: () => navigation.goBack()}]);
+            Alert.alert('Atualização', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }]);
 
         } catch (error) {
-            console.log("ERROR")
+            console.log("erro aluno")
+            console.log(error)
+        }
+
+        let formEmpresa = {
+            // celular: telefone,
+            nomeFantasia: linkedin,
+            nomeRepresentante: github,
+            numColaboradores: stackOverflow,
+            descricao: sitePessoal
+            // foto: fotoSetada,            
+        }
+
+        try {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                },
+                body: JSON.stringify(formEmpresa)
+            })
+
+            const response = await request.json();
+
+            // setTelefone(dados.celular);
+
+            Alert.alert('Atualização', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }]);
+
+        } catch (error) {
+            console.log("erro empresa")
             console.log(error)
         }
     }
@@ -93,12 +146,15 @@ export default function RedesSociaisScreen({
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
                 onChangeText={text => setLinkedin(text)}
                 value={linkedin}
+                placeholder={linkedin === '' ? 'digite seu linkedin' : linkedin}
+
             />
 
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '5%', padding: '2%' }}
                 onChangeText={text => setGitHub(text)}
                 value={github}
+                placeholder={github === '' ? 'digite seu github' : github}
 
 
             />
@@ -107,6 +163,8 @@ export default function RedesSociaisScreen({
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '5%', padding: '2%' }}
                 onChangeText={text => setStackOverflow(text)}
                 value={stackOverflow}
+                placeholder={stackOverflow === '' ? 'digite seu stack overflow' : stackOverflow}
+
 
             />
 
@@ -114,6 +172,7 @@ export default function RedesSociaisScreen({
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '5%', padding: '2%' }}
                 onChangeText={text => setSitePessoal(text)}
                 value={sitePessoal}
+                placeholder={sitePessoal === '' ? 'digite seu site' : sitePessoal}
 
             />
             <TouchableOpacity onPress={() => atualizarUser()} style={styles.link}>

@@ -32,7 +32,32 @@ export default function EscluirConta({
             }
 
         } catch (error) {
-            console.log("ERROR")
+            console.log("erro aluno")
+            console.log(error)
+        }
+
+        try {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                }
+            })
+
+            const response = await request.json();
+
+            if (response !== 'Erro ao deletar') {
+                await AsyncStorage.removeItem('token');
+                navigation.replace('TipoUsuario');
+                Alert.alert(response)
+            }
+            else {
+                Alert.alert(response)
+            }
+
+        } catch (error) {
+            console.log("erro empresa")
             console.log(error)
         }
     }

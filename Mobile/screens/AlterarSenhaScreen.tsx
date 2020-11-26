@@ -31,10 +31,27 @@ export default function AlterarSenha({
             const response = await request.json();
 
             setSenhaBanco(response.idAcessoNavigation.senha);
-
-
+           
         } catch (error) {
-            console.log("ERROR")
+            console.log("erro aluno")
+            console.log(error)
+        }
+
+        try {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                }
+            })
+
+            const response = await request.json();
+
+            setSenhaBanco(response.idAcessoNavigation.senha);
+           
+        } catch (error) {
+            console.log("erro empresa")
             console.log(error)
         }
     }
@@ -47,7 +64,7 @@ export default function AlterarSenha({
 
 
     const attUser = async () => {
-        if (novaSenha === senhaBanco) {
+        if (senhaAtual === senhaBanco) {
             let formUp = {
                 IdAcessoNavigation: {
                     Senha: novaSenha,
@@ -67,11 +84,32 @@ export default function AlterarSenha({
 
                 const response = await request.json();
 
-                Alert.alert(response)
+                Alert.alert('Senha', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }])
 
 
             } catch (error) {
-                console.log("ERROR")
+                console.log("erro aluno")
+                console.log(error)
+            }
+
+            try {
+                const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                    },
+                    body: JSON.stringify(formUp),
+
+                })
+
+                const response = await request.json();
+
+                Alert.alert('Senha', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }])
+
+
+            } catch (error) {
+                console.log("erro empresa")
                 console.log(error)
             }
         }

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as React from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 
@@ -47,6 +47,23 @@ export default function TabOneScreen() {
     setRole(tokenDecoded.Role);
   }
 
+  const wait = (timeout: any) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    getInscricao();
+
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
+
   const UsuarioScreen = () => {
 
     return (
@@ -61,7 +78,7 @@ export default function TabOneScreen() {
               <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
                 <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.id}</Text>
                 <View style={{ flexDirection: 'column', marginLeft: 5 }}>
-                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length === 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...')}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length <= 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...')}</Text>
                   <Text style={{ marginLeft: '10%' }}>{item.empresa}</Text>
                 </View>
               </View>
@@ -82,7 +99,7 @@ export default function TabOneScreen() {
 
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       {role === '1' || role === '2' ? UsuarioScreen() : EmpresaScreen()}
     </ScrollView>
   );

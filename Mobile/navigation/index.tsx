@@ -44,7 +44,7 @@ function RootNavigator() {
       <Stack.Screen name="Configuracoes" component={ConfiguracoesScreen} options={{ headerTitle: 'Configurações', headerShown: true }} />
       <Stack.Screen name="ExcluirConta" component={ExcluirContaScreen} options={{ headerTitle: 'Excluir Conta', headerShown: true }} />
       <Stack.Screen name="AlterarSenha" component={AlterarSenhaScreen} options={{ headerTitle: 'Alterar Senha', headerShown: true }} />
-      <Stack.Screen name="AtualizarRedesSociais" component={RedesSociaisScreen} options={{ headerTitle: 'Atualizar Redes Sociais', headerShown: true }} />
+      <Stack.Screen name="AtualizarRedesSociais" component={RedesSociaisScreen} options={{ headerTitle: 'Atualizar Informações', headerShown: true }} />
       <Stack.Screen name="AlterarFotoPerfil" component={AlterarFotoPerfilScreen} options={{ headerTitle: 'Alterar Foto Perfil', headerShown: true }} />
       <Stack.Screen name="TipoUsuario" component={TipoUsuarioScreen} options={{ title: 'Tipo Usuario' }} />
       <Stack.Screen name="Inscricoes" component={Inscricoes} options={{ title: 'Inscricao', headerTitle: 'Inscricao', headerShown: true }} />
