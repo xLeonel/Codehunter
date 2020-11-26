@@ -12,8 +12,6 @@ export default function AlterarFoto({
 
     const [image, setImage] = React.useState('');
 
-    const [fotoBanco, setFotoBanco] = React.useState('');
-
     React.useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -39,12 +37,7 @@ export default function AlterarFoto({
 
             const response = await request.json();
 
-            console.log(response.foto)
-            console.log(response.nomeCompleto)
-
-            let stringSplitada = response.foto.split(',')
-
-            setImage(stringSplitada[1]);
+            setImage(response.foto);
 
         } catch (error) {
             console.log("ERROR")
@@ -53,23 +46,24 @@ export default function AlterarFoto({
     }
 
     const atualizarUser = async () => {
+
         let body = {
-            foto: `data:image/jpeg;base64,${image}`
-        } 
+            foto: image
+        }
 
         try {
             const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
                 method: "PUT",
+                body: JSON.stringify(body),
                 headers: {
                     "Content-Type": "application/json",
                     authorization: 'Bearer ' + await AsyncStorage.getItem('token')
-                },
-                body: JSON.stringify(body)
+                }
             })
 
             const response = await request.json();
 
-            Alert.alert('Foto', `${response}`, [{ text: 'Ok' }])
+            Alert.alert('Foto', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }])
 
         } catch (error) {
             console.log("ERROR")
@@ -80,17 +74,19 @@ export default function AlterarFoto({
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
             base64: true
         });
 
-        // console.log(result);
-
         if (!result.cancelled) {
             setImage(result.uri);
+            if (result.base64 !== undefined) {
+                setImage(result.base64);
+            }
+
         }
 
     };
@@ -98,7 +94,9 @@ export default function AlterarFoto({
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={pickImage}>
-                {image === '' || fotoBanco === undefined ? <Avatar.Image size={150} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={150} source={{ uri: image }} />}
+                {image === '' || image === undefined ? <Avatar.Image size={150} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={150} source={{ uri: 'data:image/jpeg;base64,' + image }} />}
+               
+
             </TouchableOpacity>
 
             {/* <Text style={{ marginTop: 15 }}>Toque na imagem parar selecionar uma nova</Text> */}

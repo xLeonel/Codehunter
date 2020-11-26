@@ -25,7 +25,7 @@ export default function Login({
 
       <View style={styles.container2}>
         <View style={{ width: '40%' }}>
-          <Button mode="contained" color="#DC3545" onPress={() => navigation.replace('Voltar')}>
+          <Button mode="contained" color="#DC3545" onPress={() => navigation.replace('Login')}>
             <Text style={styles.linkText}>Aluno</Text>
           </Button>
         </View>

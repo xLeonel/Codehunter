@@ -33,13 +33,13 @@ export default function Splash({
   return (
     <View style={styles.container}>
 
-      <TouchableOpacity onPress={() => navigation.replace('TipoUsuario')} style={styles.link}>
-        <Image
-          style={{ width: 186, height: 65, marginBottom: '15%' }}
-          source={require('../assets/images/logo.png')}
 
-        />
-      </TouchableOpacity>
+      <Image
+        style={{ width: 186, height: 65, marginBottom: '15%' }}
+        source={require('../assets/images/logo.png')}
+
+      />
+
     </View>
   );
 }
