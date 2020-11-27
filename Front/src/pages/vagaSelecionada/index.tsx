@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import Button from '../../components/Button';
 import { parseJWT, usuarioLogado } from '../../services/auth';
 import history from '../../history';
-// import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 
 
 import '../../assets/style/reset.css'
@@ -16,12 +16,12 @@ function Vaga(){
     const [techs, setTech] = React.useState([]);
     const [beneficios, setBeneficios] = React.useState([]);
     
-    // const [role, setRole] = React.useState('');
+    //const [role, setRole] = React.useState('');
     const [inscrito, setInscrito] = React.useState(Boolean);
 
     
     useEffect(() => {
-        // decodeToken();
+        //decodeToken();
         GetVaga();
         GetVagaTech();
     },[])
@@ -31,6 +31,7 @@ function Vaga(){
     //     if(token !== null){
     //         var tokenDecoded:any = jwt_decode(token);
     //         setRole(tokenDecoded.Role);
+    //         console.log(tokenDecoded.Role)
     //     }
     // }
 
@@ -40,7 +41,6 @@ function Vaga(){
 
     const GetVaga = async () => {
         let url = window.location.href.substring(27,50)
-        verificarInscricao(url)
         const request = await fetch(`http://localhost:5000/api/Vaga/${url}`, {
             method: 'GET',
             headers: {
@@ -119,12 +119,13 @@ function Vaga(){
         }
     
     const selectedVaga = () => {
-        if(parseJWT().role === '1' || parseJWT().role === '2'){
+        if(parseJWT().Role === '1'){
         return (
             <div>
                 <NavBar/>
                 <div>
                     {vaga.map((item:any) => {
+                        verificarInscricao(item.idVaga)
                         return (
                         <div className="vaga3">
                     <div className="aa">
@@ -174,7 +175,63 @@ function Vaga(){
             </div>
             <Footer/>
         </div>
-        )} else {
+        )} else if (parseJWT().Role === '2') {
+            return (
+                <div>
+                    <NavBar/>
+                    <div>
+                        {vaga.map((item:any) => {
+                            return (
+                            <div className="vaga3">
+                        <div className="aa">
+                            <p className="areaAtuacao3">{item.areaAtuacaoVaga}</p>
+                            <h3 className="vagaTitle">{item.titulo}</h3>
+                        </div>
+                        <div className="basicInfo3">
+                            <div className="local3">
+                                <p className="vagaText">Local de Trabalho: </p>
+                                <p>{item.localidade}</p>
+                            </div>
+                            <div className="salary3">
+                                <p className="vagaText">Salário: </p>
+                                <p>R$ {item.salario}</p>
+                            </div>
+                        </div>
+                        <p className="vagaText">Requisitos: </p>
+                        <p className="questions">O que você precisa?</p>
+                        <p className="description3">{item.descricaoRequisitos}</p>
+    
+                        <p className="vagaText">Atividades: </p>
+                        <p className="questions">O que você irá fazer?</p>
+                        <p className="description3">{item.descricaoAtividades}</p>
+    
+                        <p className="vagaText">Benefícios: </p>
+                        <p className="questions">Quais benefícios terão?</p>
+                        <div className="benefits3">
+                            {item.beneficios.map((item: any) => {
+                                return (
+                                    <Button className="buttonT" type="submit" value={item} />
+                                )
+                            })}
+                        </div>
+    
+                        <p className="vagaText">Tecnologias: </p>
+                        <p className="questions">Quais tecnologias serão utilizadas?</p>
+                        <div className="tecnology3">
+                            {techs.map((tech: any) => {
+                                return (
+                                    <Button className="buttonT" type="submit" value={tech.nomeTecnologia} />
+                                    )
+                                })}
+                            </div>
+                            <Button className="button" type="button" value="Inscrito" onClick={() => {alert("ADM não pode se candidatar a uma vaga")}}/>
+                        </div>
+                        )})}
+                </div>
+                <Footer/>
+            </div>
+            )
+        } else if (parseJWT().Role === '3') {
             return (
                 <div>
                     <NavBar/>
@@ -224,7 +281,64 @@ function Vaga(){
                                     )
                                 })}
                             </div>
-                            <Button className="button" type="button" value="Inscrito" onClick={handleClickVaga}/>
+                            <Button className="button" type="button" value="Me Candidatar" onClick={() => alert("Apenas alunos podem se candidatar")}/>
+                        </div>
+                        )})}
+                </div>
+                <Footer/>
+            </div>
+            )
+        } else {
+            return (
+                <div>
+                    <NavBar/>
+                    <div>
+                        {vaga.map((item:any) => {
+                            verificarInscricao(item.idVaga)
+                            return (
+                            <div className="vaga3">
+                        <div className="aa">
+                            <p className="areaAtuacao3">{item.areaAtuacaoVaga}</p>
+                            <h3 className="vagaTitle">{item.titulo}</h3>
+                        </div>
+                        <div className="basicInfo3">
+                            <div className="local3">
+                                <p className="vagaText">Local de Trabalho: </p>
+                                <p>{item.localidade}</p>
+                            </div>
+                            <div className="salary3">
+                                <p className="vagaText">Salário: </p>
+                                <p>R$ {item.salario}</p>
+                            </div>
+                        </div>
+                        <p className="vagaText">Requisitos: </p>
+                        <p className="questions">O que você precisa?</p>
+                        <p className="description3">{item.descricaoRequisitos}</p>
+    
+                        <p className="vagaText">Atividades: </p>
+                        <p className="questions">O que você irá fazer?</p>
+                        <p className="description3">{item.descricaoAtividades}</p>
+    
+                        <p className="vagaText">Benefícios: </p>
+                        <p className="questions">Quais benefícios terão?</p>
+                        <div className="benefits3">
+                            {item.beneficios.map((item: any) => {
+                                return (
+                                    <Button className="buttonT" type="submit" value={item} />
+                                )
+                            })}
+                        </div>
+    
+                        <p className="vagaText">Tecnologias: </p>
+                        <p className="questions">Quais tecnologias serão utilizadas?</p>
+                        <div className="tecnology3">
+                            {techs.map((tech: any) => {
+                                return (
+                                    <Button className="buttonT" type="submit" value={tech.nomeTecnologia} />
+                                    )
+                                })}
+                            </div>
+                            <Button className="button" type="button" value="Me Candidatar" onClick={() => {alert("É necessário estar logado para se candidatar")}}/>
                         </div>
                         )})}
                 </div>
