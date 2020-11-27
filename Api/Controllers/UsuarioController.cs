@@ -124,6 +124,29 @@ namespace Api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("IsAluno")]
+        public string VerificarEmail(Usuario usuario)
+        {
+            try
+            {
+                if (_usuarioRepository.IsAluno(usuario.IdAcessoNavigation.Email, out string curso))
+                {
+                    return "true";
+                }
+                else
+                {
+                    return "false";
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return "false";
+            }
+        }
+
+
+        [AllowAnonymous]
         [HttpPost("Adm")]
         public IActionResult PostADM(Usuario usuario)
         {
