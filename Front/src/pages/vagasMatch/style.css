@@ -1,8 +1,4 @@
-/* .logoDaNav img{
-    width: 186px;
-    height: 65px;
-    margin: 17px 40px 14px  40px;
-}
+/* 
 
 .allPage {
     height: 100vh;
@@ -36,6 +32,21 @@
     display: flex;
 } */
 
+.allPage2 .logoDaNav {
+    width: 190px;
+    height: 70px;
+    margin: 17px 40px 30px 545px;
+}
+
+.pastel {
+    text-align: center;
+    margin: 5% 15%;
+}
+
+.skip .button {
+    margin-top: 3%;
+    margin-left: 80%;
+}
 
 .vaga2 {
     display: flex;

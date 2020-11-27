@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import Button from '../../components/Button/index'
 import logo from '../../assets/images/logoSenaiRed.png';
 import placeImg from '../../assets/images/img_placeIcon.png';
 import salaryImg from '../../assets/images/img_moneyIcon.png';
@@ -9,7 +10,6 @@ import '../../assets/style/reset.css'
 import './style.css';
 import { Divider } from '@material-ui/core';
 
-import Button from '../../components/Button';
 
 function Home() {
     const [vagas, setVagasMatch] = useState([]);
@@ -41,15 +41,15 @@ function Home() {
             <Divider />
 
             <div className="MainContent2">
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ipsam, possimus, nulla harum quia sit blanditiis corporis tempora mollitia, dolorum enim. Quia nulla suscipit et iste neque hic unde repellendus?</h3>
+                <h3 className="pastel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ipsam, possimus, nulla harum quia sit blanditiis corporis tempora mollitia, dolorum enim. Quia nulla suscipit et iste neque hic unde repellendus?</h3>
                 {
                     vagas.map((vaga:any) => {
                         return (
                             <div className="vaga2">
-                            <p className="areaAtuacao2">{vaga.areaAtuacaoVaga}</p>
+                            <p className="areaAtuacao">{vaga.areaAtuacaoVaga}</p>
                             <h3>{vaga.titulo}</h3>
-                            <div className="basicInfo2">
-                                <div className="local2">
+                            <div className="basicInfo">
+                                <div className="local">
                                     <img src={placeImg} alt="" />
                                     <p>{vaga.localidade}</p>
                                 </div>
@@ -63,7 +63,9 @@ function Home() {
                             </div>
                     )})
                     }
-                <Link to='/user/dashboard'><button style={{ backgroundColor: '#DC3545', color: 'black', fontSize: '20px', padding: '10px' }} type='button' value='Voltar'>Pular</button></Link>
+                <div className="skip">
+                    <Link to='/user/dashboard'><Button className="button" type="button" value="Pular"></Button></Link>
+                </div>
             </div>
         </div>
     );
