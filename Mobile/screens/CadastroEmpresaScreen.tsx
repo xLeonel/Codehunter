@@ -95,8 +95,6 @@ export default function CadastroEmpresa({
         </>
     );
 
-
-
     const StepTwo = (
         <>
 
@@ -133,7 +131,6 @@ export default function CadastroEmpresa({
     );
 
     const StepThree = (
-
         <>
             <Text style={styles.title}>Informe os dados abaixo para iniciar o cadastro da empresa</Text>
             <View style={styles.separatorTitle} />
@@ -165,7 +162,6 @@ export default function CadastroEmpresa({
             <View style={{ height: 85 }} />
 
         </>
-
     );
 
     const StepFour = (
@@ -177,7 +173,7 @@ export default function CadastroEmpresa({
                 visible={loading}
                 textContent={'Procurando cep...'}
                 textStyle={{ color: '#fff' }}
-                // color='#DC3545'
+            // color='#DC3545'
             />
 
             <View style={{ flexDirection: 'row', marginTop: 10 }}>

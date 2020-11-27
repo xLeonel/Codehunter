@@ -1,6 +1,6 @@
 import { View, Text } from '../components/Themed';
 import * as React from 'react';
-import { Alert, StyleSheet, TextInput } from 'react-native';
+import { Alert, Keyboard, KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,8 +13,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 
 export default function CadastroVaga({
     navigation,
-  }: StackScreenProps<RootStackParamList, 'NotFound'>) {
-  
+}: StackScreenProps<RootStackParamList, 'NotFound'>) {
+
 
     const [uf, setUfs] = React.useState([]);
 
@@ -48,6 +48,8 @@ export default function CadastroVaga({
     const arrayTagBenefico: Array<Tag> = [];
     const [arrayTagFormat, setArrayTag] = React.useState(Array<Tag>());
     const [arrayTagFormatBeneficio, setArrayTagBeneficio] = React.useState(Array<Tag>());
+
+    const [count, setCount] = React.useState(1);
 
 
     React.useEffect(() => {
@@ -136,12 +138,12 @@ export default function CadastroVaga({
                 //body
                 `${response}`,
                 [
-                  {
-                    text: 'Ok',
-                    onPress: () => navigation.goBack()
-                  }
+                    {
+                        text: 'Ok',
+                        onPress: () => navigation.goBack()
+                    }
                 ]
-              );
+            );
         } catch (error) {
             throw new Error(error)
         }
@@ -177,172 +179,226 @@ export default function CadastroVaga({
         setArrayTagBeneficio(arrayTagBenefico);
     }
 
-   
+    const StepOne = (
+        <>
+            <Text style={styles.title}>Informe os dados abaixo para iniciar o cadastro da vaga</Text>
+            <View style={styles.separatorTitle} />
+
+            <TextInput
+                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                placeholder='Digite o titulo da vaga'
+                onChangeText={(t) => setTitulo(t)}
+                value={titulo}
+            />
+
+            <TextInput
+                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                numberOfLines={5}
+                multiline={true}
+                placeholder='Digite a atividade que desempenhará..'
+                onChangeText={(t) => setDA(t)}
+                onKeyPress={({ nativeEvent }) => {
+                    nativeEvent.key === 'Enter' ? Keyboard.dismiss() : null
+                }}
+                value={descricaoAtividades}
+            />
+
+            <TextInput
+                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                numberOfLines={5}
+                multiline={true}
+                placeholder='Digite os requisitos que deve possuir..'
+                onChangeText={(t) => setDR(t)}
+                onKeyPress={({ nativeEvent }) => {
+                    nativeEvent.key === 'Enter' ? Keyboard.dismiss() : null
+                }}
+                value={descricaoRequisisto}
+            />
+
+            <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Selecione a cidade da vaga',
+                        value: null
+                    }}
+                    onValueChange={(value) => setLocalidade(value)}
+                    items={array}
+                    Icon={() => {
+                        return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                    }}
+                    value={localidade}
+
+                />
+            </View>
+
+            <Button mode="contained" color="#DC3545" style={{ marginTop: '10%' }} onPress={() => setCount(count + 1)} >Próximo</Button>
+
+            <View style={{ height: 85 }} />
+        </>
+    );
+
+    const StepTwo = (
+        <>
+
+            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro da vaga</Text>
+            <View style={styles.separatorTitle} />
+
+            <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Selecione o tipo de trabalho',
+                        value: null
+                    }}
+                    onValueChange={(value) => {
+                        if (value === 1) {
+                            setRemoto(true);
+                        }
+                        setIdRemoto(value);
+                    }}
+                    items={[
+                        { label: 'Remoto ou presencial', value: 3 },
+                        { label: 'Apenas presencial', value: 2 },
+                        { label: 'Apenas remoto', value: 1 },
+                    ]}
+                    Icon={() => {
+                        return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                    }}
+                    value={idRemoto}
+                />
+            </View>
+
+            <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Selecione a área de atuação',
+                        value: null
+                    }}
+                    onValueChange={(value) => setAreaAtuacao(value)}
+                    items={[
+                        { label: 'Back-end', value: 'Back-end' },
+                        { label: 'Front-end', value: 'Front-end' },
+                        { label: 'Redes', value: 'Redes' },
+                        { label: 'Full-stack', value: 'Full-stack' },
+                    ]}
+                    Icon={() => {
+                        return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                    }}
+                    value={areaAtuacao}
+                />
+            </View>
+
+            <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
+                <RNPickerSelect
+                    placeholder={{
+                        label: 'Selecione o regime de contratação',
+                        value: null
+                    }}
+                    onValueChange={(value) => setRegimeContratacao(value)}
+                    items={[
+                        { label: 'CLT', value: 'CLT' },
+                        { label: 'PJ', value: 'PJ' },
+                        { label: 'Estágio', value: 'Estágio' },
+                    ]}
+                    Icon={() => {
+                        return <Ionicons name="md-arrow-down" size={20} color="gray" />;
+                    }}
+                    value={regimeContratacao}
+                />
+            </View>
+
+            <TextInput
+                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                placeholder='Digite o salário'
+                onChangeText={(t) => setSalario(t)}
+                value={salario}
+            />
+
+            <View style={{ flexDirection: 'row' }}>
+                <Button mode="contained" color="#DC3545" style={{ marginTop: '10%' }} onPress={() => setCount(count - 1)} >Voltar</Button>
+                <Button mode="contained" color="#DC3545" style={{ marginTop: '10%', marginLeft: '5%' }} onPress={() => setCount(count + 1)} >Próximo</Button>
+            </View>
+
+            <View style={{ height: 85 }} />
+
+        </>
+    );
+
+    const StepThree = (
+        <>
+            <Text style={styles.title}>Informe os dados abaixo para finalizar o cadastro da empresa</Text>
+            <View style={styles.separatorTitle} />
+
+            <TextInput
+                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                placeholder='Digite as tecnologias'
+                onChangeText={(e) => setTags(e)}
+                onKeyPress={({ nativeEvent }) => {
+                    nativeEvent.key === ' ' || nativeEvent.key === 'Backspace' ? atualizarTagsTecnologia() : null
+                }}
+                value={tags}
+            />
+            <View style={{ flexDirection: 'row' }}>
+                {arrayTagFormat.slice(0, 2).map((tec: any) => {
+                    return (
+                        <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={tec.nome}>{tec.nome}</Button>
+                    );
+                })}
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+                {arrayTagFormat.slice(2, 5).map((tec: any) => {
+                    return (
+                        <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={tec.nome}>{tec.nome}</Button>
+                    );
+                })}
+            </View>
+
+            <TextInput
+                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
+                placeholder='Digite os beneficios'
+                onChangeText={(e) => setTagsBeneficio(e)}
+                onKeyPress={({ nativeEvent }) => {
+                    nativeEvent.key === ' ' || nativeEvent.key === 'Backspace' ? atualizarTagsBeneficios() : null
+                }}
+                value={tagsBeneficios}
+            />
+            <View style={{ flexDirection: 'row' }}>
+                {arrayTagFormatBeneficio.slice(0, 2).map((ben: any) => {
+                    return (
+                        <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={ben.nome}>{ben.nome}</Button>
+                    );
+                })}
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+                {arrayTagFormatBeneficio.slice(2, 5).map((ben: any) => {
+                    return (
+                        <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={ben.nome}>{ben.nome}</Button>
+                    );
+                })}
+            </View>
+
+
+            <View style={{ flexDirection: 'row' }}>
+                <Button mode="contained" color="#DC3545" style={{ marginTop: '10%' }} onPress={() => setCount(count - 1)} >Voltar</Button>
+                <Button mode="contained" color="#DC3545" style={{ marginTop: '10%', marginLeft: '5%' }} onPress={() => cadastrarVaga()} >Concluir</Button>
+            </View>
+
+            <View style={{ height: 85 }} />
+
+        </>
+    );
+
+
     return (
-        <ScrollView>
-            <View style={styles.container}>
+        <KeyboardAvoidingView
+            style={styles.containerTeste}
+            behavior="padding"
+        >
 
-                <TextInput
-                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    placeholder='Digite o titulo da vaga'
-                    onChangeText={(t) => setTitulo(t)}
-                />
+            {count === 1 ? StepOne : count === 2 ? StepTwo : count === 3 ? StepThree : null}
 
-                <TextInput
-                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    numberOfLines={5}
-                    multiline={true}
-                    placeholder='Digite a atividade que desempenhará..'
-                    onChangeText={(t) => setDA(t)}
-
-                />
-
-
-                <TextInput
-                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    numberOfLines={5}
-                    multiline={true}
-                    placeholder='Digite os requisitos que deve possuir..'
-                    onChangeText={(t) => setDR(t)}
-
-                />
-
-                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Selecione a cidade da vaga',
-                            value: null
-                        }}
-                        onValueChange={(value) => setLocalidade(value)}
-                        items={array}
-                        Icon={() => {
-                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
-                        }}
-                    />
-                </View>
-
-                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Selecione o tipo de trabalho',
-                            value: null
-                        }}
-                        onValueChange={(value) => {
-                            if (value === 1) {
-                                setRemoto(true);
-                            }
-                            setIdRemoto(value)
-                        }}
-                        items={[
-                            { label: 'Remoto ou presencial', value: 3 },
-                            { label: 'Apenas presencial', value: 2 },
-                            { label: 'Apenas remoto', value: 1 },
-                        ]}
-                        Icon={() => {
-                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
-                        }}
-                    />
-                </View>
-
-
-                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Selecione a área de atuação',
-                            value: null
-                        }}
-                        onValueChange={(value) => setAreaAtuacao(value)}
-                        items={[
-                            { label: 'Back-end', value: 'Back-end' },
-                            { label: 'Front-end', value: 'Front-end' },
-                            { label: 'Redes', value: 'Redes' },
-                            { label: 'Full-stack', value: 'Full-stack' },
-                        ]}
-                        Icon={() => {
-                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
-                        }}
-                    />
-                </View>
-
-                <View style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%', justifyContent: 'center' }}>
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Selecione o regime de contratação',
-                            value: null
-                        }}
-                        onValueChange={(value) => setRegimeContratacao(value)}
-                        items={[
-                            { label: 'CLT', value: 'CLT' },
-                            { label: 'PJ', value: 'PJ' },
-                            { label: 'Estágio', value: 'Estágio' },
-                        ]}
-                        Icon={() => {
-                            return <Ionicons name="md-arrow-down" size={20} color="gray" />;
-                        }}
-                    />
-                </View>
-
-                <TextInput
-                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    placeholder='Digite o salário'
-                    onChangeText={(t) => setSalario(t)}
-
-                />
-
-                <TextInput
-                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    placeholder='Digite as tecnologias'
-                    onChangeText={(e) => setTags(e)}
-                    onKeyPress={({ nativeEvent }) => {
-                        nativeEvent.key === ' ' || nativeEvent.key === 'Backspace' ? atualizarTagsTecnologia() : null
-                    }}
-                />
-                <View style={{ flexDirection: 'row' }}>
-                    {arrayTagFormat.slice(0, 2).map((tec: any) => {
-                        return (
-                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={tec.nome}>{tec.nome}</Button>
-                        );
-                    })}
-                </View>
-
-                <View style={{ flexDirection: 'row' }}>
-                    {arrayTagFormat.slice(2, 5).map((tec: any) => {
-                        return (
-                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={tec.nome}>{tec.nome}</Button>
-                        );
-                    })}
-                </View>
-
-                <TextInput
-                    style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, marginTop: '10%', padding: '2%' }}
-                    placeholder='Digite os beneficios'
-                    onChangeText={(e) => setTagsBeneficio(e)}
-                    onKeyPress={({ nativeEvent }) => {
-                        nativeEvent.key === ' ' || nativeEvent.key === 'Backspace' ? atualizarTagsBeneficios() : null
-                    }}
-                />
-                <View style={{ flexDirection: 'row' }}>
-                    {arrayTagFormatBeneficio.slice(0, 2).map((ben: any) => {
-                        return (
-                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={ben.nome}>{ben.nome}</Button>
-                        );
-                    })}
-                </View>
-
-                <View style={{ flexDirection: 'row' }}>
-                    {arrayTagFormatBeneficio.slice(2, 5).map((ben: any) => {
-                        return (
-                            <Button mode="outlined" color='#DC3545' style={{ marginTop: '5%', marginBottom: '1%', borderColor: '#DC3545', width: '35%', marginRight: '2%' }} key={ben.nome}>{ben.nome}</Button>
-                        );
-                    })}
-                </View>
-
-
-                <Button style={{ marginTop: '10%', marginBottom: '10%' }} mode="contained" color="#DC3545" onPress={() => cadastrarVaga()}>
-                    Cadastrar
-                </Button>
-            </View >
-        </ScrollView >
+        </KeyboardAvoidingView>
     );
 }
 
@@ -353,9 +409,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
     },
+    containerTeste: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    separatorTitle: {
+        backgroundColor: '#DC3545',
+        height: 2.5,
+        marginBottom: 10,
+        marginTop: 3,
+        width: '20%',
+    },
     title: {
-        fontSize: 20,
+        fontSize: 15,
         fontWeight: 'bold',
+        textAlign: "center",
+        paddingTop: 20,
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingBottom: 10
     },
     link: {
         marginTop: 15,
