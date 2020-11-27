@@ -1,10 +1,11 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Keyboard } from 'react-native';
 
 import { Button } from 'react-native-paper';
 import { RootStackParamList } from '../types';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function CadastroEmpresa({
     navigation,
@@ -32,6 +33,37 @@ export default function CadastroEmpresa({
     const [numero, setNumero] = React.useState('');
 
     const [count, setCount] = React.useState(1);
+
+    const [loading, setLoading] = React.useState(false);
+
+    const GetCep = async () => {
+        try {
+            setLoading(true);
+
+            const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                }
+            })
+
+            const response = await request.json();
+
+            setCep(response.cep);
+            setRua(response.logradouro);
+            setBairro(response.bairro);
+            setLocalidade(response.localidade)
+            setUf(response.uf)
+
+            setLoading(false);
+
+
+        } catch (error) {
+            console.log("ERROR")
+            console.log(error)
+        }
+    }
 
 
     const StepOne = (
@@ -141,15 +173,26 @@ export default function CadastroEmpresa({
             <Text style={styles.title}>Informe os dados abaixo para finalizar o cadastro da empresa</Text>
             <View style={styles.separatorTitle} />
 
+            <Spinner
+                visible={loading}
+                textContent={'Procurando cep...'}
+                textStyle={{ color: '#fff' }}
+                // color='#DC3545'
+            />
+
             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                 <TextInput
                     style={{ height: 45, width: '35%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                     placeholder='Digite o CEP'
+                    onChangeText={text => setCep(text)}
+                    onBlur={() => GetCep()}
+                    value={cep}
                 />
 
                 <TextInput
                     style={{ height: 45, width: '40%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%', marginLeft: '5%' }}
                     placeholder='Digite o bairro'
+                    value={bairro}
                 />
             </View>
 
@@ -158,16 +201,22 @@ export default function CadastroEmpresa({
                 <TextInput
                     style={{ height: 45, width: '35%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                     placeholder='Digite a cidade'
+                    value={localidade}
+
                 />
                 <TextInput
                     style={{ height: 45, width: '40%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%', marginLeft: '5%' }}
                     placeholder='Digite o estado'
+                    value={uf}
+
                 />
             </View>
 
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite o endereço'
+                value={rua}
+
             />
 
             <View style={{ flexDirection: 'row' }}>
