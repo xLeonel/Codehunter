@@ -3,7 +3,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   Splash: undefined;
   Login: undefined;
-  Perfil: any;
+  Perfil: undefined;
   LoginEmpresa: undefined;
   TipoUsuario: undefined;
   Configuracoes: undefined;
@@ -16,6 +16,7 @@ export type RootStackParamList = {
   AtualizarRedesSociais: undefined;
   CadastroAluno: undefined;
   CadastroEmpresa: undefined;
+  VagasFound: undefined;
 };
 
 export type BottomTabParamList = {

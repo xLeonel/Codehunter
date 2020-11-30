@@ -8,13 +8,15 @@ export default function Perfil({
     navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
     return (
-        <Text style={styles.texto}>Olá Mundo!</Text>
+        <View>
+            <Text style={styles.texto}>Olá Mundo!</Text>
+        </View>
     );
 }
 
 // Apenas teste
 const styles = StyleSheet.create({
     texto: {
-        color: '#fff'
+        color: 'black'
     },
 })

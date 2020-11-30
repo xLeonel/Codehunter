@@ -155,10 +155,10 @@ export default function CadastroAluno({
                                 }
                                 else {
                                     setLoading(false);
-                                    
-                                    //fazer found vagas
 
-                                    // history.push('/found')
+                                    //fazer found vagas
+                                    navigation.popToTop();
+                                    navigation.replace('VagasFound')
                                 }
                             } catch (error) {
                                 throw new Error(error)
@@ -295,9 +295,8 @@ export default function CadastroAluno({
                 onChangeText={(text) => setSenha(text)}
                 secureTextEntry={true}
                 value={senha}
-
-
             />
+
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Confirme sua senha'

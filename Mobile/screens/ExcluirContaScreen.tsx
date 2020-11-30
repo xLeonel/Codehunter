@@ -66,8 +66,8 @@ export default function EscluirConta({
         <View style={styles.container}>
             <Text style={{ textAlign: 'center' }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam facilis fugit aliquid doloribus nisi, corrupti temporibus saepe omnis aliquam tenetur necessitatibus laudantium iusto praesentium, voluptatem recusandae dicta asperiores ullam sapiente.</Text>
 
-            <TouchableOpacity onPress={() => deletarConta()} style={styles.link}>
-                <Button mode="contained" color="#DC3545" onPress={() => Alert.alert('Deletar Conta', `n tem volta`, [{ text: 'Sim', onPress: () => console.log('deletado') }, { text: 'Cancelar', onPress: () => console.log('fechar') }])}>Excluir Conta</Button>
+            <TouchableOpacity style={styles.link}>
+                <Button mode="contained" color="#DC3545" onPress={() => Alert.alert('Deletar Conta', `n tem volta`, [{ text: 'Sim', onPress: () => deletarConta() }, { text: 'Cancelar', onPress: () => console.log('fechar') }])}>Excluir Conta</Button>
             </TouchableOpacity>
         </View>
     );

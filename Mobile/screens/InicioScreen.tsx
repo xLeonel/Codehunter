@@ -32,8 +32,9 @@ export default function TabOneScreen() {
 
       const response = await request.json();
 
-      setMyInscricao(response);
-
+      if (response !== 'Usuario não possui inscrições.') {
+        setMyInscricao(response);
+      }
 
     } catch (error) {
       console.log("ta tudo bem")
@@ -95,7 +96,7 @@ export default function TabOneScreen() {
         <View style={styles.separatorTitle} />
 
 
-        {inscricao.map((item: any) => {
+        {inscricao.length !== 0 ? inscricao.map((item: any) => {
           return (
             <TouchableOpacity key={item.id} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
@@ -108,7 +109,7 @@ export default function TabOneScreen() {
               <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
             </TouchableOpacity>
           );
-        })}
+        }) : <Text>Realize uma inscrição</Text>}
 
       </View>
     );
