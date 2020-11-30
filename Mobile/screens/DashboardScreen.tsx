@@ -49,7 +49,7 @@ export default function Dashboard({
 
   const getInfoUser = async () => {
     try {
-      const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
+      const request = await fetch("http://192.168.0.2:8000/api/Usuario", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

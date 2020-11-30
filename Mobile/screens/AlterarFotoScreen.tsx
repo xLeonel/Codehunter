@@ -27,7 +27,7 @@ export default function AlterarFoto({
 
     const getInfoUser = async () => {
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
+            const request = await fetch("http://192.168.0.2:8000/api/Usuario", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export default function AlterarFoto({
         }
 
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
+            const request = await fetch("http://192.168.0.2:8000/api/Usuario", {
                 method: "PUT",
                 body: JSON.stringify(body),
                 headers: {
