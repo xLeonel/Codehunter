@@ -3,6 +3,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   Splash: undefined;
   Login: undefined;
+  Perfil: any;
   LoginEmpresa: undefined;
   TipoUsuario: undefined;
   Configuracoes: undefined;
