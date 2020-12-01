@@ -273,6 +273,7 @@ export default function CadastroAluno({
                     placeholder='Digite seu email'
                     onChangeText={(text) => setEmail(text)}
                     value={email}
+                    onBlur={() => verificarEmail()}
                 /> : emailValid === 'false' ?
                     <TextInput
                         style={{ height: 45, width: '80%', borderColor: 'red', borderWidth: 2, padding: '2%', marginTop: 30 }}
@@ -335,7 +336,7 @@ export default function CadastroAluno({
 
     const StepTwo = (
         <>
-            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro da empresa</Text>
+            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro de aluno</Text>
             <View style={styles.separatorTitle} />
 
             <TextInput
@@ -374,7 +375,7 @@ export default function CadastroAluno({
     const StepThree = (
         <>
 
-            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro da empresa</Text>
+            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro de aluno</Text>
             <View style={styles.separatorTitle} />
 
 
@@ -442,7 +443,7 @@ export default function CadastroAluno({
 
     const StepFour = (
         <>
-            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro da empresa</Text>
+            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro de aluno</Text>
             <View style={styles.separatorTitle} />
 
             <Spinner
@@ -519,7 +520,7 @@ export default function CadastroAluno({
     const StepFive = (
         <>
 
-            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro da empresa</Text>
+            <Text style={styles.title}>Informe os dados abaixo para continuar o cadastro de aluno</Text>
             <View style={styles.separatorTitle} />
 
 
@@ -612,7 +613,7 @@ export default function CadastroAluno({
 
     const StepSix = (
         <>
-            <Text style={styles.title}>Informe os dados abaixo para finalizar o cadastro da empresa</Text>
+            <Text style={styles.title}>Informe os dados abaixo para finalizar o cadastro de aluno</Text>
             <View style={styles.separatorTitle} />
 
             <Spinner
