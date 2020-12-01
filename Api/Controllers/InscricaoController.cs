@@ -11,6 +11,8 @@ using Api.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Api.Controllers
 {
@@ -21,9 +23,12 @@ namespace Api.Controllers
     {
         CodehunterContext ctx = new CodehunterContext();
         private IInscricaoRepository _inscricaoRepository { get; set; }
+        private EstagiosRepository _internshipRepository { get; set; }
+
         public InscricaoController()
         {
             _inscricaoRepository = new InscricoesRepository();
+
         }
 
         [Authorize(Roles = "2")]
@@ -122,6 +127,39 @@ namespace Api.Controllers
                 inscricao.IdStatusInscricao = 1;
 
                 _inscricaoRepository.Add(inscricao);
+
+                var vaga = ctx.Vaga.Where(v => v.IdVaga == inscricao.IdVaga).Include(v => v.IdRegimeContratacaoNavigation).ToList();
+
+                foreach (var item in vaga)
+                {
+                    if (item.IdRegimeContratacaoNavigation.NomeRegimeContratacao == "Estágio")
+                    {
+                        Contrato contrato = new Contrato
+                        {
+                            Inicio = DateTime.Now,
+                            IdStatusContrato = 1
+                        };
+
+                        string vazia = "";
+
+                        byte[] byt = new byte[vazia.Length];
+
+                        Estagio estagio = new Estagio
+                        {
+                            IdContratoNavigation = contrato,
+                            ContratoPdf = byt,
+                            IdInscricao = inscricao.IdInscricao
+
+                        };
+
+                        ctx.Estagio.Add(estagio);
+                        ctx.SaveChanges();
+                  
+                      
+                    }
+                }
+
+
 
                 return Ok("Inscricao atualizado.");
             }

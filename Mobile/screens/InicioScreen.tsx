@@ -172,14 +172,14 @@ export default function TabOneScreen() {
         <View style={styles.separatorTitle} />
 
 
-        {inscricao.length !== 0 ? inscricao.map((item: any) => {
+        {estagios.length !== 0 ? estagios.map((item: any) => {
           return (
-            <TouchableOpacity key={item.id} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity key={item.idEstagio} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
-                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.id}</Text>
+                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.idEstagio}</Text>
                 <View style={{ flexDirection: 'column', marginLeft: 5 }}>
-                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length <= 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...')}</Text>
-                  <Text style={{ marginLeft: '10%' }}>{item.empresa}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.idInscricaoNavigation.idUsuarioNavigation.nomeCompleto}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.idInscricaoNavigation.idVagaNavigation.idEmpresaNavigation.nomeFantasia}</Text>
                 </View>
               </View>
               <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />

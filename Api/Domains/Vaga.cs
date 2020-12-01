@@ -31,5 +31,6 @@ namespace Api.Domains
         public virtual ICollection<Beneficios> Beneficios { get; set; }
         public virtual ICollection<Inscricao> Inscricao { get; set; }
         public virtual ICollection<Tecnologia> Tecnologia { get; set; }
+
     }
 }
