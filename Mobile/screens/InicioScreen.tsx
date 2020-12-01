@@ -8,6 +8,7 @@ import { Text, View } from '../components/Themed';
 export default function TabOneScreen() {
 
   const [inscricao, setMyInscricao] = React.useState([]);
+  const [estagios, setEstagios] = React.useState([]);
   const [role, setRole] = React.useState('');
 
   const [numList, setNum] = React.useState(0);
@@ -17,6 +18,7 @@ export default function TabOneScreen() {
     decodeToken();
     getInscricao();
     getNumVagas();
+    getEstagios();
 
   }, []);
 
@@ -35,6 +37,25 @@ export default function TabOneScreen() {
       if (response !== 'Usuario não possui inscrições.') {
         setMyInscricao(response);
       }
+
+    } catch (error) {
+      console.log("ta tudo bem")
+    }
+  }
+
+  const getEstagios = async () => {
+    try {
+      const request = await fetch("http://192.168.0.2:8000/api/Estagio/AllInternship", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+        }
+      })
+
+      const response = await request.json();
+
+      setEstagios(response);
 
     } catch (error) {
       console.log("ta tudo bem")
@@ -144,10 +165,36 @@ export default function TabOneScreen() {
     );
   }
 
+  const AdmScreen = () => {
+    return (
+      <View>
+        <Text style={styles.title}>Estágios</Text>
+        <View style={styles.separatorTitle} />
+
+
+        {inscricao.length !== 0 ? inscricao.map((item: any) => {
+          return (
+            <TouchableOpacity key={item.id} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
+                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.id}</Text>
+                <View style={{ flexDirection: 'column', marginLeft: 5 }}>
+                  <Text style={{ marginLeft: '10%' }}>{item.titulo.length <= 28 ? item.titulo : item.titulo.replace(item.titulo.substring(27, 1000), '...')}</Text>
+                  <Text style={{ marginLeft: '10%' }}>{item.empresa}</Text>
+                </View>
+              </View>
+              <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+            </TouchableOpacity>
+          );
+        }) : <Text>Sem estágio vigente</Text>}
+
+      </View>
+    );
+  }
+
 
   return (
     <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-      {role === '1' || role === '2' ? UsuarioScreen() : EmpresaScreen()}
+      {role === '1' ? UsuarioScreen() : role === '2' ? AdmScreen() : EmpresaScreen()}
     </ScrollView>
   );
 }

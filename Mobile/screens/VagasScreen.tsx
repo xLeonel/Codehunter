@@ -200,7 +200,7 @@ export default function VagaScreen({
   }
 
   const modal = () => {
-    if (role === '1' || role === '2') {
+    if (role === '1') {
       return (
         <View>
           <Modal
@@ -303,10 +303,59 @@ export default function VagaScreen({
         </View >
       );
     }
+    else if (role === '2') {
+      return (
+        <View>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.",);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.title}>{empresa}</Text>
+                <Text style={styles.modalText}>Titulo: {titulo}</Text>
+                <Text style={styles.modalText}>Área atuação: {areaAtuacaoVaga}</Text>
+                <Text style={styles.modalText}>Localidade: {localidade}</Text>
+                <Text style={styles.modalText}>Remoto: {remoto}</Text>
+                <Text style={styles.modalText}>Salário: {salario}</Text>
+                <Text style={styles.modalText}>Regime Contratação: {regContratacao}</Text>
+                <Text style={styles.modalText}>Descricão das Ativades: {descAtividades}</Text>
+                <Text style={styles.modalText}>Descricão dos Requisitos: {descRequisitos}</Text>
+                <Text style={styles.modalText}>Beneficios: {beneficios.map((item: any) => {
+                  return (
+                    <Text key={item}>{item}, </Text>
+                  );
+                })}</Text>
+
+                <Text style={styles.modalText}>Tecnologia: {tecnologias.filter(function (tec: any) { if (tec.idVaga === idVaga) return tec }).map((tec: any) => {
+                  return (
+                    <Text key={tec.idTecnologia}>{tec.nomeTecnologia}, </Text>
+                  );
+                })}</Text>
+
+                <TouchableHighlight
+                  style={{ ...styles.openButton, backgroundColor: "#DC3545", marginBottom: '5%', marginTop: '15%' }}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Fechar</Text>
+
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
+        </View >
+      );
+    }
 
   }
 
-  const wait = (timeout : any) => {
+  const wait = (timeout: any) => {
     return new Promise(resolve => {
       setTimeout(resolve, timeout);
     });
