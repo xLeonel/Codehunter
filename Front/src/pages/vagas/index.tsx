@@ -35,6 +35,7 @@ function Vagas() {
         setPage(1)
         setSearchTerm(event.target.value);
     };
+    const [citySearch, setCitySearch] = React.useState('Selecione')
 
     const [page, setPage] = React.useState(1);
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -103,65 +104,122 @@ function Vagas() {
     function mapIndex(position: any, type: number) {
         let indexPosition = chunkArray(vagas, 4, 0)
         let techPosition = chunkArray(tecnologias, 2, 0)
-        let techs
-
-        if (searchTerm === null || searchTerm === "") {
-            if (type === 0) {
-                if (indexPosition === null || indexPosition === undefined || indexPosition.length === 0) {
-                    return (
-                        <div>
-                        </div>
-                    )
-                } else {
-                return (
-                    indexPosition[position].map((vaga: any) => {
+        
+        if(citySearch === "Selecione" || citySearch === undefined || citySearch === null){
+            if (searchTerm === null || searchTerm === "") {
+                if (type === 0) {
+                    if (indexPosition === null || indexPosition === undefined || indexPosition.length === 0) {
                         return (
-                            <div className="vaga">
-                                <p className="areaAtuacao">{vaga.areaAtuacaoVaga}</p>
-                                <h3>{vaga.titulo}</h3>
-                                <div className="basicInfo">
-                                    <div className="local">
-                                        <img src={placeImg} alt="" />
-                                        <p>{vaga.localidade}</p>
-                                    </div>
-                                    <div className="salary">
-                                        <img src={salaryImg} alt="" />
-                                        <p>R$ {vaga.salario}</p>
-                                    </div>
-                                </div>
-                                <p className="description">{vaga.descricaoRequisitos}</p>
-                                {mapIndex(position, 1)}
-                                <Link to={`/vaga/${vaga.idVaga}`}><Button className="button" type="button" value="Mais Detalhes" /></Link>
+                            <div>
                             </div>
                         )
-                    })
-                )}
+                    } else {
+                    return (
+                        indexPosition[position].map((vaga: any) => {
+                            return (
+                                <div className="vaga">
+                                    <p className="areaAtuacao">{vaga.areaAtuacaoVaga}</p>
+                                    <h3>{vaga.titulo}</h3>
+                                    <div className="basicInfo">
+                                        <div className="local">
+                                            <img src={placeImg} alt="" />
+                                            <p>{vaga.localidade}</p>
+                                        </div>
+                                        <div className="salary">
+                                            <img src={salaryImg} alt="" />
+                                            <p>R$ {vaga.salario}</p>
+                                        </div>
+                                    </div>
+                                    <p className="description">{vaga.descricaoRequisitos}</p>
+                                    {mapIndex(position, 1)}
+                                    <Link to={`/vaga/${vaga.idVaga}`}><Button className="button" type="button" value="Mais Detalhes" /></Link>
+                                </div>
+                            )
+                        })
+                    )}
+                } else {
+                    return (
+                        <div className="tecnology">
+                            {techPosition.forEach((tecnologia: any) => {
+                                return (
+                                    tecnologia.map((tech: any) => {
+                                        return (
+                                            <Button className="buttonT" type="submit" value={tech.nomeTecnologia} />
+                                        )
+                                    })
+                                )
+                            }
+                            )}
+                        </div>
+                    )
+                }
             } else {
                 return (
-                    <div className="tecnology">
-                        {techPosition.forEach((tecnologia: any) => {
-                            return (
-                                tecnologia.map((tech: any) => {
-                                    return (
-                                        <Button className="buttonT" type="submit" value={tech.nomeTecnologia} />
-                                    )
-                                })
-                            )
-                        }
-                        )}
-                    </div>
+                    Search(searchTerm, position, type, vagas)
                 )
             }
         } else {
-            return (
-                Search(searchTerm, position, type)
-            )
+            if (searchTerm === null || searchTerm === "") {
+                if (type === 0) {
+                    if (indexPosition === null || indexPosition === undefined || indexPosition.length === 0) {
+                        return (
+                            <div>
+                            </div>
+                        )
+                    } else {
+                        let newFilter = cityFilter(vagas)
+                        let newIndexPosition = chunkArray(newFilter, 4, 0)
+                    return (
+                        newIndexPosition[position].map((vaga: any) => {
+                            return (
+                                <div className="vaga">
+                                    <p className="areaAtuacao">{vaga.areaAtuacaoVaga}</p>
+                                    <h3>{vaga.titulo}</h3>
+                                    <div className="basicInfo">
+                                        <div className="local">
+                                            <img src={placeImg} alt="" />
+                                            <p>{vaga.localidade}</p>
+                                        </div>
+                                        <div className="salary">
+                                            <img src={salaryImg} alt="" />
+                                            <p>R$ {vaga.salario}</p>
+                                        </div>
+                                    </div>
+                                    <p className="description">{vaga.descricaoRequisitos}</p>
+                                    {mapIndex(position, 1)}
+                                    <Link to={`/vaga/${vaga.idVaga}`}><Button className="button" type="button" value="Mais Detalhes" /></Link>
+                                </div>
+                            )
+                        })
+                    )}
+                } else {
+                    return (
+                        <div className="tecnology">
+                            {techPosition.forEach((tecnologia: any) => {
+                                return (
+                                    tecnologia.map((tech: any) => {
+                                        return (
+                                            <Button className="buttonT" type="submit" value={tech.nomeTecnologia} />
+                                        )
+                                    })
+                                )
+                            }
+                            )}
+                        </div>
+                    )
+                }
+            } else {
+                let newFilter = cityFilter(vagas)
+                return (
+                    Search(searchTerm, position, type, newFilter)
+                )
+            }
         }
     }
 
-    function Search(searchTerm: string | null, position: any, type: number) {
+    function Search(searchTerm: string | null, position: any, type: number, array:any[]) {
         let techPosition = chunkArray(tecnologias, 2, 0)
-        let filteredArray = Filter(vagas)
+        let filteredArray = Filter(array)
         if (type === 0) {
             if (filteredArray === null || filteredArray === undefined || filteredArray.length === 0) {
                 return (
@@ -188,9 +246,9 @@ function Vagas() {
                                 </div>
                                 <p className="description">{vaga.descricaoRequisitos}</p>
                                 <div className="tecnology">
-                                    {Search(searchTerm, position + 1, 1)}
+                                    {Search(searchTerm, position + 1, 1, array)}
                                 </div>
-                                <Button className="button" type="button" value="Me Candidatar" />
+                                <Link to={`/vaga/${vaga.idVaga}`}><Button className="button" type="button" value="Mais Detalhes" /></Link>
                             </div>
                         )
                     })
@@ -218,64 +276,112 @@ function Vagas() {
         return array.filter(item => item.titulo.toLowerCase().includes(searchTerm?.toLowerCase()))
     }
 
-    function SelectedValue(array: any[], value: any) {
-        return array.filter(item => item.localidade.equals(value))
-    }
-
     function numeroVagas(searchTerm: string | null) {
-        if (searchTerm === null || searchTerm === "") {
-            if(vagas.length === 0 || vagas.length === undefined || vagas.length === null){
-                return (
-                    <h3 className="qtdVagas">Nenhuma vaga cadastrada no momento...</h3>
-                )
-            } else{
-                return (
-                    <h3 className="qtdVagas">Encontramos {vagas.length} vagas para <br /> desenvolvedor</h3>
-                )
+        if(citySearch === 'Selecione'){
+            if (searchTerm === null || searchTerm === "") {
+                if(vagas.length === 0 || vagas.length === undefined || vagas.length === null){
+                    return (
+                        <h3 className="qtdVagas">Nenhuma vaga cadastrada no momento...</h3>
+                    )
+                } else{
+                    return (
+                        <h3 className="qtdVagas">Encontramos {vagas.length} vagas para <br /> desenvolvedor</h3>
+                    )
+                }
+            } else {
+                let filteredArray = Filter(vagas);
+                if (filteredArray.length > 0) {
+                    return (
+                        <h3 className="qtdVagas">Encontramos {filteredArray.length} vagas para <br /> desenvolvedor</h3>
+                    )
+                } else {
+                    return (
+                        <h3 className="qtdVagas">Nenhuma vaga encontrada...</h3>
+                    )
+                }
             }
         } else {
-            let filteredArray = Filter(vagas);
-            if (filteredArray.length > 0) {
-                return (
-                    <h3 className="qtdVagas">Encontramos {filteredArray.length} vagas para <br /> desenvolvedor</h3>
-                )
+            let newFilter = cityFilter(vagas)
+            if (searchTerm === null || searchTerm === "") {
+                if(newFilter.length === 0 || newFilter.length === undefined || newFilter.length === null){
+                    return (
+                        <h3 className="qtdVagas">Nenhuma vaga cadastrada no momento...</h3>
+                    )
+                } else {
+                    return (
+                        <h3 className="qtdVagas">Encontramos {newFilter.length} vagas para <br /> desenvolvedor</h3>
+                    )
+                }
             } else {
-                return (
-                    <h3 className="qtdVagas">Nenhuma vaga encontrada...</h3>
-                )
+                let filteredArray = Filter(newFilter);
+                if (filteredArray.length > 0) {
+                    return (
+                        <h3 className="qtdVagas">Encontramos {filteredArray.length} vagas para <br /> desenvolvedor</h3>
+                    )
+                } else {
+                    return (
+                        <h3 className="qtdVagas">Nenhuma vaga encontrada...</h3>
+                    )
+                }
             }
         }
     }
 
     function Paginations(searchTerm: string | null) {
-        if (searchTerm === null || searchTerm === "") {
-            return (
-                <div className="pages">
-                    <div className={classes.root}>
-                        <Pagination count={chunkArray(vagas, 4, 1)} shape="rounded" page={page} onChange={handleChange} />
+        if(citySearch === 'Selecione'){
+            if (searchTerm === null || searchTerm === "") {
+                return (
+                    <div className="pages">
+                        <div className={classes.root}>
+                            <Pagination count={chunkArray(vagas, 4, 1)} shape="rounded" page={page} onChange={handleChange} />
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                let filteredArray = Filter(vagas)
+                return (
+                    <div className="pages">
+                        <div className={classes.root}>
+                            <Pagination count={chunkArray(filteredArray, 4, 1)} shape="rounded" page={page} onChange={handleChange} />
+                        </div>
+                    </div>
+                )
+            }
         } else {
-            let filteredArray = Filter(vagas)
-            return (
-                <div className="pages">
-                    <div className={classes.root}>
-                        <Pagination count={chunkArray(filteredArray, 4, 1)} shape="rounded" page={page} onChange={handleChange} />
+            let newFilter = cityFilter(vagas)
+            if (searchTerm === null || searchTerm === "") {
+                return (
+                    <div className="pages">
+                        <div className={classes.root}>
+                            <Pagination count={chunkArray(newFilter, 4, 1)} shape="rounded" page={page} onChange={handleChange} />
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                let filteredArray = Filter(newFilter)
+                return (
+                    <div className="pages">
+                        <div className={classes.root}>
+                            <Pagination count={chunkArray(filteredArray, 4, 1)} shape="rounded" page={page} onChange={handleChange} />
+                        </div>
+                    </div>
+                )
+            }
         }
     }
 
-    function cityFilter(array: any) {
+    function cityFilter(array: any[]){
+        return array.filter(item => item.localidade.includes(citySearch))
+    }
+
+    function selectCityFilter(array: any) {
         let tags: any
         tags = array.map((item: any) => item.localidade)
         return tags.filter((item: any, idx: any) => tags.indexOf(item) === idx)
     }
 
     const vagasPage = () => {
-        let locais = cityFilter(vagas)
+        let locais = selectCityFilter(vagas)
         return (
             <div>
                 <div>
@@ -284,7 +390,7 @@ function Vagas() {
                         <div className="pesquisa">
                             <h1>Vagas</h1>
                             <div className="inputsPesquisa">
-                                <select name="cidades" className="cidades" >
+                                <select name="cidades" className="cidades" onChange={e => setCitySearch(e.target.value)}>
                                     <option value="Selecione" selected >Selecione</option>
                                     {locais.map((local: any) => {
                                         return (
