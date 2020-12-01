@@ -76,7 +76,7 @@ namespace Api.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpGet]
         public IActionResult GetByIdUser()
         {
@@ -186,7 +186,7 @@ namespace Api.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpPut]
         public IActionResult Put(Usuario usuario)
         {
@@ -205,7 +205,7 @@ namespace Api.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpDelete]
         public IActionResult Delete()
         {

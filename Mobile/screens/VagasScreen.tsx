@@ -376,7 +376,7 @@ export default function VagaScreen({
     return (
       <ScrollView style={{ width: '100%' }}>
         <View style={styles.container}>
-          {vagas.map((item: any) => {
+          {vagas.length !== 0 ? vagas.map((item: any) => {
             return (
               <View style={{ width: '80%', marginTop: '5%', marginBottom: '5%' }} key={item.idVaga}>
                 <Text style={styles.subTitulo}>{item.areaAtuacaoVaga}</Text>
@@ -408,7 +408,7 @@ export default function VagaScreen({
                 }}>Mais Detalhes</Button>
               </View>
             );
-          })}
+          }) : <Text style={{ padding: 20 }}>Sem vaga cadastrada</Text>}
 
           {modal()}
 
@@ -418,12 +418,11 @@ export default function VagaScreen({
   }
 
 
-
   const vagaEmpresa = () => {
     return (
       <ScrollView style={{ width: '100%' }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={styles.container}>
-          {vagas.map((item: any) => {
+          {vagas.length !== 0 ? vagas.map((item: any) => {
             return (
               <View style={{ width: '80%', marginTop: '5%', marginBottom: '5%' }} key={item.idVaga}>
                 <Text style={styles.subTitulo}>{item.areaAtuacaoVaga}</Text>
@@ -454,7 +453,7 @@ export default function VagaScreen({
                 }}>Mais Detalhes</Button>
               </View>
             );
-          })}
+          }) : <Text style={{ padding: 20 }}>Cadastre uma vaga</Text>}
 
           {modal()}
 

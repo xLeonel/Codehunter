@@ -151,6 +151,7 @@ export default function CadastroAluno({
                                 if (response === 'Nenhuma vaga compatível com o usuário.') {
                                     setLoading(false);
 
+                                    navigation.popToTop();
                                     navigation.replace('Voltar');
                                 }
                                 else {
