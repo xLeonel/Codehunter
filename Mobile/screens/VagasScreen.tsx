@@ -51,7 +51,7 @@ export default function VagaScreen({
 
     // if (role === '1' || role === '2') {
     try {
-      const request = await fetch("http://192.168.0.2:8000/api/Vaga/Mobile", {
+      const request = await fetch("http://192.168.0.3:8000/api/Vaga/Mobile", {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -70,7 +70,7 @@ export default function VagaScreen({
     // }
     // else if (role === '3') {
     //   try {
-    //     const request = await fetch("http://192.168.0.2:8000/api/Vaga/Empresa", {
+    //     const request = await fetch("http://192.168.0.3:8000/api/Vaga/Empresa", {
     //       method: "GET",
     //       headers: {
     //         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export default function VagaScreen({
 
   const listarVagasEmpresa = async () => {
     try {
-      const request = await fetch("http://192.168.0.2:8000/api/Vaga/Empresa", {
+      const request = await fetch("http://192.168.0.3:8000/api/Vaga/Empresa", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export default function VagaScreen({
   const listarTech = async () => {
     if (role !== '3') {
       try {
-        const requestTech = await fetch("http://192.168.0.2:8000/api/Tecnologia", {
+        const requestTech = await fetch("http://192.168.0.3:8000/api/Tecnologia", {
           method: "GET",
           headers: {
             "Content-Type": "application/json"
@@ -145,7 +145,7 @@ export default function VagaScreen({
     }
 
     try {
-      const request = await fetch("http://192.168.0.2:8000/api/Inscricao", {
+      const request = await fetch("http://192.168.0.3:8000/api/Inscricao", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -181,7 +181,7 @@ export default function VagaScreen({
 
   const verificarInscricao = async (id: any) => {
     try {
-      const request = await fetch(`http://192.168.0.2:8000/api/Inscricao/VerificarInscricao/${id}`, {
+      const request = await fetch(`http://192.168.0.3:8000/api/Inscricao/VerificarInscricao/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

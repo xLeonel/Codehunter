@@ -12,7 +12,7 @@ export default function EscluirConta({
 
     const deletarConta = async () => {
         try {
-            const request = await fetch("http://192.168.0.2:8000/api/Usuario", {
+            const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export default function EscluirConta({
         }
 
         try {
-            const request = await fetch("http://192.168.0.2:8000/api/Empresa", {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -19,7 +19,7 @@ export default function LoginAluno({
     }
 
     try {
-      const request = await fetch('http://192.168.0.2:8000/api/Login/Usuario', {
+      const request = await fetch('http://192.168.0.3:8000/api/Login/Usuario', {
         body: JSON.stringify(body),
         method: "POST",
         headers: {

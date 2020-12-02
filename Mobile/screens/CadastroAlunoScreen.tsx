@@ -105,7 +105,7 @@ export default function CadastroAluno({
         try {
             setLoading(true);
 
-            const url = "http://192.168.0.2:8000/api/Usuario/"
+            const url = "http://192.168.0.3:8000/api/Usuario/"
             const request = await fetch(url, {
                 method: "post",
                 headers: {
@@ -118,7 +118,7 @@ export default function CadastroAluno({
             if (response === 'Cadastrado') {
 
                 try {
-                    const url = "http://192.168.0.2:8000/api/Login/Usuario"
+                    const url = "http://192.168.0.3:8000/api/Login/Usuario"
                     const request = await fetch(url, {
                         method: "post",
                         headers: {
@@ -139,7 +139,7 @@ export default function CadastroAluno({
                             await AsyncStorage.setItem('token', response.token)
 
                             try {
-                                const url = "http://192.168.0.2:8000/api/Usuario/VagasMatch"
+                                const url = "http://192.168.0.3:8000/api/Usuario/VagasMatch"
                                 const request = await fetch(url, {
                                     method: "get",
                                     headers: {
@@ -227,7 +227,7 @@ export default function CadastroAluno({
 
         try {
             setLoading(true);
-            const request = await fetch('http://192.168.0.2:8000/api/Usuario/IsAluno', {
+            const request = await fetch('http://192.168.0.3:8000/api/Usuario/IsAluno', {
                 body: JSON.stringify(body),
                 method: "POST",
                 headers: {

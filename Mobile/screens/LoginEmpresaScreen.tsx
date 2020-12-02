@@ -19,7 +19,7 @@ export default function LoginEmpresa({
     }
 
     try {
-      const request = await fetch("http://192.168.0.2:8000/api/Login/Empresa", {
+      const request = await fetch("http://192.168.0.3:8000/api/Login/Empresa", {
         body: JSON.stringify(body),
         method: "POST",
         headers: {
