@@ -26,7 +26,6 @@ export default function Configuracoes({
 
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
-
             <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('AtualizarRedesSociais')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
                     <Ionicons name="md-list" size={30} color="black" />

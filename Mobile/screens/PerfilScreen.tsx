@@ -1,16 +1,21 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { RootStackParamList } from '../types';
+import { View } from '../components/Themed';
+
 
 export default function Perfil({
     navigation,
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
 
     const [image, setImage] = React.useState('');
+    const [nome, setNome] = React.useState('');
     const [curso, setCurso] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [senha, setSenha] = React.useState('');
 
     React.useEffect(() => {
         getInfoUser();
@@ -29,7 +34,10 @@ export default function Perfil({
             const response = await request.json();
 
             setImage(response.foto);
+            setNome(response.nome);
             setCurso(response.curso);
+            setEmail(response.email);
+            setSenha(response.senha);
 
         } catch (error) {
             console.log("ERROR")
@@ -40,21 +48,25 @@ export default function Perfil({
     return (
         <View style={styles.container}>
 
-            <View style={{ alignItems: "flex-start", padding: 20 }}>
+            <View style={{ padding: 20, flexDirection: "row", alignItems: "center"}} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
+                {image === '' || image === undefined ? <Avatar.Image size={100} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={100} source={{ uri: 'data:image/jpeg;base64,' + image }} />} 
+                <Text style={{ fontSize: 19, fontStyle: "italic", marginLeft: 50 }}>{nome}</Text>
+            </View>
 
-                {image === '' || image === undefined ? <Avatar.Image size={90} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={90} source={{ uri: 'data:image/jpeg;base64,' + image }} />}
+            <View style={styles.separator}/>
 
+            <View style={{ alignItems: "flex-start", padding: 20, marginTop: 20 }} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" >
                 <Text style={styles.titulo}>Nome</Text>
-                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>Nome do Usuário</Text>
+                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>{nome}</Text>
 
                 <Text style={styles.titulo}>Curso</Text>
                 <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>{curso}</Text>
 
                 <Text style={styles.titulo}>E-mail</Text>
-                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>usuario.senai@gmail.com</Text>
+                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>{email}</Text>
 
                 <Text style={styles.titulo}>Senha</Text>
-                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 50 }}>******</Text>
+                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 50 }}>{senha}</Text>
             </View>
         </View>
     );
@@ -63,7 +75,7 @@ export default function Perfil({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     titulo: {
         color: '#757272'
@@ -71,6 +83,5 @@ const styles = StyleSheet.create({
     separator: {
         height: 1,
         width: '100%',
-        color: '#000'
     }
 });

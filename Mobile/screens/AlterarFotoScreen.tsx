@@ -95,7 +95,6 @@ export default function AlterarFoto({
         <View style={styles.container}>
             <TouchableOpacity onPress={pickImage}>
                 {image === '' || image === undefined ? <Avatar.Image size={150} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={150} source={{ uri: 'data:image/jpeg;base64,' + image }} />}
-               
 
             </TouchableOpacity>
 

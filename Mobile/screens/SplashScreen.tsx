@@ -25,7 +25,7 @@ export default function Splash({
 
     wait(3500).then(() => {
       setRefreshing(false);
-      navigation.replace('TipoUsuario');
+      navigation.replace('Perfil');
     });
   }, []);
 
