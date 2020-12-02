@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         height: 1,
-        width: '100%'
+        width: '100%',
+        color: '#000'
     }
 });
