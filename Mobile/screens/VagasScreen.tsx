@@ -317,7 +317,7 @@ export default function VagaScreen({
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.title}>{empresa}</Text>
-                <Text style={styles.modalText}>Titulo: {titulo}</Text>
+                <Text style={styles.title}>Titulo: <Text style={styles.modalText}>{titulo}</Text></Text>
                 <Text style={styles.modalText}>Área atuação: {areaAtuacaoVaga}</Text>
                 <Text style={styles.modalText}>Localidade: {localidade}</Text>
                 <Text style={styles.modalText}>Remoto: {remoto}</Text>

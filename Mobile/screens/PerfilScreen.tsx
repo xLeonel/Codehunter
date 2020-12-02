@@ -10,6 +10,7 @@ export default function Perfil({
 }: StackScreenProps<RootStackParamList, 'NotFound'>) {
 
     const [image, setImage] = React.useState('');
+    const [curso, setCurso] = React.useState('');
 
     React.useEffect(() => {
         getInfoUser();
@@ -28,6 +29,7 @@ export default function Perfil({
             const response = await request.json();
 
             setImage(response.foto);
+            setCurso(response.curso);
 
         } catch (error) {
             console.log("ERROR")
@@ -46,7 +48,7 @@ export default function Perfil({
                 <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>Nome do Usuário</Text>
 
                 <Text style={styles.titulo}>Curso</Text>
-                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>Desenvolvimento de Sistemas</Text>
+                <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>{curso}</Text>
 
                 <Text style={styles.titulo}>E-mail</Text>
                 <Text style={{ fontSize: 19, fontStyle: "italic", marginBottom: 40 }}>usuario.senai@gmail.com</Text>
