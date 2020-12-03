@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Keyboard, Alert } from 'react-native';
 
 import { Button } from 'react-native-paper';
 import { RootStackParamList } from '../types';
@@ -35,6 +35,10 @@ export default function CadastroEmpresa({
     const [count, setCount] = React.useState(1);
 
     const [loading, setLoading] = React.useState(false);
+    const [loadingConcluir, setLoadingConcluir] = React.useState(false);
+
+    const [emailValid, setEmailValid] = React.useState('');
+
 
     const GetCep = async () => {
         try {
@@ -65,28 +69,186 @@ export default function CadastroEmpresa({
         }
     }
 
+    const Cadastrar = async () => {
+
+        const body = {
+            IdAcessoNavigation: {
+                Email: email,
+                Senha: senha
+            },
+            NomeFantasia: nomeFantasia,
+            RazaoSocial: razaoSocial,
+            NumColaboradores: numColaboradores,
+            Cnpj: cnpj,
+            NomeRepresentante: nomeRepresentante,
+            Celular: celular,
+            Descricao: descricao,
+            IdAreaAtuacaoNavigation: {
+                NomeAreaAtuacao: areaAtuacao
+            },
+            IdEnderecoNavigation: {
+                Cep: cep,
+                Logradouro: `${rua}, ${numero}`,
+                Complemento: complemento,
+                Bairro: bairro,
+                Localidade: localidade,
+                Uf: uf
+            }
+        }
+
+        try {
+            setLoadingConcluir(true);
+            const url = "http://192.168.0.3:8000/api/Empresa"
+            const request = await fetch(url, {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body)
+            })
+            const response = await request.json()
+
+            if (response === 'Cadastrado com sucesso') {
+                try {
+                    const url = "http://192.168.0.3:8000/api/Login/Empresa"
+                    const request = await fetch(url, {
+                        method: "post",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ Email: email, Senha: senha })
+                    })
+                    const response = await request.json()
+
+                    if (response === 'Conta não existe') {
+                        setLoadingConcluir(false);
+                        Alert.alert(response)
+
+                    }
+                    else if (response === 'Email ou senha inválidos.') {
+                        setLoadingConcluir(false);
+                        Alert.alert(response)
+                    }
+                    else {
+                        if (response !== undefined) {
+                            await AsyncStorage.setItem('token', response.token)
+
+                            setLoadingConcluir(false);
+                            navigation.popToTop();
+                            navigation.replace('Voltar');
+                        }
+                    }
+                } catch (error) {
+                    console.log(error)
+                    setLoadingConcluir(false);
+                }
+            }
+            else {
+                setLoadingConcluir(false);
+                Alert.alert(response);
+            }
+
+        } catch (error) {
+            setLoadingConcluir(false);
+            console.log(error)
+
+        }
+    }
+
+    const validarSenha = () => {
+        if (senha !== confirmSenha) {
+            Alert.alert('As senhas devem ser iguais.')
+        }
+    }
+
+    const verificarEmail = async () => {
+
+        const body = {
+            IdAcessoNavigation: {
+                Email: email
+            }
+        }
+
+        try {
+            setLoading(true);
+            const request = await fetch('http://192.168.0.3:8000/api/Empresa/EmailExiste', {
+                body: JSON.stringify(body),
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            const response = await request.json();
+
+            if (response !== "true") {
+                Alert.alert('Email Inválido', `${response}`)
+                setEmailValid('false');
+            }
+
+            setEmailValid(response);
+
+            setLoading(false);
+
+
+        } catch (error) {
+            console.log("ERROR")
+            console.log(error)
+            setLoading(false);
+
+        }
+    }
 
     const StepOne = (
         <>
             <Text style={styles.title}>Informe os dados abaixo para iniciar o cadastro da empresa</Text>
             <View style={styles.separatorTitle} />
 
-            <TextInput
-                style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: 30 }}
-                placeholder='Digite seu email corporativo'
-            />
+            {emailValid === 'true' ?
+                <TextInput
+                    style={{ height: 45, width: '80%', borderColor: 'green', borderWidth: 2, padding: '2%', marginTop: 30 }}
+                    placeholder='Digite seu email corporativo'
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                    onBlur={() => verificarEmail()}
+                /> : emailValid === 'false' ?
+                    <TextInput
+                        style={{ height: 45, width: '80%', borderColor: 'red', borderWidth: 2, padding: '2%', marginTop: 30 }}
+                        placeholder='Digite seu email corporativo'
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
+                        onBlur={() => verificarEmail()}
+                    /> :
+                    <TextInput
+                        style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: 30 }}
+                        placeholder='Digite seu email corporativo'
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
+                        onBlur={() => verificarEmail()}
+                    />}
+
 
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite seu senha'
+                onChangeText={(text) => setSenha(text)}
+                secureTextEntry={true}
+                value={senha}
             />
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Confirme sua senha'
+                secureTextEntry={true}
+                onChangeText={(text) => setSenhaConfirm(text)}
+                onBlur={validarSenha}
+                value={confirmSenha}
             />
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite seu telefone de contato'
+                onChangeText={(text) => setCelular(text)}
+                keyboardType={'number-pad'}
+                value={celular}
             />
 
             <Button mode="contained" color="#DC3545" style={{ marginTop: '10%' }} onPress={() => setCount(count + 1)} >Próximo</Button>
@@ -104,19 +266,37 @@ export default function CadastroEmpresa({
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: 30 }}
                 placeholder='Digite o CNPJ'
+                onChangeText={(text) => setCnpj(text)}
+                keyboardType={'numbers-and-punctuation'}
+                value={cnpj}
+                maxLength={18}
             />
 
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite a Razão Social da empresa'
+                onChangeText={(text) => setRazaoSocial(text)}
+                value={razaoSocial}
+                secureTextEntry={false}
+
             />
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite o Nome Fantasia da empresa'
+                onChangeText={(text) => setNomeFantasia(text)}
+                value={nomeFantasia}
+                secureTextEntry={false}
+
+
+
             />
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite a área de atuação da empresa'
+                onChangeText={(text) => setAreaAtuacao(text)}
+                value={areaAtuacao}
+
+
             />
 
             <View style={{ flexDirection: 'row' }}>
@@ -127,7 +307,6 @@ export default function CadastroEmpresa({
             <View style={{ height: 85 }} />
 
         </>
-
     );
 
     const StepThree = (
@@ -138,6 +317,8 @@ export default function CadastroEmpresa({
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: 30 }}
                 placeholder='Digite o seu nome'
+                onChangeText={(text) => setNomeRepresentante(text)}
+                value={nomeRepresentante}
             />
 
             <TextInput
@@ -147,10 +328,16 @@ export default function CadastroEmpresa({
                 onKeyPress={({ nativeEvent }) => {
                     nativeEvent.key === 'Enter' ? Keyboard.dismiss() : null
                 }}
+                onChangeText={(text) => setDescricao(text)}
+                value={descricao}
             />
             <TextInput
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite o número de coloboradores'
+                onChangeText={(text) => setNumColaboradores(parseInt(text))}
+                keyboardType={'number-pad'}
+                value={`${numColaboradores}`}
+
             />
 
 
@@ -172,6 +359,13 @@ export default function CadastroEmpresa({
             <Spinner
                 visible={loading}
                 textContent={'Procurando cep...'}
+                textStyle={{ color: '#fff' }}
+            // color='#DC3545'
+            />
+
+            <Spinner
+                visible={loadingConcluir}
+                textContent={'Processando...'}
                 textStyle={{ color: '#fff' }}
             // color='#DC3545'
             />
@@ -219,10 +413,17 @@ export default function CadastroEmpresa({
                 <TextInput
                     style={{ height: 45, width: '35%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                     placeholder='Digite o número'
+                    onChangeText={(text) => setNumero(text)}
+                    keyboardType={'number-pad'}
+                    value={numero}
+
                 />
                 <TextInput
                     style={{ height: 45, width: '40%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%', marginLeft: '5%' }}
                     placeholder='Digite o complemento'
+                    onChangeText={(text) => setComplemento(text)}
+                    value={complemento}
+
                 />
             </View>
 
@@ -230,7 +431,7 @@ export default function CadastroEmpresa({
 
             <View style={{ flexDirection: 'row' }}>
                 <Button mode="contained" color="#DC3545" style={{ marginTop: '10%' }} onPress={() => setCount(count - 1)} >Voltar</Button>
-                <Button mode="contained" color="#DC3545" style={{ marginTop: '10%', marginLeft: '5%' }} >Concluir</Button>
+                <Button mode="contained" color="#DC3545" style={{ marginTop: '10%', marginLeft: '5%' }} onPress={() => Cadastrar()}>Concluir</Button>
             </View>
 
             <View style={{ height: 85 }} />
@@ -239,11 +440,11 @@ export default function CadastroEmpresa({
 
     );
 
-
     return (
         <KeyboardAvoidingView
             style={styles.containerTeste}
             behavior="padding"
+            onTouchStart={Keyboard.dismiss}
         >
 
             {count === 1 ? StepOne : count === 2 ? StepTwo : count === 3 ? StepThree : StepFour}

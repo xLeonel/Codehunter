@@ -62,9 +62,27 @@ export default function Dashboard({
       setImage(response.foto);
 
     } catch (error) {
-      console.log("ERROR")
+      console.log("ERROR Aluno")
       console.log(error)
     }
+
+    try {
+      const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+          }
+      })
+
+      const response = await request.json();
+
+      setImage(response.foto);
+
+  } catch (error) {
+      console.log("ERROR Empresa")
+      console.log(error)
+  }
   }
 
   const wait = (timeout: any) => {

@@ -43,6 +43,24 @@ export default function AlterarFoto({
             console.log("ERROR")
             console.log(error)
         }
+
+        try {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                }
+            })
+
+            const response = await request.json();
+
+            setImage(response.foto);
+
+        } catch (error) {
+            console.log("ERROR FOTO")
+            console.log(error)
+        }
     }
 
     const atualizarUser = async () => {
@@ -66,7 +84,27 @@ export default function AlterarFoto({
             Alert.alert('Foto', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }])
 
         } catch (error) {
-            console.log("ERROR")
+            console.log("ERROR ALUNO")
+            console.log(error)
+            // Alert.alert("Vagas não encontrado!", "Tente novamente")
+        }
+
+        try {
+            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+                method: "PUT",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+                }
+            })
+
+            const response = await request.json();
+
+            Alert.alert('Foto', `${response}`, [{ text: 'Ok', onPress: () => navigation.goBack() }])
+
+        } catch (error) {
+            console.log("ERROR EMPRESA")
             console.log(error)
             // Alert.alert("Vagas não encontrado!", "Tente novamente")
         }
@@ -95,7 +133,6 @@ export default function AlterarFoto({
         <View style={styles.container}>
             <TouchableOpacity onPress={pickImage}>
                 {image === '' || image === undefined ? <Avatar.Image size={150} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={150} source={{ uri: 'data:image/jpeg;base64,' + image }} />}
-
             </TouchableOpacity>
 
             {/* <Text style={{ marginTop: 15 }}>Toque na imagem parar selecionar uma nova</Text> */}

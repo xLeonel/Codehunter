@@ -103,6 +103,7 @@ create table Empresa(
 	NumColaboradores int Not null,
 	Cnpj varchar(18) not null unique,
 	NomeRepresentante varchar(255) not null,
+	Foto image,
 	Celular char(15) not null,
 	Descricao varchar(2000) Not null,
 	IdAcesso int foreign key references Acesso (IdAcesso) Not null,

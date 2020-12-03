@@ -85,6 +85,8 @@ export default function TabOneScreen() {
     setRefreshing(true);
 
     getInscricao();
+    getNumVagas();
+    getEstagios();
 
     wait(2000).then(() => setRefreshing(false));
   }, []);

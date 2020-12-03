@@ -53,10 +53,10 @@ namespace Api.Contexts
             modelBuilder.Entity<Acesso>(entity =>
             {
                 entity.HasKey(e => e.IdAcesso)
-                    .HasName("PK__Acesso__CDF01DA1F45A6D22");
+                    .HasName("PK__Acesso__CDF01DA1FF3A146F");
 
                 entity.HasIndex(e => e.Email)
-                    .HasName("UQ__Acesso__A9D105348B74A1D7")
+                    .HasName("UQ__Acesso__A9D105344C74FFF2")
                     .IsUnique();
 
                 entity.Property(e => e.Email)
@@ -73,13 +73,13 @@ namespace Api.Contexts
                     .WithMany(p => p.Acesso)
                     .HasForeignKey(d => d.IdTipoAcesso)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Acesso__IdTipoAc__3A81B327");
+                    .HasConstraintName("FK__Acesso__IdTipoAc__286302EC");
             });
 
             modelBuilder.Entity<AreaAtuacao>(entity =>
             {
                 entity.HasKey(e => e.IdAreaAtuacao)
-                    .HasName("PK__AreaAtua__D7DEAA2FC1C8011A");
+                    .HasName("PK__AreaAtua__D7DEAA2F80B228AF");
 
                 entity.Property(e => e.NomeAreaAtuacao)
                     .IsRequired()
@@ -90,7 +90,7 @@ namespace Api.Contexts
             modelBuilder.Entity<Beneficios>(entity =>
             {
                 entity.HasKey(e => e.IdBeneficios)
-                    .HasName("PK__Benefici__4EC0569A322D1C01");
+                    .HasName("PK__Benefici__4EC0569A2C3A0D50");
 
                 entity.Property(e => e.NomeBeneficios)
                     .IsRequired()
@@ -100,13 +100,13 @@ namespace Api.Contexts
                 entity.HasOne(d => d.IdVagaNavigation)
                     .WithMany(p => p.Beneficios)
                     .HasForeignKey(d => d.IdVaga)
-                    .HasConstraintName("FK__Beneficio__IdVag__5DCAEF64");
+                    .HasConstraintName("FK__Beneficio__IdVag__4BAC3F29");
             });
 
             modelBuilder.Entity<Contrato>(entity =>
             {
                 entity.HasKey(e => e.IdContrato)
-                    .HasName("PK__Contrato__8569F05A55FAF696");
+                    .HasName("PK__Contrato__8569F05A155AFCCC");
 
                 entity.Property(e => e.Efetivado).HasColumnType("date");
 
@@ -117,16 +117,16 @@ namespace Api.Contexts
                 entity.HasOne(d => d.IdStatusContratoNavigation)
                     .WithMany(p => p.Contrato)
                     .HasForeignKey(d => d.IdStatusContrato)
-                    .HasConstraintName("FK__Contrato__IdStat__6E01572D");
+                    .HasConstraintName("FK__Contrato__IdStat__5BE2A6F2");
             });
 
             modelBuilder.Entity<Empresa>(entity =>
             {
                 entity.HasKey(e => e.IdEmpresa)
-                    .HasName("PK__Empresa__5EF4033ED15F6AAB");
+                    .HasName("PK__Empresa__5EF4033E736C663B");
 
                 entity.HasIndex(e => e.Cnpj)
-                    .HasName("UQ__Empresa__A299CC921E2F5F37")
+                    .HasName("UQ__Empresa__A299CC920ECAA56B")
                     .IsUnique();
 
                 entity.Property(e => e.Celular)
@@ -144,6 +144,8 @@ namespace Api.Contexts
                     .IsRequired()
                     .HasMaxLength(2000)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Foto).HasColumnType("image");
 
                 entity.Property(e => e.NomeFantasia)
                     .IsRequired()
@@ -164,25 +166,25 @@ namespace Api.Contexts
                     .WithMany(p => p.Empresa)
                     .HasForeignKey(d => d.IdAcesso)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Empresa__IdAcess__534D60F1");
+                    .HasConstraintName("FK__Empresa__IdAcess__412EB0B6");
 
                 entity.HasOne(d => d.IdAreaAtuacaoNavigation)
                     .WithMany(p => p.Empresa)
                     .HasForeignKey(d => d.IdAreaAtuacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Empresa__IdAreaA__5535A963");
+                    .HasConstraintName("FK__Empresa__IdAreaA__4316F928");
 
                 entity.HasOne(d => d.IdEnderecoNavigation)
                     .WithMany(p => p.Empresa)
                     .HasForeignKey(d => d.IdEndereco)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Empresa__IdEnder__5441852A");
+                    .HasConstraintName("FK__Empresa__IdEnder__4222D4EF");
             });
 
             modelBuilder.Entity<Endereco>(entity =>
             {
                 entity.HasKey(e => e.IdEndereco)
-                    .HasName("PK__Endereco__0B7C7F172FC8314A");
+                    .HasName("PK__Endereco__0B7C7F17A5B5C552");
 
                 entity.Property(e => e.Bairro)
                     .IsRequired()
@@ -220,7 +222,7 @@ namespace Api.Contexts
             modelBuilder.Entity<Estagio>(entity =>
             {
                 entity.HasKey(e => e.IdEstagio)
-                    .HasName("PK__Estagio__C70AD76CA769E77D");
+                    .HasName("PK__Estagio__C70AD76CF5F30F25");
 
                 entity.Property(e => e.ContratoPdf)
                     .HasColumnName("ContratoPDF")
@@ -229,18 +231,18 @@ namespace Api.Contexts
                 entity.HasOne(d => d.IdContratoNavigation)
                     .WithMany(p => p.Estagio)
                     .HasForeignKey(d => d.IdContrato)
-                    .HasConstraintName("FK__Estagio__IdContr__71D1E811");
+                    .HasConstraintName("FK__Estagio__IdContr__5FB337D6");
 
                 entity.HasOne(d => d.IdInscricaoNavigation)
                     .WithMany(p => p.Estagio)
                     .HasForeignKey(d => d.IdInscricao)
-                    .HasConstraintName("FK__Estagio__IdInscr__70DDC3D8");
+                    .HasConstraintName("FK__Estagio__IdInscr__5EBF139D");
             });
 
             modelBuilder.Entity<Experiencias>(entity =>
             {
                 entity.HasKey(e => e.IdExperiencias)
-                    .HasName("PK__Experien__AA4913C0C4E0B4C0");
+                    .HasName("PK__Experien__AA4913C08929EA19");
 
                 entity.Property(e => e.Cargo)
                     .HasMaxLength(200)
@@ -257,37 +259,37 @@ namespace Api.Contexts
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Experiencias)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__Experienc__IdUsu__4F7CD00D");
+                    .HasConstraintName("FK__Experienc__IdUsu__3D5E1FD2");
             });
 
             modelBuilder.Entity<Inscricao>(entity =>
             {
                 entity.HasKey(e => e.IdInscricao)
-                    .HasName("PK__Inscrica__6209444B1068D80D");
+                    .HasName("PK__Inscrica__6209444B7380B47B");
 
                 entity.HasOne(d => d.IdStatusInscricaoNavigation)
                     .WithMany(p => p.Inscricao)
                     .HasForeignKey(d => d.IdStatusInscricao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Inscricao__IdSta__68487DD7");
+                    .HasConstraintName("FK__Inscricao__IdSta__5629CD9C");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Inscricao)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Inscricao__IdUsu__66603565");
+                    .HasConstraintName("FK__Inscricao__IdUsu__5441852A");
 
                 entity.HasOne(d => d.IdVagaNavigation)
                     .WithMany(p => p.Inscricao)
                     .HasForeignKey(d => d.IdVaga)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Inscricao__IdVag__6754599E");
+                    .HasConstraintName("FK__Inscricao__IdVag__5535A963");
             });
 
             modelBuilder.Entity<PreferenciasTrabalho>(entity =>
             {
                 entity.HasKey(e => e.IdPreferenciasTrabalho)
-                    .HasName("PK__Preferen__C01397CBF065A1C4");
+                    .HasName("PK__Preferen__C01397CBC2796AFB");
 
                 entity.Property(e => e.Github)
                     .HasMaxLength(200)
@@ -317,19 +319,19 @@ namespace Api.Contexts
                     .WithMany(p => p.PreferenciasTrabalho)
                     .HasForeignKey(d => d.IdRegimeContratacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Preferenc__IdReg__45F365D3");
+                    .HasConstraintName("FK__Preferenc__IdReg__33D4B598");
 
                 entity.HasOne(d => d.IdRemotoNavigation)
                     .WithMany(p => p.PreferenciasTrabalho)
                     .HasForeignKey(d => d.IdRemoto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Preferenc__IdRem__44FF419A");
+                    .HasConstraintName("FK__Preferenc__IdRem__32E0915F");
             });
 
             modelBuilder.Entity<RegimeContratacao>(entity =>
             {
                 entity.HasKey(e => e.IdRegimeContratacao)
-                    .HasName("PK__RegimeCo__114A1D9225632C52");
+                    .HasName("PK__RegimeCo__114A1D9283B8D0CE");
 
                 entity.Property(e => e.ExpectativaSalario)
                     .IsRequired()
@@ -345,7 +347,7 @@ namespace Api.Contexts
             modelBuilder.Entity<Remoto>(entity =>
             {
                 entity.HasKey(e => e.IdRemoto)
-                    .HasName("PK__Remoto__EC95280A3DBB5199");
+                    .HasName("PK__Remoto__EC95280A9FF6EFA1");
 
                 entity.Property(e => e.NomeRemoto)
                     .IsRequired()
@@ -356,10 +358,10 @@ namespace Api.Contexts
             modelBuilder.Entity<StatusContrato>(entity =>
             {
                 entity.HasKey(e => e.IdStatusContrato)
-                    .HasName("PK__StatusCo__60463F1F46F72E38");
+                    .HasName("PK__StatusCo__60463F1FC406F48C");
 
                 entity.HasIndex(e => e.StatusContrato1)
-                    .HasName("UQ__StatusCo__81309FC08E57DE14")
+                    .HasName("UQ__StatusCo__81309FC07981BC5C")
                     .IsUnique();
 
                 entity.Property(e => e.StatusContrato1)
@@ -372,10 +374,10 @@ namespace Api.Contexts
             modelBuilder.Entity<StatusInscricao>(entity =>
             {
                 entity.HasKey(e => e.IdStatusInscricao)
-                    .HasName("PK__StatusIn__4F419FD7489C66FA");
+                    .HasName("PK__StatusIn__4F419FD7CDCB61A6");
 
                 entity.HasIndex(e => e.StatusInscricao1)
-                    .HasName("UQ__StatusIn__F7B3C367262FDDB3")
+                    .HasName("UQ__StatusIn__F7B3C367DA1EA7A6")
                     .IsUnique();
 
                 entity.Property(e => e.StatusInscricao1)
@@ -388,7 +390,7 @@ namespace Api.Contexts
             modelBuilder.Entity<Tecnologia>(entity =>
             {
                 entity.HasKey(e => e.IdTecnologia)
-                    .HasName("PK__Tecnolog__5ECD2D11D155729D");
+                    .HasName("PK__Tecnolog__5ECD2D1184F4DDFF");
 
                 entity.Property(e => e.NomeTecnologia)
                     .IsRequired()
@@ -398,16 +400,16 @@ namespace Api.Contexts
                 entity.HasOne(d => d.IdVagaNavigation)
                     .WithMany(p => p.Tecnologia)
                     .HasForeignKey(d => d.IdVaga)
-                    .HasConstraintName("FK__Tecnologi__IdVag__60A75C0F");
+                    .HasConstraintName("FK__Tecnologi__IdVag__4E88ABD4");
             });
 
             modelBuilder.Entity<TipoAcesso>(entity =>
             {
                 entity.HasKey(e => e.IdAcesso)
-                    .HasName("PK__TipoAces__CDF01DA16FA2F4E9");
+                    .HasName("PK__TipoAces__CDF01DA1D6F02F6B");
 
                 entity.HasIndex(e => e.TipoAcesso1)
-                    .HasName("UQ__TipoAces__102AD6C4AB8E4CEA")
+                    .HasName("UQ__TipoAces__102AD6C4E2130AFC")
                     .IsUnique();
 
                 entity.Property(e => e.TipoAcesso1)
@@ -420,10 +422,10 @@ namespace Api.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuario__5B65BF975BC422BD");
+                    .HasName("PK__Usuario__5B65BF979CD077A5");
 
                 entity.HasIndex(e => e.Cpf)
-                    .HasName("UQ__Usuario__C1F89731BFFD23E5")
+                    .HasName("UQ__Usuario__C1F89731C2C2D8D0")
                     .IsUnique();
 
                 entity.Property(e => e.Celular)
@@ -465,31 +467,31 @@ namespace Api.Contexts
                     .WithMany(p => p.Usuario)
                     .HasForeignKey(d => d.IdAcesso)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Usuario__IdAcess__49C3F6B7");
+                    .HasConstraintName("FK__Usuario__IdAcess__37A5467C");
 
                 entity.HasOne(d => d.IdAreaAtuacaoNavigation)
                     .WithMany(p => p.Usuario)
                     .HasForeignKey(d => d.IdAreaAtuacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Usuario__IdAreaA__4BAC3F29");
+                    .HasConstraintName("FK__Usuario__IdAreaA__398D8EEE");
 
                 entity.HasOne(d => d.IdEnderecoNavigation)
                     .WithMany(p => p.Usuario)
                     .HasForeignKey(d => d.IdEndereco)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Usuario__IdEnder__4AB81AF0");
+                    .HasConstraintName("FK__Usuario__IdEnder__38996AB5");
 
                 entity.HasOne(d => d.IdPreferenciasTrabalhoNavigation)
                     .WithMany(p => p.Usuario)
                     .HasForeignKey(d => d.IdPreferenciasTrabalho)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Usuario__IdPrefe__4CA06362");
+                    .HasConstraintName("FK__Usuario__IdPrefe__3A81B327");
             });
 
             modelBuilder.Entity<Vaga>(entity =>
             {
                 entity.HasKey(e => e.IdVaga)
-                    .HasName("PK__Vaga__A848DC3EB8BD3B38");
+                    .HasName("PK__Vaga__A848DC3E19E8D9ED");
 
                 entity.Property(e => e.DataPostada).HasColumnType("date");
 
@@ -519,25 +521,25 @@ namespace Api.Contexts
                     .WithMany(p => p.Vaga)
                     .HasForeignKey(d => d.IdAreaAtuacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Vaga__IdAreaAtua__59063A47");
+                    .HasConstraintName("FK__Vaga__IdAreaAtua__46E78A0C");
 
                 entity.HasOne(d => d.IdEmpresaNavigation)
                     .WithMany(p => p.Vaga)
                     .HasForeignKey(d => d.IdEmpresa)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Vaga__IdEmpresa__5812160E");
+                    .HasConstraintName("FK__Vaga__IdEmpresa__45F365D3");
 
                 entity.HasOne(d => d.IdRegimeContratacaoNavigation)
                     .WithMany(p => p.Vaga)
                     .HasForeignKey(d => d.IdRegimeContratacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Vaga__IdRegimeCo__5AEE82B9");
+                    .HasConstraintName("FK__Vaga__IdRegimeCo__48CFD27E");
 
                 entity.HasOne(d => d.IdRemotoNavigation)
                     .WithMany(p => p.Vaga)
                     .HasForeignKey(d => d.IdRemoto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Vaga__IdRemoto__59FA5E80");
+                    .HasConstraintName("FK__Vaga__IdRemoto__47DBAE45");
             });
 
             OnModelCreatingPartial(modelBuilder);

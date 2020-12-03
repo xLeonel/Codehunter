@@ -179,5 +179,29 @@ namespace Api.Controllers
                 return BadRequest("Empresa não encontrada");
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost("EmailExiste")]
+        public string VerificarEmail(Empresa empresa)
+        {
+            try
+            {
+                bool emailExiste = _empresaRepository.VerifyEmail(empresa.IdAcessoNavigation.Email, out string emailBanco);
+
+                if (!emailExiste)
+                {
+                    return "true";
+                }
+                else
+                {
+                    return $"Email já cadastrado. Entre em contato com {emailBanco}, para solicitar um acesso.";
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return "false";
+            }
+        }
     }
 }

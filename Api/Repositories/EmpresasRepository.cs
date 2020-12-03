@@ -101,6 +101,12 @@ namespace Api.Repositories
 
                 }
 
+                if (empresa.Foto != null)
+                {
+                    empresaBanco.Foto = empresa.Foto;
+
+                }
+
                 ctx.SaveChanges();
 
 

@@ -16,6 +16,7 @@ namespace Api.Domains
         public int NumColaboradores { get; set; }
         public string Cnpj { get; set; }
         public string NomeRepresentante { get; set; }
+        public byte[] Foto { get; set; }
         public string Celular { get; set; }
         public string Descricao { get; set; }
         public int IdAcesso { get; set; }
