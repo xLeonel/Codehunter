@@ -91,7 +91,8 @@ namespace Api.Repositories
                 {
                     IdKey = count,
                     Nome = item.IdUsuarioNavigation.NomeCompleto,
-                    Email = item.IdUsuarioNavigation.IdAcessoNavigation.Email
+                    Email = item.IdUsuarioNavigation.IdAcessoNavigation.Email,
+                    IdUser = item.IdUsuario
                 };
 
                 listViewModel.Add(inscricaoEmpresaViewModel);

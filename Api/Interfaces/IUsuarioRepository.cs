@@ -19,5 +19,6 @@ namespace Api.Interfaces
         IEnumerable<UsuarioViewModel> AllUsers();
         bool RecuperarSenha(string email);
         bool EmailExist(string email);
+        PerfilViewModel GetUserById(int id);
     }
 }

@@ -40,6 +40,13 @@ namespace Api.Controllers
             return _usuarioRepository.AllUsers();
         }
 
+        [Authorize(Roles = "3")]
+        [HttpGet("{id}")]
+        public PerfilViewModel GetAll(int id)
+        {
+            return _usuarioRepository.GetUserById(id);
+        }
+
         [Authorize(Roles = "1")]
         [HttpGet("Inscricao")]
         public IActionResult GetInscricaoByUser()

@@ -12,6 +12,7 @@ import CadastroAluno from '../screens/CadastroAlunoScreen';
 import CadastroEmpresa from '../screens/CadastroEmpresaScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PerfilScreen from '../screens/PerfilScreen';
+import PerfilModalScreen from '../screens/PerfilModalScreen';
 import LoginEmpresaScreen from '../screens/LoginEmpresaScreen';
 import ConfiguracoesScreen from '../screens/ConfiguracoesScreen';
 import ExcluirContaScreen from '../screens/ExcluirContaScreen';
@@ -46,6 +47,7 @@ function RootNavigator() {
       <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
       <Stack.Screen name="LoginEmpresa" component={LoginEmpresaScreen} options={{ title: 'Login' }} />
       <Stack.Screen name="Perfil" component={PerfilScreen} options={{ title: 'Perfil', headerShown: true }} />
+      <Stack.Screen name="PerfilModal" component={PerfilModalScreen} options={{ title: 'Informações Usuário', headerShown: true }} />
       <Stack.Screen name="Configuracoes" component={ConfiguracoesScreen} options={{ headerTitle: 'Configurações', headerShown: true }} />
       <Stack.Screen name="ExcluirConta" component={ExcluirContaScreen} options={{ headerTitle: 'Excluir Conta', headerShown: true }} />
       <Stack.Screen name="AlterarSenha" component={AlterarSenhaScreen} options={{ headerTitle: 'Alterar Senha', headerShown: true }} />

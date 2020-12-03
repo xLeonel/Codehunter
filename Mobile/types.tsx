@@ -17,6 +17,7 @@ export type RootStackParamList = {
   CadastroAluno: undefined;
   CadastroEmpresa: undefined;
   VagasFound: undefined;
+  PerfilModal : any;
 };
 
 export type BottomTabParamList = {

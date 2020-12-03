@@ -1,14 +1,16 @@
-
 import { Text, View } from '../components/Themed';
 import { Ionicons } from '@expo/vector-icons';
-
+import { RootStackParamList } from '../types';
+import { StackScreenProps } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import * as React from 'react';
 import { Alert, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 
-export default function Inscricoes() {
+export default function Inscricoes({
+    navigation,
+}: StackScreenProps<RootStackParamList, 'NotFound'>) {
 
     type ParamList = {
         Object: {
@@ -51,15 +53,15 @@ export default function Inscricoes() {
             <View>
                 {inscricoes.map((item: any) => {
                     return (
-                        <TouchableOpacity key={item.idKey} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5% 5%' }}>
-                                <Text style={{ marginLeft: '1%', fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
+                        <TouchableOpacity key={item.idKey} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => { navigation.navigate('PerfilModal', { idUser: item.idUser }) }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginBottom: 5, marginRight: 5, marginLeft: 5 }}>
+                                <Text style={{fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
                                 <View style={{ flexDirection: 'column', marginLeft: 5 }}>
                                     <Text style={{ marginLeft: '10%' }}>{item.nome}</Text>
                                     <Text style={{ marginLeft: '10%' }}>{item.email}</Text>
                                 </View>
                             </View>
-                            <Ionicons style={{ margin: '5% 5%' }} name="md-arrow-forward" size={24} color="black" />
+                            <Ionicons style={{ marginTop: 5, marginBottom: 5, marginRight: 5, marginLeft: 5 }} name="md-arrow-forward" size={24} color="black" />
                         </TouchableOpacity>
                     );
                 })}

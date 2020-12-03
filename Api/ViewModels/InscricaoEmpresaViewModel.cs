@@ -10,6 +10,7 @@ namespace Api.ViewModels
         public int IdKey { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
+        public int IdUser { get; set; }
 
     }
 }

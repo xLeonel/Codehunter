@@ -504,5 +504,21 @@ namespace Api.Repositories
 
             return userFilter;
         }
+
+        public PerfilViewModel GetUserById(int id)
+        {
+            var user = ctx.Usuario.Where(u => u.IdUsuario == id).Include(u => u.IdAcessoNavigation).FirstOrDefault();
+
+            PerfilViewModel perfilViewModel = new PerfilViewModel
+            {
+                NomeCompleto = user.NomeCompleto,
+                Celular = user.Celular,
+                Curso = user.Curso,
+                Email = user.IdAcessoNavigation.Email,
+                Foto = user.Foto
+            };
+
+            return perfilViewModel;
+        }
     }
 }
