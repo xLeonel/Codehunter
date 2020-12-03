@@ -66,11 +66,12 @@ function FilialCadastro() {
 
 
         try {
-            const url = "http://localhost:5000/api/Empresa"
+            const url = "http://localhost:5000/api/Empresa/Filial"
             const request = await fetch(url, {
                 method: "post",
                 headers: {
                     'Content-Type': 'application/json',
+                    authorization: 'Bearer ' + localStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
             })
