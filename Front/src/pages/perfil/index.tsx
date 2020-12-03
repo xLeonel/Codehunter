@@ -120,6 +120,16 @@ function Perfil() {
                     setNomeRepresentante(dados.nomeRepresentante);
                     setNomeFantasia(dados.nomeFantasia);
 
+                    const foto: ImageType = {
+                        dataURL: `data:image/jpeg;base64,${dados.foto}`
+                    }
+
+                    console.log(dados.foto)
+
+                    var imagens = [foto];
+
+                    setImages(imagens as never[])
+
                 })
                 .catch(erro => console.error(erro))
         }
@@ -237,8 +247,8 @@ function Perfil() {
                 nomeFantasia: nomeFantasia,
                 nomeRepresentante: nomeRepresentante,
                 numColaboradores: numColab,
-                descricao: descricao
-                // foto: fotoSetada,            
+                descricao: descricao,
+                foto: fotoSetada           
             }
 
             fetch('http://localhost:5000/api/Empresa', {
@@ -259,6 +269,7 @@ function Perfil() {
                     setNumColab(0);
                     setNomeRepresentante('');
                     setNomeFantasia('');
+                    setFoto('');
 
                     setMudado(false);
 
