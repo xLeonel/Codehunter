@@ -51,11 +51,11 @@ export default function Inscricoes({
     return (
         <ScrollView style={styles.container}>
             <View>
-                {inscricoes.map((item: any) => {
+                {inscricoes.length !== 0 ? inscricoes.map((item: any) => {
                     return (
                         <TouchableOpacity key={item.idKey} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => { navigation.navigate('PerfilModal', { idUser: item.idUser }) }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5, marginBottom: 5, marginRight: 5, marginLeft: 5 }}>
-                                <Text style={{fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
+                                <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.idKey}</Text>
                                 <View style={{ flexDirection: 'column', marginLeft: 5 }}>
                                     <Text style={{ marginLeft: '10%' }}>{item.nome}</Text>
                                     <Text style={{ marginLeft: '10%' }}>{item.email}</Text>
@@ -64,7 +64,7 @@ export default function Inscricoes({
                             <Ionicons style={{ marginTop: 5, marginBottom: 5, marginRight: 5, marginLeft: 5 }} name="md-arrow-forward" size={24} color="black" />
                         </TouchableOpacity>
                     );
-                })}
+                }) : <Text style={{ textAlign: 'center' }}>Ninguem se inscreveu :(</Text>}
             </View>
         </ScrollView>
 

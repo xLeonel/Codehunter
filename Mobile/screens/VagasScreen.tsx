@@ -20,6 +20,7 @@ export default function VagaScreen({
 
   const [role, setRole] = React.useState('');
   const [vagas, setVagas] = React.useState([]);
+  const [vagasEmpresa, setVagasEmpresa] = React.useState([]);
   const [tecnologias, setTecnologias] = React.useState([]);
 
 
@@ -103,7 +104,7 @@ export default function VagaScreen({
 
       const response = await request.json();
 
-      setVagas(response);
+      setVagasEmpresa(response);
 
     } catch (error) {
       console.log("ERROR")
@@ -422,7 +423,7 @@ export default function VagaScreen({
     return (
       <ScrollView style={{ width: '100%' }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={styles.container}>
-          {vagas.length !== 0 ? vagas.map((item: any) => {
+          {vagasEmpresa.length !== 0 ? vagas.map((item: any) => {
             return (
               <View style={{ width: '80%', marginTop: '5%', marginBottom: '5%' }} key={item.idVaga}>
                 <Text style={styles.subTitulo}>{item.areaAtuacaoVaga}</Text>

@@ -92,7 +92,7 @@ export default function Perfil({
 
             <View style={{ padding: 20, flexDirection: "row", alignItems: "center" }}>
                 {image === '' || image === undefined ? <Avatar.Image size={100} source={require('../assets/images/fotoUser.jpg')} /> : <Avatar.Image size={100} source={{ uri: 'data:image/jpeg;base64,' + image }} />}
-                <Text style={{ fontSize: 19, fontStyle: "italic", marginLeft: 50 }}>{nome}</Text>
+                <Text style={{ fontSize: 19, fontStyle: "italic", marginLeft: 40 }}>{nome}</Text>
             </View>
 
             <View style={styles.separator} />

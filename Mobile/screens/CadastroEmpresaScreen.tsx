@@ -335,7 +335,6 @@ export default function CadastroEmpresa({
                 style={{ height: 45, width: '80%', borderColor: 'gray', borderWidth: 1, padding: '2%', marginTop: '10%' }}
                 placeholder='Digite o número de coloboradores'
                 onChangeText={(text) => setNumColaboradores(parseInt(text))}
-                keyboardType={'number-pad'}
                 value={`${numColaboradores}`}
 
             />
