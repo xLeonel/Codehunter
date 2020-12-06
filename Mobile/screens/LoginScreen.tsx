@@ -72,7 +72,7 @@ export default function LoginAluno({
 
       <Text style={styles.label}>Esqueceu a senha?</Text>
 
-      <Text style={styles.label}>Não possui uma conta? <Text style={{ fontWeight: 'bold' }} onPress={() => navigation.navigate('CadastroAluno')}>Cadastre-se</Text></Text>
+      <Text style={styles.label}>Não possui uma conta? <Text style={{ fontWeight: "bold", color: 'blue' }} onPress={() => navigation.navigate('CadastroAluno')}>Cadastre-se</Text></Text>
 
     </View >
   );

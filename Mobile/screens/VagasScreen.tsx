@@ -524,6 +524,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginTop: 15,
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: "bold"
   }
 });
