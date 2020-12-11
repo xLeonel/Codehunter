@@ -368,6 +368,7 @@ export default function VagaScreen({
     setRefreshing(true);
 
     listarVagas();
+    listarVagasEmpresa();
 
     wait(2000).then(() => setRefreshing(false));
   }, []);
@@ -423,7 +424,7 @@ export default function VagaScreen({
     return (
       <ScrollView style={{ width: '100%' }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={styles.container}>
-          {vagasEmpresa.length !== 0 ? vagas.map((item: any) => {
+          {vagasEmpresa.length !== 0 ? vagasEmpresa.map((item: any) => {
             return (
               <View style={{ width: '80%', marginTop: '5%', marginBottom: '5%' }} key={item.idVaga}>
                 <Text style={styles.subTitulo}>{item.areaAtuacaoVaga}</Text>
