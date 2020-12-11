@@ -2,7 +2,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
 import { StyleSheet, Text, TextInput, View, Image, Alert } from 'react-native';
-import { Button } from 'react-native-paper';
+import Spinner from 'react-native-loading-spinner-overlay';
+import { Button, Title } from 'react-native-paper';
 import { RootStackParamList } from '../types';
 
 export default function LoginAluno({
@@ -11,6 +12,7 @@ export default function LoginAluno({
 
   const [email, setEmail] = React.useState('');
   const [senha, setSenha] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
 
   const login = async () => {
     const body = {
@@ -40,8 +42,44 @@ export default function LoginAluno({
     }
   }
 
+  const esqueceuSenha = async () => {
+    const body = {
+      email: email
+    }
+
+    try {
+      setLoading(true);
+      const request = await fetch('http://192.168.0.3:8000/api/Usuario/RecuperarSenha', {
+        body: JSON.stringify(body),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      const response = await request.json();
+
+      Alert.alert('Recuperar Senha', `${response}`, [{ text: 'Ok', onPress: () => setLoading(false) }]);
+
+    } catch (error) {
+      setLoading(false);
+
+      console.log("ERROR")
+      console.log(error)
+    }
+
+  }
+
   return (
     <View style={styles.container}>
+
+
+      <Spinner
+        visible={loading}
+        textContent={'Enviando email...'}
+        textStyle={{ color: '#fff' }}
+      // color='#DC3545'
+      />
 
       <Image
         style={{ width: 186, height: 65, marginBottom: '15%' }}
@@ -70,9 +108,9 @@ export default function LoginAluno({
       </Button>
       </View>
 
-      <Text style={styles.label}>Esqueceu a senha?</Text>
+      <Text style={{ ...styles.label, textDecorationLine: 'underline' }} onPress={() => email === '' ? Alert.alert('Preencha o campo email') : esqueceuSenha()}>Esqueceu a senha?</Text>
 
-      <Text style={styles.label}>Não possui uma conta? <Text style={{ fontWeight: "bold", color: 'blue' }} onPress={() => navigation.navigate('CadastroAluno')}>Cadastre-se</Text></Text>
+      <Text style={styles.label}>Não possui uma conta? <Text style={{ fontWeight: "bold" }} onPress={() => navigation.navigate('CadastroAluno')}>Cadastre-se</Text></Text>
 
     </View >
   );

@@ -49,7 +49,7 @@ export default function Dashboard({
 
   const getInfoUser = async () => {
     try {
-      const request = await fetch("http://192.168.0.109:8000/api/Usuario", {
+      const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -67,22 +67,22 @@ export default function Dashboard({
     }
 
     try {
-      const request = await fetch("http://192.168.0.109:8000/api/Empresa", {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json",
-              authorization: 'Bearer ' + await AsyncStorage.getItem('token')
-          }
+      const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: 'Bearer ' + await AsyncStorage.getItem('token')
+        }
       })
 
       const response = await request.json();
 
       setImage(response.foto);
 
-  } catch (error) {
+    } catch (error) {
       console.log("ERROR Empresa")
       console.log(error)
-  }
+    }
   }
 
   const wait = (timeout: any) => {
@@ -112,19 +112,19 @@ export default function Dashboard({
 
           <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
           <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('Perfil')}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5  }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: '5%', marginTop: '5%', marginBottom: '5%', marginRight: '5%' }}>
               <Ionicons name="md-people" size={30} color="black" />
               <Text style={{ marginLeft: '10%' }}>Perfil</Text>
             </View>
-            <Ionicons style={{ margin: 5 }} name="md-arrow-forward" size={24} color="black" />
+            <Ionicons style={{ marginLeft: '5%', marginTop: '5%', marginBottom: '5%', marginRight: '5%' }} name="md-arrow-forward" size={24} color="black" />
           </TouchableOpacity>
           <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
           <TouchableOpacity style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} onPress={() => navigation.navigate('Configuracoes')}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: '5%', marginTop: '5%', marginBottom: '5%', marginRight: '5%' }}>
               <Ionicons name="md-settings" size={30} color="black" />
               <Text style={{ marginLeft: '10%' }}>Configurações</Text>
             </View>
-            <Ionicons style={{ margin: 5 }} name="md-arrow-forward" size={24} color="black" />
+            <Ionicons style={{ marginLeft: '5%', marginTop: '5%', marginBottom: '5%', marginRight: '5%' }} name="md-arrow-forward" size={24} color="black" />
           </TouchableOpacity>
           <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 

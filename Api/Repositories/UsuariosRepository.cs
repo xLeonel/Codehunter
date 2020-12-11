@@ -30,6 +30,7 @@ namespace Api.Repositories
         private PreferenciasTrabalhoRepository _prefTrabalhoRepository { get; set; }
         private RegimeContratacaoRepository _regContratacaoRepository { get; set; }
         private InscricoesRepository _inscricaoRepository { get; set; }
+        private EstagiosRepository _estagioRepository { get; set; }
 
         public UsuariosRepository()
         {
@@ -40,6 +41,7 @@ namespace Api.Repositories
             _prefTrabalhoRepository = new PreferenciasTrabalhoRepository();
             _regContratacaoRepository = new RegimeContratacaoRepository();
             _inscricaoRepository = new InscricoesRepository();
+            _estagioRepository = new EstagiosRepository();
         }
 
         public bool IsAluno(string email, out string curso)
@@ -279,15 +281,22 @@ namespace Api.Repositories
                 .Include(u => u.IdPreferenciasTrabalhoNavigation.IdRegimeContratacaoNavigation)
                 .FirstOrDefault(u => u.IdUsuario == id);
 
-            var inscricao = ctx.Inscricao.Where(i => i.IdUsuario == id);
+            var inscricao = ctx.Inscricao.Where(i => i.IdUsuario == id).Include(i => i.IdVagaNavigation.IdRegimeContratacaoNavigation).ToList();
 
             foreach (var item in inscricao)
             {
+                if (item.IdVagaNavigation.IdRegimeContratacaoNavigation.NomeRegimeContratacao == "Estágio")
+                {
+                    var estagio = ctx.Estagio.Where(e => e.IdInscricao == item.IdInscricao).FirstOrDefault();
+
+                    _estagioRepository.Delete(estagio);
+                }
+
                 _inscricaoRepository.Delete(item);
             }
 
             Delete(user);
-
+            
             Acesso acesso = _acessoRepository.GetById(user.IdAcesso);
 
             _acessoRepository.Delete(acesso);
