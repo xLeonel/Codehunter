@@ -17,12 +17,22 @@
   </tr>
 </table>
 
+# Database
+Para configurar a database desse projeto, você deve seguir os seguintes passos:
+
+1. Rode o script no sql management.
+2. Crie um arquivo .text com o nome 'ssh' no seu Disco Local (C:)
+3. Copie a string de conexão dentro do arquivo ssh.
+
+Exemplo: Data Source=DESKTOP-UKN5A79\SQLEXPRESS; Initial Catalog=Codehunter; user Id=sa; pwd=123;
+
 # Api 
 
 1. Abra a solução do projeto no Visual Studio.
 2. rode a aplicação.
 
 *Obs: Caso queria rodar a aplicação mobile você deve ir em 'Properties -> lauchSettings.json -> Alterar a propriedade 'applicationUrl' com o seu ipv4 (ipLocal).
+Dica: Caso queira só testar a api, import os request no postman.
 
 # Web
 Para rodar essa aplicação, você irá precisar do node e o yarn.
