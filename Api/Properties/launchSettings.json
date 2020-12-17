@@ -22,7 +22,7 @@
       "commandName": "Project",
       "launchBrowser": false,
       //"launchUrl": "localhost/{launchUrl}",
-      "applicationUrl": "http://192.168.0.3:8000",
+      "applicationUrl": "http://192.168.0.6:8000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

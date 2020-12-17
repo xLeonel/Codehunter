@@ -29,7 +29,7 @@ export default function Inscricoes({
     const listar = async () => {
 
         try {
-            const request = await fetch(`http://192.168.0.3:8000/api/Inscricao/UserByInscricoes/${objeto.params.idVaga}`, {
+            const request = await fetch(`http://192.168.0.6:8000/api/Inscricao/UserByInscricoes/${objeto.params.idVaga}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

@@ -21,7 +21,7 @@ export default function LoginAluno({
     }
 
     try {
-      const request = await fetch('http://192.168.0.3:8000/api/Login/Usuario', {
+      const request = await fetch('http://192.168.0.6:8000/api/Login/Usuario', {
         body: JSON.stringify(body),
         method: "POST",
         headers: {
@@ -49,7 +49,7 @@ export default function LoginAluno({
 
     try {
       setLoading(true);
-      const request = await fetch('http://192.168.0.3:8000/api/Usuario/RecuperarSenha', {
+      const request = await fetch('http://192.168.0.6:8000/api/Usuario/RecuperarSenha', {
         body: JSON.stringify(body),
         method: "POST",
         headers: {

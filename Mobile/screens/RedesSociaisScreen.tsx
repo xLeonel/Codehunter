@@ -24,7 +24,7 @@ export default function RedesSociaisScreen({
 
     const listar = async () => {
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
+            const request = await fetch("http://192.168.0.6:8000/api/Usuario", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export default function RedesSociaisScreen({
         }
 
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+            const request = await fetch("http://192.168.0.6:8000/api/Empresa", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export default function RedesSociaisScreen({
         }
 
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Usuario", {
+            const request = await fetch("http://192.168.0.6:8000/api/Usuario", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export default function RedesSociaisScreen({
         }
 
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Empresa", {
+            const request = await fetch("http://192.168.0.6:8000/api/Empresa", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

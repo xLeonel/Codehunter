@@ -37,7 +37,7 @@ export default function Perfil({
     const getInfoUser = async () => {
         try {
             setLoading(true);
-            const request = await fetch(`http://192.168.0.3:8000/api/Usuario/${objeto.params.idUser}`, {
+            const request = await fetch(`http://192.168.0.6:8000/api/Usuario/${objeto.params.idUser}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

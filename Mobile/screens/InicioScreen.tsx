@@ -24,7 +24,7 @@ export default function TabOneScreen() {
 
   const getInscricao = async () => {
     try {
-      const request = await fetch("http://192.168.0.3:8000/api/Usuario/Inscricao", {
+      const request = await fetch("http://192.168.0.6:8000/api/Usuario/Inscricao", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export default function TabOneScreen() {
 
   const getEstagios = async () => {
     try {
-      const request = await fetch("http://192.168.0.3:8000/api/Estagio/AllInternship", {
+      const request = await fetch("http://192.168.0.6:8000/api/Estagio/AllInternship", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export default function TabOneScreen() {
 
   const getNumVagas = async () => {
     try {
-      const request = await fetch("http://192.168.0.3:8000/api/Empresa/Vagas", {
+      const request = await fetch("http://192.168.0.6:8000/api/Empresa/Vagas", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

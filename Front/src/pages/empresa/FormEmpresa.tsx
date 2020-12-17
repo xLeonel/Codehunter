@@ -348,7 +348,7 @@ function FormEmpresa() {
 
 
                     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '35px' }}>
-                        <label htmlFor="quantity">Número de Coloboradores *</label>
+                        <label htmlFor="quantity">Número de Colaboradores *</label>
                         <input value={numColaboradores} onChange={e => setNumColaboradores(e.target.valueAsNumber)} style={{ border: '1px solid black' }} type="number" id="quantity" name="quantity" min="1" max="5"></input>
                     </div>
 

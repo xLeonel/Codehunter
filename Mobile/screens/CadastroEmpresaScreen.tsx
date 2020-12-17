@@ -98,7 +98,7 @@ export default function CadastroEmpresa({
 
         try {
             setLoadingConcluir(true);
-            const url = "http://192.168.0.3:8000/api/Empresa"
+            const url = "http://192.168.0.6:8000/api/Empresa"
             const request = await fetch(url, {
                 method: "post",
                 headers: {
@@ -110,7 +110,7 @@ export default function CadastroEmpresa({
 
             if (response === 'Cadastrado com sucesso') {
                 try {
-                    const url = "http://192.168.0.3:8000/api/Login/Empresa"
+                    const url = "http://192.168.0.6:8000/api/Login/Empresa"
                     const request = await fetch(url, {
                         method: "post",
                         headers: {
@@ -171,7 +171,7 @@ export default function CadastroEmpresa({
 
         try {
             setLoading(true);
-            const request = await fetch('http://192.168.0.3:8000/api/Empresa/EmailExiste', {
+            const request = await fetch('http://192.168.0.6:8000/api/Empresa/EmailExiste', {
                 body: JSON.stringify(body),
                 method: "POST",
                 headers: {

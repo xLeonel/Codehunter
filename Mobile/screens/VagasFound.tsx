@@ -43,7 +43,7 @@ export default function VagasFound({
         try {
             setLoading(true);
 
-            const request = await fetch("http://192.168.0.3:8000/api/Usuario/VagasMatch", {
+            const request = await fetch("http://192.168.0.6:8000/api/Usuario/VagasMatch", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function VagasFound({
 
     const listarTech = async () => {
         try {
-            const requestTech = await fetch("http://192.168.0.3:8000/api/Tecnologia", {
+            const requestTech = await fetch("http://192.168.0.6:8000/api/Tecnologia", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -98,7 +98,7 @@ export default function VagasFound({
         }
 
         try {
-            const request = await fetch("http://192.168.0.3:8000/api/Inscricao", {
+            const request = await fetch("http://192.168.0.6:8000/api/Inscricao", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export default function VagasFound({
 
     const verificarInscricao = async (id: any) => {
         try {
-            const request = await fetch(`http://192.168.0.3:8000/api/Inscricao/VerificarInscricao/${id}`, {
+            const request = await fetch(`http://192.168.0.6:8000/api/Inscricao/VerificarInscricao/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

@@ -16,3 +16,33 @@
     <td align="center"><a href="https://github.com/pedrohenriquesilva00"><img src="https://avatars2.githubusercontent.com/u/54954810?v=4" width="100px;" alt=""/><br /><sub><b>Pedro</b></sub></a><br /><a href="#design-tbenning" title="Design">🎨</a> <a href="#maintenance-tbenning" title="Maintenance">🚧</a></td>
   </tr>
 </table>
+
+# Api 
+
+1. Abra a solução do projeto no Visual Studio.
+2. rode a aplicação.
+
+*Obs: Caso queria rodar a aplicação mobile você deve ir em 'Properties -> lauchSettings.json -> Alterar a propriedade 'applicationUrl' com o seu ipv4 (ipLocal).
+
+# Web
+Para rodar essa aplicação, você irá precisar do node e o yarn.
+
+1. Abra o Projeto 'Front'
+2. Digite 'yarn install' para instalar as dependências
+3. Digite 'yarn start'
+
+*Obs: Não esqueça de rodar a api.
+
+# Mobile
+Para rodar essa aplicação, você irá precisar do expo client, disponível para IOS e Android.
+
+1. Abra o Projeto 'Mobile'
+2. Digite 'yarn install' para instalar as dependências
+3. Digite 'yarn start'
+4. Aponte a câmera pro QR Code para a aplicação abrir no expo
+
+*Obs: Não esqueça de rodar a api.
+
+
+
+

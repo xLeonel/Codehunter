@@ -121,7 +121,7 @@ export default function CadastroVaga({
         }
 
         try {
-            const url = "http://192.168.0.3:8000/api/Vaga"
+            const url = "http://192.168.0.6:8000/api/Vaga"
             const request = await fetch(url, {
                 method: "POST",
                 headers: {

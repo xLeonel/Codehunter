@@ -159,7 +159,7 @@ namespace Api.Repositories
         {
             Empresa empresa = GetById(id);
 
-            var vagas = ctx.Vaga.Where(i => i.IdEmpresa == id);
+            var vagas = ctx.Vaga.Where(i => i.IdEmpresa == id).ToList();
 
             foreach (var item in vagas)
             {
